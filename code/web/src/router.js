@@ -29,6 +29,12 @@ export default new Router({
       name: "login",
       meta: { layout: "no-sidebar" },
       component: require("@/pages/Login.vue").default
+    },
+    {
+      path: "/register",
+      name: "register",
+      meta: { layout: "no-sidebar" },
+      component: require("@/pages/Register.vue").default
     }
   ]
 });
