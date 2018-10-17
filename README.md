@@ -2,6 +2,6 @@
 
 This project composed by three parts:
 
-- Rearch
+- Research
 - Web Model Admin
 - Web Client (GovAuth)
