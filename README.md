@@ -1,7 +1,8 @@
 # Gov Auth First Approach
 
-This project composed by three parts:
+This project is composed by four parts:
 
 - Research
 - Web Model Admin
-- Web Client (GovAuth)
+- Web Client (GovAuth Model dministrator)
+- GovCore Core
