@@ -3,13 +3,13 @@
         <!--SELECTING IDP -->
         <section class="section" v-if="isStep==1">
             <div class="container">
-                <div class="columns  is-mobile">
+                <div class="columns  is-desktop">
                     <div class="column ">
                         <h1 class="title">Welcome to GovAuth</h1>
                         <h2 class="subtitle">Please select your identity provider:</h2>
                     </div>
                 </div>
-                <div class="columns  is-mobile">
+                <div class="columns  is-desktop">
                     <div class="column">
                         <a class="button is-large is-fullwidth" @click="selectIdp">
                             <span class="icon">
@@ -65,7 +65,7 @@
         <!-- CONFIRMING WETHER BUSINESS ACCOUNT OR NOT -->
         <section class="section" v-if="isStep==2">
             <div class="container">
-                <div class="columns  is-mobile">
+                <div class="columns  is-desktop">
                     <div class="column ">
                         <h1 class="title">Are you a business?</h1>
 
@@ -85,14 +85,14 @@
                             
                         </div>
 
-                        <div class="columns  is-mobile">
+                        <div class="columns  is-desktop">
                             <div class="column">
-                                <a class="button is-large is-fullwidth" @click="confirmAccount">
+                                <a class="button is-info is-outlined is-fullwidth" @click="confirmAccount">
                                     <span>Yes</span>
                                 </a>
                             </div>
                             <div class="column">
-                                <a class="button is-large is-fullwidth" @click="confirmAccount">
+                                <a class="button is-success is-outlined is-fullwidth" @click="confirmAccount">
                                     <span>No</span>
                                 </a>
                             </div>
@@ -104,13 +104,13 @@
         <!-- FINAL STEP EITHER REDIRECTING TO  DASHBOARD OR TO PARENT  -->
         <section class="section" v-if="isStep==3">
             <div class="container">
-                <div class="columns  is-mobile">
+                <div class="columns  is-desktop">
                     <div class="column ">
                         <h1 class="title">Thanks for your registration!</h1>
                         <h2 class="subtitle">Where do you wanna go?</h2>
                     </div>
                 </div>
-                <div class="columns  is-mobile">
+                <div class="columns  is-desktop">
                     <div class="column">
                         <a class="button is-large is-fullwidth" @click="myDashboard">
                             <span>My DashBoard</span>
@@ -128,6 +128,7 @@
     </div>
 </template>
 <script>
+    import router from '../router'
     export default {
         data() {
             return {
@@ -151,17 +152,18 @@
                 }, 1 * 1000)
             },
             myDashboard() {
-                this.isLoading = true
+                this.isLoading = true               
+                
                 setTimeout(() => {
                     this.isLoading = false;
-
+                    router.push({ name: "dash" });
                 }, 1 * 1000)
             },
             goToParent() {
                 this.isLoading = true
                 setTimeout(() => {
                     this.isLoading = false;
-
+                    router.push({ name: "handsbills" });
                 }, 1 * 1000)
             }
         }

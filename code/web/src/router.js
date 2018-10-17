@@ -31,6 +31,24 @@ export default new Router({
       component: require("@/pages/Login.vue").default
     },
     {
+      path: "/samples",
+      name: "samples",
+      meta: { layout: "no-sidebar" },
+      component: require("@/pages/Samples.vue").default
+    },
+    {
+      path: "/handsbills/login",
+      name: "hbLogin",
+      meta: { layout: "empty" },
+      component: require("@/pages/handsbills/Login.vue").default
+    },
+    {
+      path: "/handsbills/register",
+      name: "hbRegister",
+      meta: { layout: "empty" },
+      component: require("@/pages/handsbills/Register.vue").default
+    },
+    {
       path: "/register",
       name: "register",
       meta: { layout: "no-sidebar" },
