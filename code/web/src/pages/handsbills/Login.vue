@@ -104,7 +104,6 @@
 </template>
 
 <script>
-import router from '../../router'
 export default {
     data(){
 
@@ -113,14 +112,21 @@ export default {
                 
             }
     },    
-    methods: {
-            
+    methods: {            
             selectGovAuth() {
                 this.isLoading = true               
                 
                 setTimeout(() => {
                     this.isLoading = false;
-                    router.push({ name: "login" });
+                        var w=800;
+                        var h=500;
+                        var x;
+                        var y;
+                        x=(screen.width/2)-(w/2);
+                        y=(screen.height/2)-(h/2);
+                        window.open("/login", "", "width="+w+",height="+h+",menubar=0,toolbar=0,directories=0,scrollbars=no,resizable=no,left="+x+",top="+y+"");
+
+                       
                 }, 1 * 1000)
             }
         }     
