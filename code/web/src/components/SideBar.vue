@@ -16,10 +16,10 @@
     <li><a>Join Business</a></li>
     <li><a>My Profile</a></li>    
   </ul>
-  <p class="menu-label">
+  <p class="menu-label" v-if="false">
     Dash-Com Admin
   </p>
-  <ul class="menu-list">
+  <ul class="menu-list" v-if="false">
     <li><a >Businesess</a></li>
     <li><a >Services</a></li>
     <li><a >Users</a></li>

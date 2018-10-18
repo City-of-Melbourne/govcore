@@ -202,14 +202,17 @@
                 
                 setTimeout(() => {
                     this.isLoading = false;
-                    router.push({ name: "dash" });
+                    //router.push({ name: "dash" });
+                    opener.location.href = "/dash";
+                    window.close();
+
                 }, 1 * 1000)
             },
             goToParent() {
                 this.isLoading = true
                 setTimeout(() => {
                     this.isLoading = false;
-                    router.push({ name: "handsbills" });
+                    window.close();
                 }, 1 * 1000)
             }
         }
