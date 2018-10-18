@@ -118,14 +118,13 @@ export default {
                 
                 setTimeout(() => {
                     this.isLoading = false;
-                        var w=800;
-                        var h=500;
+                        var w=600;
+                        var h=700;
                         var x;
                         var y;
                         x=(screen.width/2)-(w/2);
                         y=(screen.height/2)-(h/2);
                         window.open("/login", "", "width="+w+",height="+h+",menubar=0,toolbar=0,directories=0,scrollbars=no,resizable=no,left="+x+",top="+y+"");
-
                        
                 }, 1 * 1000)
             }
