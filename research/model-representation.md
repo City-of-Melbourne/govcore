@@ -440,13 +440,15 @@ alternatively, we could represent buckets as keys like so:
         { id: 5, a: 2, b: 3 }
     ]
 
-or keep each `bucket` in a separate file or a separate database.
+or keep each `bucket` in a separate file/database.
 
 The flat option seems more flexible, because it's literally a single key/value store. Almost like a big array where the index is the id. It could work very well in single-column databases. It could potentially be more painful to manage.
 
 On the other hand the more structured version makes the buckets more visible and slightly smaller because we don't need to add the extra `document_type` key to each record.
 
 Let's go with the structured approach for now.
+
+> Assumption: Documents don't need a document_type
 
 Do we have enough information to go from business to person and from person to business?
 
