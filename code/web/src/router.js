@@ -72,6 +72,21 @@ export default new Router({
       path: "/joinbusiness",
       name: "joinbusiness",
       component: () => import("@/pages/Business/JoinBusiness.vue") 
+    },
+    {
+      path: "/manageusers",
+      name: "manageusers",
+      component: () => import("@/pages/Business/ManageUsers.vue") 
+    },
+    {
+      path: "/mybusiness",
+      name: "mybusiness",
+      component: () => import("@/pages/Business/MyBusiness.vue") 
+    },
+    {
+      path: "/myprofile",
+      name: "myprofile",
+      component: () => import("@/pages/Business/MyProfile.vue") 
     }
   ]
 });

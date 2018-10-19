@@ -54,7 +54,7 @@
                                
                                 <div class="column">
                                     <strong>{{ props.row.name }}</strong>
-                                    <small>@{{ props.row.membership }}</small>                                    
+                                    <small> -> {{ props.row.membership }}</small>                                    
                                     <br>
                                     <small>{{props.row.description}}</small>
                                     
@@ -93,7 +93,7 @@
                     'Handsbills'
                 ],
                 serviceData,
-                defaultOpenedDetails: [1],
+                defaultOpenedDetails: [0],
                 name: '',
                 selected: null
             }

@@ -1,16 +1,26 @@
 <template>
     <div>
         <section>
-            <h1 class="title">Join Business</h1>
+            <h1 class="title">Users</h1>
             <div class="columns is-desktop">
 
                 <div class="column is-four-fifths">
-
-                    <b-autocomplete rounded v-model="name" :data="filteredDataArray" placeholder="e.g. Company Name" icon="magnify"
-                        @select="option => selected = option">
-                        <template slot="empty">No businesses found</template>
-                    </b-autocomplete>
-
+                <b-field>
+                    <b-input placeholder="Email"
+                        type="email"
+                        icon="email">
+                    </b-input>
+                </b-field>
+                </div>
+                 <div class="column">
+                    <b-dropdown>
+                        <button class="button is-primary" slot="trigger">
+                            <span>Role</span>
+                            <b-icon icon="menu-down"></b-icon>
+                        </button>
+                        <b-dropdown-item>Admin</b-dropdown-item>
+                        <b-dropdown-item>Login</b-dropdown-item>                    
+                    </b-dropdown>
                 </div>
                 <div class="column">
                     <a class="button is-success">
@@ -25,17 +35,19 @@
         </section>
         <br>
         <b-tabs type="is-toggle" expanded>
-            <b-tab-item label="Businesses" icon="book">
-                <b-table :data="businessData" paginated per-page="5" :opened-detailed="defaultOpenedDetails" detailed
+            <b-tab-item label="Users" icon="book">
+                <b-table :data="usersData" paginated per-page="5" :opened-detailed="defaultOpenedDetails" detailed
                     detail-key="id" @details-open="(row, index) => $toast.open(`Expanded ${row.user.name}`)">
 
                     <template slot-scope="props">
 
-                        <b-table-column field="user.name" label="Company" sortable>
+                        <b-table-column field="user.name" label="User" sortable>
                             {{ props.row.name }}
                         </b-table-column>
 
-
+                        <b-table-column field="row.email" label="Email" sortable>
+                            {{ props.row.email }}
+                        </b-table-column> 
                         <b-table-column field="user.role" label="Role" sortable>
                             {{ props.row.role }}
                         </b-table-column>
@@ -57,7 +69,7 @@
 
 
                                         <div class="column">
-                                            <strong>{{ props.row.name }}</strong>
+                                            <strong>{{ props.row.email }} ({{ props.row.name }})</strong> 
                                             <small> -> {{ props.row.role }}</small>
                                             <br>
                                             <small>{{props.row.description}}</small>
@@ -80,22 +92,21 @@
                     </template>
                 </b-table>
             </b-tab-item>
-            <b-tab-item label="Invites" icon="exclamation">
-                <b-table :data="businessInvData" paginated per-page="5"  detail-key="id" >
+            <b-tab-item label="Requests" icon="exclamation">
+                <b-table :data="usersReqData" paginated per-page="5"  detail-key="id" >
 
                     <template slot-scope="props">
 
-                        <b-table-column field="row.name" label="Company" sortable>
+                        <b-table-column field="row.name" label="User" sortable>
                             {{ props.row.name }}
                         </b-table-column>
-
-
+                        <b-table-column field="row.email" label="Email" sortable>
+                            {{ props.row.email }}
+                        </b-table-column>  
                         <b-table-column field="row.role" label="Role" sortable>
                             {{ props.row.role }}
                         </b-table-column>                     
-                        <b-table-column field="row.responsible" label="Responsible" sortable>
-                            {{ props.row.responsible }}
-                        </b-table-column>                     
+                                          
                  
 
                         <b-table-column field="date" label="Invitation date" sortable centered>
@@ -108,7 +119,7 @@
                                 <span class="icon is-small">
                                     <i class="fas fa-plus"></i>
                                 </span>
-                                <span>Join</span>
+                                <span>Accept</span>
                             </a>
                              <a class="button is-danger">
                                             <span class="icon is-small">
@@ -133,19 +144,13 @@
 </template>
 
 <script>
-    const businessData = require('@/data/SampleBusinesses.json');
-    const businessInvData = require('@/data/SampleBusinessesInv.json');
+    const usersData = require('@/data/SampleUsers.json');
+    const usersReqData = require('@/data/SampleUsersReq.json');
     export default {
         data() {
-            return {
-                data: [
-                    'Company',
-                    'Kartaway',
-                    'Bingo',
-                    'Bin & Bang',
-                ],
-                businessData,
-                businessInvData,
+            return {               
+                usersData,
+                usersReqData,
                 defaultOpenedDetails: [0],
                 name: '',
                 selected: null

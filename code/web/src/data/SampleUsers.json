@@ -1,0 +1,6 @@
+[
+    {"id":1,"joined":"2016/10/15 13:43:27","name":"John Snow","email":"js@email.com","role":"Admin"},
+    {"id":2,"joined":"2017/10/15 13:43:27","name":"Keith Richards","email":"k@email.com","role":"Login"},
+    {"id":3,"joined":"2018/10/15 13:43:27","name":"Caroline Wozniacky","email":"c@email.com","role":"Login"}
+   
+]

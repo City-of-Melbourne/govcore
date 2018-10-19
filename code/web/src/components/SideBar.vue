@@ -4,17 +4,17 @@
     Dash-Business Owner
   </p>
   <ul class="menu-list">
-    <li><a>Join Service</a></li>
-    <li><a>Users</a></li>
-    <li><a>Business</a></li>
-    <li><a>My Profile</a></li>
+    <li><a href="/joinservice">Join Service</a></li>
+    <li><a href="/manageusers">Users</a></li>
+    <li><a href="/mybusiness">Business</a></li>
+    <li><a href="/myprofile">My Profile</a></li>
   </ul>
   <p class="menu-label">
     Dash-Business Staff
   </p>
   <ul class="menu-list">
-    <li><a>Join Business</a></li>
-    <li><a>My Profile</a></li>    
+    <li><a href="/joinbusiness">Join Business</a></li>
+    <li><a href="/myprofile">My Profile</a></li>    
   </ul>
   <p class="menu-label" v-if="false">
     Dash-Com Admin
