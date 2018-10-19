@@ -212,6 +212,7 @@
                 this.isLoading = true
                 setTimeout(() => {
                     this.isLoading = false;
+                    opener.location.href = "/handsbills/success";
                     window.close();
                 }, 1 * 1000)
             }

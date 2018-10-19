@@ -13,11 +13,7 @@ export default new Router({
   base,
 
   routes: [   
-    {
-      path: "/dash",
-      name: "dash",
-      component: () => import("@/pages/Dash.vue") 
-    },
+    
     {
       path: "*",
       name: "404*",
@@ -36,6 +32,7 @@ export default new Router({
       meta: { layout: "no-sidebar" },
       component: require("@/pages/Samples.vue").default
     },
+    // Handsbills sample
     {
       path: "/handsbills/login",
       name: "hbLogin",
@@ -49,10 +46,32 @@ export default new Router({
       component: require("@/pages/handsbills/Register.vue").default
     },
     {
+      path: "/handsbills/success",
+      name: "success",
+      meta: { layout: "empty" },
+      component: require("@/pages/handsbills/Success.vue").default
+    },
+    {
       path: "/register",
       name: "register",
       meta: { layout: "no-sidebar" },
       component: require("@/pages/Register.vue").default
+    },
+    // Dash
+    {
+      path: "/dash",
+      name: "dash",
+      component: () => import("@/pages/Dash.vue") 
+    },
+    {
+      path: "/joinservice",
+      name: "joinservice",
+      component: () => import("@/pages/Business/JoinService.vue") 
+    },
+    {
+      path: "/joinbusiness",
+      name: "joinbusiness",
+      component: () => import("@/pages/Business/JoinBusiness.vue") 
     }
   ]
 });
