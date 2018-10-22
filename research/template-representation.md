@@ -56,7 +56,7 @@ So we could say that the main difference between `enforcing structure` and  `val
 
 and
 
-`Validating data` menas making sure that the `values` conform to some rules.
+`Validating data` means making sure that the `values` conform to some rules.
 
 Two questions are bugging me right now:
 
