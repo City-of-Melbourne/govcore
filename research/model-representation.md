@@ -434,11 +434,11 @@ alternatively, we could represent buckets as keys like so:
         { id: 1, type: "person",   name: "Frank Pecorino" },
         { id: 3, type: "person",   name: "Elena Pecorino" },
         { id: 2, type: "business", name: "Frank's Cafe"   }
-    }],
+    ],
     graph_edges: [
         { id: 4, a: 2, b: 1 },
         { id: 5, a: 2, b: 3 }
-    }]
+    ]
 
 or keep each `bucket` in a separate file or a separate database.
 
