@@ -5,21 +5,19 @@
             <div class="columns is-desktop">
 
                 <div class="column is-four-fifths">
-                <b-field>
-                    <b-input placeholder="Email"
-                        type="email"
-                        icon="email">
-                    </b-input>
-                </b-field>
+                    <b-field>
+                        <b-input placeholder="Email" type="email" icon="email">
+                        </b-input>
+                    </b-field>
                 </div>
-                 <div class="column">
+                <div class="column">
                     <b-dropdown>
                         <button class="button is-primary" slot="trigger">
                             <span>Role</span>
                             <b-icon icon="menu-down"></b-icon>
                         </button>
                         <b-dropdown-item>Admin</b-dropdown-item>
-                        <b-dropdown-item>Login</b-dropdown-item>                    
+                        <b-dropdown-item>Login</b-dropdown-item>
                     </b-dropdown>
                 </div>
                 <div class="column">
@@ -47,7 +45,7 @@
 
                         <b-table-column field="row.email" label="Email" sortable>
                             {{ props.row.email }}
-                        </b-table-column> 
+                        </b-table-column>
                         <b-table-column field="user.role" label="Role" sortable>
                             {{ props.row.role }}
                         </b-table-column>
@@ -69,7 +67,7 @@
 
 
                                         <div class="column">
-                                            <strong>{{ props.row.email }} ({{ props.row.name }})</strong> 
+                                            <strong>{{ props.row.email }} ({{ props.row.name }})</strong>
                                             <small> -> {{ props.row.role }}</small>
                                             <br>
                                             <small>{{props.row.description}}</small>
@@ -93,7 +91,7 @@
                 </b-table>
             </b-tab-item>
             <b-tab-item label="Requests" icon="exclamation">
-                <b-table :data="usersReqData" paginated per-page="5"  detail-key="id" >
+                <b-table :data="usersReqData" paginated per-page="5" detail-key="id">
 
                     <template slot-scope="props">
 
@@ -102,12 +100,12 @@
                         </b-table-column>
                         <b-table-column field="row.email" label="Email" sortable>
                             {{ props.row.email }}
-                        </b-table-column>  
+                        </b-table-column>
                         <b-table-column field="row.role" label="Role" sortable>
                             {{ props.row.role }}
-                        </b-table-column>                     
-                                          
-                 
+                        </b-table-column>
+
+
 
                         <b-table-column field="date" label="Invitation date" sortable centered>
                             <span class="tag is-success">
@@ -121,18 +119,18 @@
                                 </span>
                                 <span>Accept</span>
                             </a>
-                             <a class="button is-danger">
-                                            <span class="icon is-small">
-                                                <i class="fas fa-minus"></i>
-                                            </span>
-                                            <span>Ignore</span>
-                                        </a>
+                            <a class="button is-danger">
+                                <span class="icon is-small">
+                                    <i class="fas fa-minus"></i>
+                                </span>
+                                <span>Ignore</span>
+                            </a>
                         </b-table-column>
-                      
+
 
                     </template>
 
-                 
+
                 </b-table>
 
 
@@ -148,7 +146,7 @@
     const usersReqData = require('@/data/SampleUsersReq.json');
     export default {
         data() {
-            return {               
+            return {
                 usersData,
                 usersReqData,
                 defaultOpenedDetails: [0],
