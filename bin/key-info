@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+ack ">\s?(Assumption|Unknown|Requirement):"
+
+# find research -type f | xargs egrep ">\s?(Assumption|Unknown|Requirement):"
