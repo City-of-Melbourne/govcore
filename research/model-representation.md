@@ -260,7 +260,7 @@ Notation:
     b = business
     e = employee
     s = service
-    n = number of docuements to make a bidirectinal connection
+    n = number of documents to make a bidirectinal connection
 
 On a senario like this:
 
