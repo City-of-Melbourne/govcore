@@ -30,7 +30,7 @@ The first approach is to get a set of functions that we can use in a JavaScript 
 
 ---
 
-Look at how other have done this.
+Look at how others have done this.
 
 Examples:
 
@@ -41,7 +41,7 @@ Examples:
     nosql (mongo) | insert  | query     | update    | delete
     hash/map      | set     | get       | set       | delete
 
-So we have this basic operation, that at first sight look like low level stuff, but actually these are business requirements.  Any database, file system can do this things, the difference here is that we have very specific requirements about where and how to store the data, what happens when information get's modified...
+So we have this basic operation, that at first sight look like low level stuff, but actually these are business requirements. Any database, file system can do thes things. The difference here is that we have very specific requirements about where and how to store the data, what happens when information get's modified.
 
 But what are these requirements?
 
@@ -72,9 +72,9 @@ or
 
 like an ORM that stores info in different databases.
 
-So the buckets could be different databases but not necessarily, but we definitely need to make a distinction. or do we?
+Although not necessarily, each bucket could be stored different database so definitely need to make a distinction. Or do we?
 
-Ok, let's start with the simple case. We this buckets are logical (directories/collections) and we have one database.
+Ok, let's start with the simple case. We this buckets are logical stores (directories/collections) and we have one database.
 
 ## Create
 
@@ -113,16 +113,14 @@ The digest could serve multiple purposes:
 
 So let's assume ids will be a hash of the contents. We will discuss how to do that later.
 
-Adding more detail...
-
-our create function has these responsibilities:
+Our create function has these responsibilities:
 
 1. decide in what bucket to store the doc
 2. generate id by hashing the doc
 3. add metadata: id, timestamps, etc
 4. store the doc
 
-in pseudocode
+in pseudocode:
 
     create(doc)
         id      = hash_function(doc)
@@ -137,7 +135,7 @@ in pseudocode
             
             return new_doc
 
-and the should produce
+and the should produce:
 
     {
         id: 12987234,
@@ -150,7 +148,7 @@ and the should produce
 
 We can think of the create operation as a orchestration function that takes a document and a well defined functions/objects that comply with an interface.
 
-We don't don't care how `hash_function`, `bucket_for` and `add_metadata` do their job as long as they have the same interface.
+We don't care how `hash_function`, `bucket_for` and `add_metadata` do their job as long as they have the same interface.
 
 That way we can easily swap databases/buckets by providing different `adapters`.
 
@@ -158,7 +156,7 @@ And to ensure we keep things decouples we could pass all the dependencies to the
 
     create(hash_function, bucket_for, add_metadata, doc)
 
-or make a functions preloaded with that
+or make a function preloaded with that:
 
     create = make_create_function(hash_function, bucket_for, add_metadata)
 
@@ -193,7 +191,7 @@ I can't tell what's better yet, let's leave it as an unknown
 
 Also the problem we're tackling right now is lowest level crud/io operations.
 
-    Client -> HTTP API -> GovCoreRules ->  GovCoreCRUD -> DBAdapter -> DB
+    Client -> HTTP API -> GovCoreRules ->  GovCoreCRUD -> Bucket -> DB
                                                  👆
                                              We are here
 
@@ -208,10 +206,10 @@ Update: Our create function has these responsibilities:
 
 1. generate id by hashing the doc
 2. add metadata: id, timestamps, etc
-3. Serialize
+3. serialise
 3. store the doc
 
-So we can remove on thing from the interface:
+So we can remove one thing from the interface:
 
     create(hash_function, bucket, add_metadata, doc) -> doc
 
@@ -251,7 +249,7 @@ Maybe so that we can handle errors in standard way?
 
 Maybe to convert the data to the format we're expecting?
 
-Let's see, so far we haven't specified how `bucket` works. We only know that it gets and creates stuff from a data store/database. However we haven't say how to store the data weather we want to store it as json or a binary thing.
+Let's see, so far we haven't specified how `bucket` works. We only know that it gets and creates stuff from a data store/database. However we haven't say how to store the data or wether we want to store it as JSON or anther format.
 
 The bucket acts as an I/O device in operating system terms. It doesn't care about the shape of the data.
 
@@ -259,15 +257,18 @@ But we do care about the shape. So the next question is: who's responsibility is
 
 This is what the overall I/O of the system looks like:
 
-    Client -> HTTP API -> GovCoreRules ->  GovCoreCRUD -> DBAdapter -> DDB
+    Client → HTTP API → GovCoreRules →  GovCoreCRUD → DBAdapter → DDB
 
 Let's expand this and try to figure out that's the shape of the data on each arrow:
+    
+    Client  →  HTTP API  →  GovCoreRules  →  GovCoreCRUD  →  Bucket  →  DB
+          JSON         struct           struct         key/value  key/value
 
-    Client --(JSON)-> HTTP API --(Struct)-> GovCoreRules --(Struct)-> GovCoreCRUD --(key, value)-> Bucket --(key, value)-> DB
+And the other way around (read):
 
-And the other way around:
-
-    Client <-(JSON)-- HTTP API <-(Struct)-- GovCoreRules <-(Struct)-- GovCoreCRUD <-(value)-- Bucket <-(value)-- DB
+    
+    Client ← HTTP API ← GovCoreRules ← GovCoreCRUD ← Bucket ← DB
+          JSON      struct          struct         value    value
 
 It seems like the conversion should happen at GovCoreCRUD level.
 
@@ -282,7 +283,7 @@ Does that sound reasonable?
 Yes. We have clear separation of concerns:
 
     GovCoreCRUD: Orchestrate data Store/Retrieval the "govcore way"
-    Bucket:       Store/Retrieve data (any shape) in a particular place/database
+    Bucket:      Store/Retrieve data (any shape) in a particular place/database
 
 Ok, Now that we know this, what would the get function look like?
 
@@ -343,8 +344,7 @@ I don't know. And I think we need to start working with real examples to how all
 
 Maybe we need to give the crud operations more responsibilities and rely a bit more on the bucket interface
 
-
-# The Whole Lot
+# Conclusion
 
 Responsibilities of GovCoreCRUD are:
 
