@@ -113,4 +113,22 @@ In order to reduce dependancies we have decided to use  graphQL but just using t
 
 ## Schema 
 
+GraphQL has its own type language that’s used the write GraphQL schemas: The Schema Definition Language (SDL)
 
+
+    type Person {
+    id: ID!
+    name: String
+    }
+
+Instantly we noticed that the schema by itself is not available to be consumed throught queries, so __Root Types__ are the answer
+
+## Root Types
+
+
+ These types define the entry points for a GraphQL API and
+ determine the shape of the queries and mutations that will be accepted 
+
+- Query
+- Mutation
+- Suscription
