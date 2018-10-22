@@ -13,7 +13,12 @@ First step towards implementing GovCore concept  through building  GovAuth use c
 3. Web Client (GovAuth web site  that use GovCore as a backend) 
     - [Code](https://github.com/City-of-Melbourne/govAuth/tree/master/code/web)
 
-4. GovCore Web Manangment Tool( Data and model managment )
+4. Bridging Gaps
+
+    - [GraphQL](https://github.com/City-of-Melbourne/govAuth/tree/master/research/graphQL.md)
+     - [Protocol Buffers](https://github.com/City-of-Melbourne/govAuth/tree/master/research/protocolBuffers.md)
+
+5. GovCore Web Manangment Tool( Data and model managment )
 
 5. GovCore
    - Documentation
@@ -24,4 +29,4 @@ First step towards implementing GovCore concept  through building  GovAuth use c
 - [x] Model of GovAuth
 - [x] Research and Implement model using a readable format (Json)
 - [x] Web site for GovAuth
-- [ ] Sync Model With Gov Auth web site throught some technology 👈 doing
+- [ ] Bridging  Model With Gov Auth web site somehow 👈 doing
