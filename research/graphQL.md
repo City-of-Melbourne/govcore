@@ -1,11 +1,11 @@
 # GraphQL
 
-This document intends to explain the process that we followed to implement the current model in JSON and start to invoke more govCore elements into the battlefield; to be more precise we are aiming to link __(templates)__ with real data and finally enable queries through graphQL. The goal is more than clear, in order to take into account graphQL within next experiments related wiht goVcore in the near , we want to have a real firts trial and unleahs its power or simply deprecate it.
+This document intends to explain the process that we followed to implement the current model in JSON and start to invoke more govCore elements into the battlefield; to be more precise we are aiming to link __(templates)__ with real data and finally enable queries through graphQL. The goal is more than clear, in order to take into account graphQL within next experiments related wiht goVcore in the near future , we want to have a  first real trial and reveal  its potential or simply deprecate it.
 
 
 ## JSON Model as Starting Point
 
-As a main outcome of this modeling process [Model Representation](https://github.com/City-of-Melbourne/govAuth/blob/master/research/model-representation.md) undertaken previously, so we are going to use it regardless modeling considerations, now the priority is to jump from the readable model to something that enable our govAuth  __(use case)__ to interact with data under govCore concept.
+As a main outcome of this modeling process [Model Representation](https://github.com/City-of-Melbourne/govAuth/blob/master/research/model-representation.md) undertaken previously, so we are going to use it regardless modeling considerations, now the priority is to jump from the readable model to something that enable  govAuth  __(use case)__ to interact with data under govCore concept.
 
 
     {
@@ -103,13 +103,13 @@ As a main outcome of this modeling process [Model Representation](https://github
 
 # Hello graphQL
 
-In order to reduce dependancies we have decided to use  graphQL but just using the __execution engine__ and the query resolution process; deleting wrappers or additional stuff, so the escenario will looks like:
+In order to reduce dependancies we have decided to use  graphQL but just using the __execution engine__ and __the query resolution process__; deleting wrappers or additional stuff, so the escenario will looks like:
 
-- Node Js 
+- Node Js / express server for queries throught the browser
 - graphQL for javascript installed via npm
-- Creating Schema
-- Linking Data
-- Playing  with queries
+
+# Step by step 
+
 
 ## Schema 
 
@@ -121,7 +121,12 @@ GraphQL has its own type language that’s used the write GraphQL schemas: The S
     name: String
     }
 
-Instantly we noticed that the schema by itself is not available to be consumed throught queries, so __Root Types__ are the answer
+Instantly we noticed that the schema by itself is not available to be consumed so the next step is to enable it throught __Root Types__, before keep going the model under graphQL would looks like:
+
+
+
+
+
 
 ## Root Types
 
@@ -132,3 +137,9 @@ Instantly we noticed that the schema by itself is not available to be consumed t
 - Query
 - Mutation
 - Suscription
+
+
+
+- Linking Data (Documents and templates working alongside)
+- Playing  with queries
+
