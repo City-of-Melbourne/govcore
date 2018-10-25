@@ -101,7 +101,12 @@ As a main outcome of this modeling process [Model Representation](https://github
         ]
     }
 
-# Hello graphQL
+# Hello! graphQL
+
+
+![](https://trello-attachments.s3.amazonaws.com/5bac5270efa930417941b4fa/5bc6f4c5268f4267399b447d/ddcd6e3f54e703e14ade7cf2b4f2d0ac/image.png)
+
+
 
 In order to reduce dependancies we have decided to use  graphQL but just using the __execution engine__ and __the query resolution process__; deleting wrappers or additional stuff, so the escenario will looks like:
 
@@ -109,37 +114,99 @@ In order to reduce dependancies we have decided to use  graphQL but just using t
 - graphQL for javascript installed via npm
 
 # Step by step 
-
-
 ## Schema 
-
 GraphQL has its own type language that’s used the write GraphQL schemas: The Schema Definition Language (SDL)
 
+        type Entity {
+            id: ID!
+            name: String
+        }
 
-    type Person {
-    id: ID!
-    name: String
+Instantly we noticed that the schema by itself is not available to be consumed so the next step is to enable it throught __Root Types__;the model under graphQL would looks like:
+
+        type Entity {  
+            id: Int!,
+            name: String     
+        },              
+        type GraphEdge {  
+            id: Int!,
+            type: String,
+            a: Int,
+            b: Int   
+            },
+        type Event {  
+            id: Int,
+            type: String,
+            name: String,  
+            document_id: Int,
+            date: String 
+            }
+
+At this moment your schema is ready to be used throught __Root Types__ and make it queryble and mutable.
+
+## Root types
+
+ These types define the entry points for a GraphQL  and determine the shape of the queries and mutations that will be accepted 
+
+ A brief description of the types:
+
+- Query: Allow users to get data or resources, basically is the same than GET in Rest Services
+    - [https://graphql.org/learn/execution/](https://graphql.org/learn/execution/)
+
+
+> __First Question__ that come up when we realized that graphQL let you get everything from itself, why do we need to send an template file attached with the document ??? graphQL let you have the same concept and addittional access it
+
+> An answer could be __graphQL introspection__ to replace the fact of being sending the document  + template all the time
+
+      
+
+
+
+
+
+
+- Mutation: Allow users to manipulate data 
+    - [Example](https://graphql.org/graphql-js/mutations-and-input-types/)
+    - [Example - Level 2](https://hackernoon.com/mutations-in-graphql-9ac6a28202a2) 
+
+
+            mutation{
+                createEntity(name:"basic mutation"){
+                    id,
+                    name    
+                }  
+            }
+
+
+
+
+- Suscription: Allow users to  observe specific events and receive updates
+
+Just for now we want to enable the data and enable it throught root types(Query and mutate)
+
+            type Query {  
+                entities(id: Int!): [Entity],
+                entity(id: Int!): Entity
+            }
+
+
+## Templates
+
+After being playing with graphQL and the first schema draft would desire a template that is saved somehow withing govcore Buckets and would have the following structure:
+
+### Entity
+
+  Entity {  
+        id: Int!,
+        type: String,   
+        bucket:String,     
+        fields:[
+            name: String
+        ]   
+        ,queries[
+
+        ],
+        mutations[
+            
+        ]
     }
-
-Instantly we noticed that the schema by itself is not available to be consumed so the next step is to enable it throught __Root Types__, before keep going the model under graphQL would looks like:
-
-
-
-
-
-
-## Root Types
-
-
- These types define the entry points for a GraphQL API and
- determine the shape of the queries and mutations that will be accepted 
-
-- Query
-- Mutation
-- Suscription
-
-
-
-- Linking Data (Documents and templates working alongside)
-- Playing  with queries
-

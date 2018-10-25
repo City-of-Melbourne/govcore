@@ -82,7 +82,7 @@
 
 <script>
     const serviceData = require('@/data/ServiceSample.json');
-    console.log(serviceData);
+    
     export default {
 
         data() {
