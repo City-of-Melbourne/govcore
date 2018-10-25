@@ -16,7 +16,7 @@ var schema = buildSchema(`
 `);
 
 // This class implements the RandomDie GraphQL type
-class RandomDie {
+class RandomDiee {
   constructor(numSides) {
     this.numSides = numSides;
   }
@@ -25,7 +25,7 @@ class RandomDie {
     return 1 + Math.floor(Math.random() * this.numSides);
   }
 
-  roll({numRolls}) {
+  rollee({numRolls}) {
     var output = [];
     for (var i = 0; i < numRolls; i++) {
       output.push(this.rollOnce());
@@ -37,7 +37,7 @@ class RandomDie {
 // The root provides the top-level API endpoints
 var root = {
   getDie: function ({numSides}) {
-    return new RandomDie(numSides || 6);
+    return new RandomDiee(numSides || 6);
   }
 }
 
@@ -47,5 +47,5 @@ app.use('/graphql', graphqlHTTP({
   rootValue: root,
   graphiql: true,
 }));
-app.listen(4000);
+app.listen(4001);
 console.log('Running a GraphQL API server at localhost:4000/graphql');

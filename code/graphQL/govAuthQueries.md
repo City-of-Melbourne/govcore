@@ -60,19 +60,36 @@
 
 > Querying entities
         {
-            idp(input: {id: "a0c1f114-f138-426c-9c84-99f319613a52", bucket: "entity@aws.au", name: "479332973"}) {
+        idp(input: {id: "a0c1f114-f138-426c-9c84-99f319613a52", bucket: "entity@aws.au", name: "479332973"}) {
+            id
+            bucket
+            name
+        }
+        service(input: {id: "3b8611aa-23a0-49fc-95b2-ac33cbad0b2c", bucket: "entity@aws.au", name: "479332973"}) {
+            id
+            bucket
+            name
+        }
+        business(input: {id: "903f00dc-1c3a-49be-9e82-1a4f093a61c5", bucket: "entity@aws.au", name: "479332973", abn: "479332973"}) {
+            id
+            bucket
+            name
+        }
+        serviceBusiness(input: {id: "49be-9e82-1a4f093a61c5", bucket: "entity@aws.au", date: "01/01/1989", service: {id: "asd", bucket: "bucket"}}) {
+            id
+            bucket
+            service {
                 id
-                bucket
                 name
+                bucket
             }
-            service(input: {id: "3b8611aa-23a0-49fc-95b2-ac33cbad0b2c", bucket: "entity@aws.au", name: "479332973"}) {
+            business {
                 id
-                bucket
                 name
-            }
-            business(input: {id: "903f00dc-1c3a-49be-9e82-1a4f093a61c5", bucket: "entity@aws.au", name: "479332973", abn: "479332973"}) {
-                id
                 bucket
-                name
             }
         }
+        }
+
+
+> Mutating entities

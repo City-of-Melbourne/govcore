@@ -34,31 +34,30 @@ var schema = buildSchema(`
         document_id: String,
         date: String 
     },
-
+    
     type ServiceBusiness {  
         id: String!,
-        bucket: String!,
-        type: String,
-        date: String,
-        business: Business,
-        service: Service 
+        bucket: String!,        
+        date: String,        
+        business: Business
+        service: Service
     },
     type MemberBusiness {  
         id: String!,
-        bucket: String!,
-        type: String,
+        bucket: String!,        
         date: String,          
         business: Business,
-        member: Member 
+        member: Member
     },
     type ServiceMember {  
         id: String!,
-        bucket: String!, 
-        type: String,
+        bucket: String!,         
         date: String,         
         member: Member,
         Service: Service 
     },
+
+
 
     input IdpInput {  
         id: String,
@@ -81,30 +80,33 @@ var schema = buildSchema(`
         abn: String,
         name: String  
     }, 
+    
+
+    
     input ServiceBusinessInput {  
-        id: String!,
-        bucket: String!,
-        type: String,
+        id: String,
+        bucket: String!,        
         date: String,          
         business: BusinessInput,
         service: ServiceInput 
     },
     input MemberBusinessInput {  
-        id: String!,
-        bucket: String!,
-        type: String,
+        id: String,
+        bucket: String!,        
         date: String,          
         business: BusinessInput,
         member: MemberInput 
     },
     input ServiceMemberInput {  
         id: String,
-        bucket: String!,
-        type: String,
+        bucket: String!,        
         date: String,  
         member: MemberInput,
         Service: ServiceInput 
     },
+	
+
+    
 
     type Query{
 
@@ -116,6 +118,7 @@ var schema = buildSchema(`
         serviceBusiness(input:ServiceBusinessInput): [ServiceBusiness],
         memberBusiness(input:MemberBusinessInput): [MemberBusiness],
         serviceMember(input:ServiceMemberInput): [ServiceMember]
+      
     }
    
 
@@ -125,18 +128,26 @@ class GovCore {
     constructor() {
     
     } 
-    get(input) {    
-
+    //THIS ONE GOES TO THE ENTITY BUCKET TO FIND AN ANSWER
+    get(input) {  
         var inputs = new Array(input, input,input);        
         return inputs;
-
     }
+    getGraphEdge(input) {  
+     
+        var inputs = new Array(input, input,input);
+        return inputs;
+    }   
+    
   }
 
 // RESOLVERS
 var root = {
     //QUERY    
     idp: ({input}) => {              
+        return new GovCore().get(input); 
+    },
+    member: ({input}) => {              
         return new GovCore().get(input); 
     },
     service: ({input}) => {       
@@ -146,16 +157,15 @@ var root = {
         return new GovCore().get(input);  
     },
     serviceBusiness: ({input}) => {              
-        return new GovCore().get(input); 
+        return new GovCore().getGraphEdge(input); 
     },
-    memberBusiness: ({input}) => {       
-        return new GovCore().get(input);  
+    memberBusiness: ({input}) => {              
+        return new GovCore().getGraphEdge(input); 
     },
-    serviceMember: ({input}) => {     
-        return new GovCore().get(input);  
+    serviceMember: ({input}) => {              
+        return new GovCore().getGraphEdge(input); 
     }
-    //MUTATIONS
-    
+    //MUTATIONS    
 };
 
 
