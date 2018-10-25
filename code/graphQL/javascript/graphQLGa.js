@@ -129,14 +129,13 @@ class GovCore {
 
         var inputs = new Array(input, input,input);        
         return inputs;
-        
+
     }
   }
 
 // RESOLVERS
 var root = {
-    //QUERY
-    
+    //QUERY    
     idp: ({input}) => {              
         return new GovCore().get(input); 
     },
@@ -155,6 +154,7 @@ var root = {
     serviceMember: ({input}) => {     
         return new GovCore().get(input);  
     }
+    //MUTATIONS
     
 };
 
