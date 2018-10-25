@@ -79,8 +79,7 @@ var schema = buildSchema(`
         bucket: String!,
         abn: String,
         name: String  
-    }, 
-    
+    },     
 
     
     input ServiceBusinessInput {  
@@ -104,9 +103,7 @@ var schema = buildSchema(`
         member: MemberInput,
         Service: ServiceInput 
     },
-	
-
-    
+	    
 
     type Query{
 
@@ -119,6 +116,10 @@ var schema = buildSchema(`
         memberBusiness(input:MemberBusinessInput): [MemberBusiness],
         serviceMember(input:ServiceMemberInput): [ServiceMember]
       
+    },
+
+    type Mutation{
+        setmember(input: MemberInput):Member
     }
    
 
@@ -132,40 +133,45 @@ class GovCore {
     get(input) {  
         var inputs = new Array(input, input,input);        
         return inputs;
+    }  
+    set(input){
+        return input;
     }
-    getGraphEdge(input) {  
-     
-        var inputs = new Array(input, input,input);
-        return inputs;
-    }   
+    delete(input){
+        return input;
+    }
     
   }
 
 // RESOLVERS
 var root = {
-    //QUERY    
-    idp: ({input}) => {              
-        return new GovCore().get(input); 
-    },
-    member: ({input}) => {              
-        return new GovCore().get(input); 
-    },
-    service: ({input}) => {       
-        return new GovCore().get(input);  
-    },
-    business: ({input}) => {     
-        return new GovCore().get(input);  
-    },
-    serviceBusiness: ({input}) => {              
-        return new GovCore().getGraphEdge(input); 
-    },
-    memberBusiness: ({input}) => {              
-        return new GovCore().getGraphEdge(input); 
-    },
-    serviceMember: ({input}) => {              
-        return new GovCore().getGraphEdge(input); 
-    }
-    //MUTATIONS    
+    
+        //QUERY    
+        idp: ({input}) => {              
+            return new GovCore().get(input); 
+        },
+        member: ({input}) => {              
+            return new GovCore().get(input); 
+        },
+        service: ({input}) => {       
+            return new GovCore().get(input);  
+        },
+        business: ({input}) => {     
+            return new GovCore().get(input);  
+        },
+        serviceBusiness: ({input}) => {              
+            return new GovCore().get(input); 
+        },
+        memberBusiness: ({input}) => {              
+            return new GovCore().get(input); 
+        },
+        serviceMember: ({input}) => {              
+            return new GovCore().get(input); 
+        },    
+        //MUTATIONS   
+        setmember: ({input}) => {              
+            return new GovCore().create(input); 
+        } 
 };
 
 

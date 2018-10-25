@@ -59,11 +59,17 @@
 ## Query using inputs
 
 > Querying entities
+
         {
         idp(input: {id: "a0c1f114-f138-426c-9c84-99f319613a52", bucket: "entity@aws.au", name: "479332973"}) {
             id
             bucket
             name
+        }
+        member(input: {id: "a0c1f114-f138-426c-9c84-99f319613a52", bucket: "entity@aws.au", email: "479332973"}) {
+            id
+            bucket
+            email
         }
         service(input: {id: "3b8611aa-23a0-49fc-95b2-ac33cbad0b2c", bucket: "entity@aws.au", name: "479332973"}) {
             id
@@ -79,17 +85,28 @@
             id
             bucket
             service {
-                id
-                name
-                bucket
+            id
+            name
+            bucket
             }
             business {
-                id
-                name
-                bucket
+            id
+            name
+            bucket
             }
         }
         }
+
 
 
 > Mutating entities
+
+
+mutation{
+  member(input:{id:"adsfasdf",bucket:"asdfasdf",email:"jonathan"}){
+    id,
+    bucket,
+    email
+  }
+  
+}

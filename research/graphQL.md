@@ -192,21 +192,19 @@ Just for now we want to enable the data and enable it throught root types(Query 
 
 ## Templates
 
-After being playing with graphQL and the first schema draft would desire a template that is saved somehow withing govcore Buckets and would have the following structure:
+After had been playing with graphQL using the first schema draft, would be advisable develop a template that is saved somehow withing govcore Buckets and would have the following structure:
 
 ### Entity
+This is the basis for any template , either for entites or events or graphEdges
 
   Entity {  
-        id: Int!,
-        type: String,   
-        bucket:String,     
-        fields:[
-            name: String
-        ]   
-        ,queries[
 
-        ],
-        mutations[
-            
-        ]
+            id: Int!,
+            bucket:String,    
+            ,queries[
+
+            ],
+            mutations[
+
+            ]    
     }

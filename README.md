@@ -8,6 +8,7 @@ First step towards implementing GovCore concept  through building  GovAuth use c
     - [Graphs](https://github.com/City-of-Melbourne/govAuth/blob/master/research/graphs.md)
 
 2. Modeling GovAuth Problem
+    - [Model](https://github.com/City-of-Melbourne/govAuth/blob/master/research/model.md)
     - [Model Representation](https://github.com/City-of-Melbourne/govAuth/blob/master/research/model-representation.md)
     - [Template Representation](https://github.com/City-of-Melbourne/govAuth/blob/master/research/template-representation.md)
 
@@ -16,7 +17,7 @@ First step towards implementing GovCore concept  through building  GovAuth use c
 
 4. Bridging Gaps
 
-    - [GraphQL](https://github.com/City-of-Melbourne/govAuth/tree/master/research/graphQL.md)
+     - [GraphQL](https://github.com/City-of-Melbourne/govAuth/tree/master/research/graphQL.md)
      - [Protocol Buffers](https://github.com/City-of-Melbourne/govAuth/tree/master/research/protocolBuffers.md)
 
 5. GovCore Web Manangment Tool( Data and model managment )
