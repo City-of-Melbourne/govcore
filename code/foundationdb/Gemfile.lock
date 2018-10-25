@@ -1,0 +1,15 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    fdb (5.2.6)
+      ffi (>= 1.1.5)
+    ffi (1.9.25)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  fdb
+
+BUNDLED WITH
+   1.16.3
