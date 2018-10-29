@@ -103,7 +103,7 @@
                         <div class="field">
                             <label class="label">Name</label>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Text input">
+                                <input class="input" type="text" placeholder="" v-model="model.name">
                             </div>
                           <p class="help">Fill out if you are a business</p>
                         </div>
@@ -111,7 +111,7 @@
                         <div class="field">
                             <label class="label">ABN</label>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Text input">
+                                <input class="input" type="text" placeholder="" v-model="model.abn">
                             </div>
                             <p class="help">Fill out if you are a business</p>
                         </div>
@@ -119,12 +119,12 @@
                         <div class="columns  is-desktop">
                             
                             <div class="column">
-                                 <a class="button is-large is-fullwidth" @click="confirmAccount">                                   
+                                 <a class="button is-large is-fullwidth" @click="confirmAccount(true)">                                   
                                     <span>Yes</span>
                                 </a>
                             </div>
                             <div class="column">
-                                  <a class="button is-large is-fullwidth" @click="confirmAccount">                                   
+                                  <a class="button is-large is-fullwidth" @click="confirmAccount(false)">                                   
                                     <span>No</span>
                                 </a>
                             </div>
@@ -159,13 +159,17 @@
         <b-loading :is-full-page="true" :active.sync="isLoading" :can-cancel="true"></b-loading>
     </div>
 </template>
-<script>
-    import router from '../router'
+<script> 
+    const axios = require("axios")
+    
+    import {Toast}  from 'buefy/dist/components/toast'
     export default {
-        data() {
+        
+        data() {            
             return {
                 isLoading: false,
-                isStep: 1,
+                isStep: 1,                
+                model:{ id:"",name:"",email:"test@gmail.com",abn:"" }
             }
         },
         methods: {
@@ -191,11 +195,12 @@
                     this.isStep = 3;
                 }, 1 * 1000)
             },
-            confirmAccount() {
+            confirmAccount(business) {
+                
                 this.isLoading = true
                 setTimeout(() => {
-                    this.isLoading = false;
-                    this.isStep = 4;
+                    this.isLoading = false;                    
+                    this.setNewMember(business);
                 }, 1 * 1000)
             },
             myDashboard() {
@@ -217,22 +222,73 @@
                     window.close();
                 }, 1 * 1000)
             },
-            // AXIOS METHODS - CALLING GRAPHQL TO GET RESPONSES
-            async getLanguage () {
-                    try {
+            // AXIOS HTTP CALLS - REQUESTING DATA FROM  GRAPHQL
+            async setNewMember (business) {   
+                  
+              
+                if(business)    {  //CREATING BUSINESS              
 
-                        const res = await axios.post(
-                        'http://localhost:4000/graphql', {
-                        query: '{ language }'
-                        })
+                      axios({
+                            url: 'http://localhost:4000/graphql',
+                            method: 'post',
+                            data: {
+                                query: `
+                                mutation{
+                                        setbusiness(input:{id:"`+this.model.id+`",abn:"`+this.model.abn+`",name:"`+this.model.name+`"}){
+                                            id                                            
+                                            abn
+                                            name
+                                        }
+                                    }
+                                `
+                            }
+                            }).then((result) => {
+                                /* eslint-disable */ 
+                                console.log(result.data)
+                                this.isStep = 4;
+                            }).catch(err => {
+                                /* eslint-disable */ 
+                                 console.log('graphql error:', err);
+                                 Toast.open({
+                                    duration: 5000,
+                                    message: `Problems creating business`,                                    
+                                    type: 'is-danger'
+                                })
+                            });
+
                         
-                        this.example1 = res.data.data.language
-
-
-                    } catch (e) {
-                        console.log('err', e)
-                    }
                 }
+                else{   //CREATING MEMBER
+
+                      axios({
+                            url: 'http://localhost:4000/graphql',
+                            method: 'post',
+                            data: {
+                                query: `
+                                mutation{
+                                        setmember(input:{id:"`+this.model.id+`",email:"`+this.model.email+`"}){
+                                            id
+                                            email
+                                            abn
+                                        }
+                                    }
+                                `
+                            }
+                            }).then((result) => {
+                                /* eslint-disable */ 
+                                console.log(result.data)
+                                this.isStep = 4;
+                            }).catch(err => {
+                                /* eslint-disable */ 
+                                Toast.open({
+                                    duration: 5000,
+                                    message: `Problems creating member`,                                    
+                                    type: 'is-danger'
+                                })
+                                
+                            });
+                }
+            }
         }
     }
 </script>

@@ -1,6 +1,7 @@
 var express = require('express');
 var graphqlHTTP = require('express-graphql');
 var { buildSchema } = require('graphql');
+const cors = require('cors')
 
 
 // SCHEMA 
@@ -24,7 +25,7 @@ type BussinessServiceConnection{
 }
 type Member {  
     id: ID,        
-    email:String   
+    email:String       
     idps(
         first: Int   
         ):MemberIdpConnection!  
@@ -53,15 +54,20 @@ type Role {
 }
 type Event {  
     id: ID!,
-    type: String,
-    name: String,  
-    document_id: String,
+    type: String
+    name: String
+    document_id: String
     date: String 
 }
 
 input MemberInput {  
-    id: ID,        
-    email:String 
+    id: ID   
+    email:String    
+}
+input BusinessInput {  
+    id: ID
+    abn: String
+    name: String    
 }
 
 
@@ -76,6 +82,7 @@ type Query {
 
 type Mutation {
     setmember(input: MemberInput):Member
+    setbusiness(input: BusinessInput):Business
 }
 `);
 // This class implements the RandomDie GraphQL type
@@ -98,6 +105,10 @@ class GovCore {
         return input;
   
     }
+    create(input) {              
+  
+        return input;
+    } 
     
   }
 
@@ -120,6 +131,9 @@ var root = {
         //MUTATIONS   
         setmember: ({input}) => {              
             return new GovCore().create(input); 
+        },
+        setbusiness: ({input}) => {              
+            return new GovCore().create(input); 
         } 
 };
 
@@ -127,7 +141,7 @@ var root = {
 
 
 var app = express();
-
+app.use(cors())
 app.use('/graphql', graphqlHTTP({
     schema: schema,
     rootValue: root,

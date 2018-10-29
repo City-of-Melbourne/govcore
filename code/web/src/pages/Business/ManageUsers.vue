@@ -142,6 +142,7 @@
 </template>
 
 <script>
+    const axios = require("axios")
     const usersData = require('@/data/SampleUsers.json');
     const usersReqData = require('@/data/SampleUsersReq.json');
     export default {
@@ -163,6 +164,32 @@
                         .indexOf(this.name.toLowerCase()) >= 0
                 })
             }
+        },
+        methods:{
+            // AXIOS HTTP CALLS - REQUESTING DATA FROM  GRAPHQL
+            async getUsersBusiness () {                   
+                
+                        // axios({
+                        //     url: 'https://1jzxrj179.lp.gql.zone/graphql',
+                        //     method: 'post',
+                        //     data: {
+                        //         query: `
+                        //                 query PostsForAuthor {
+                        //                     author(id: 1) {
+                        //                     firstName
+                        //                         posts {
+                        //                         title
+                        //                         votes
+                        //                         }
+                        //                     }
+                        //                     }
+                        //         `
+                        //     }
+                        //     }).then((result) => {
+                        //         //console.log(result.data)                                
+                        //     });
+
+                }
         }
     }
 </script>

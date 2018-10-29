@@ -5,17 +5,50 @@ After had played  few days with grapQL, we come up with the following templates 
 ## Member
 
   Member {  
+      
             id: ID!,
-            email:String
-            ,queries{ 
-                member(input:MemberInput): [Member]
-                    },
-            mutations{
-                setmember(input: MemberInput):Member            
-                },
-            metadata{
-                bucket:String              
+            email:String            
+            Metadata{
+                bucket:String  
+                creator:String
+                modifier:String
                 created:Int
                 modified:Int
+            }
+            input MemberInput {  
+                id: ID   
+                email:String    
+            }
+            type Query {                
+                member(id:ID):Member              
+            }
+            type Mutation {
+                setmember(input: MemberInput):Member                
+            }
+    }
+
+## Business
+
+Business {  
+            id: ID!
+            abn: String
+            name: String
+            metadata{
+                bucket:String    
+                creator:String    
+                modifier:String      
+                created:Int
+                modified:Int
+            }
+            input BusinessInput {  
+                id: ID
+                abn: String
+                name: String    
+            }
+            type Query {                
+                business(id:ID):Business       
+            }
+            type Mutation {                
+                setbusiness(input: BusinessInput):Business                
             }
     }
