@@ -4,24 +4,23 @@ After had played  few days with grapQL, we come up with the following templates 
 
 ## Member
 
-  Member {  
-      
+  Member {        
             id: ID!,
-            email:String            
+            email:String,        
             Metadata{
-                bucket:String  
-                creator:String
-                modifier:String
-                created:Int
-                modified:Int
-            }
+                bucket:String,
+                creator:String,
+                modifier:String,
+                created:Int,
+                modified:Int,
+            },
             input MemberInput {  
-                id: ID   
+                id: ID,   
                 email:String    
-            }
+            },
             type Query {                
                 member(id:ID):Member              
-            }
+            },
             type Mutation {
                 setmember(input: MemberInput):Member                
             }
@@ -29,7 +28,7 @@ After had played  few days with grapQL, we come up with the following templates 
 
 ## Business
 
-Business {  
+    Business {  
             id: ID!
             abn: String
             name: String

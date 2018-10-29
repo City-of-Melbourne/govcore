@@ -40,7 +40,7 @@
                 }
             },
       
-        __type(name: "GraphEdge") {
+        __type(name: "Member") {
                 name
                 kind,
                     fields {
