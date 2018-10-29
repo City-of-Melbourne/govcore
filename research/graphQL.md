@@ -199,12 +199,18 @@ This is the basis for any template , either for entites or events or graphEdges
 
   Entity {  
 
-            id: Int!,
+            id: String!,
             bucket:String,    
             ,queries[
 
             ],
             mutations[
 
-            ]    
+            ],
+            meta{
+                bucket:String,
+                creator:String,
+                Date:String
+            }    
+
     }

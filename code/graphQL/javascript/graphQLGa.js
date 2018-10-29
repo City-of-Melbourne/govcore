@@ -7,28 +7,24 @@ var { buildSchema } = require('graphql');
 var schema = buildSchema(`       
 
     type Idp {  
-        id: String!,
-        bucket: String!,
+        id: ID,        
         name: String
     },     
     type Member {  
-        id: String!,
-        bucket: String!,
+        id: ID,        
         email:String        
     },         
     type Service {  
-        id: String!,
-        bucket: String!,
+        id: ID,        
         name: String        
     },
     type Business {  
-        id: String!,
-        bucket: String!,
+        id: ID,
         abn: String,
         name: String   
     },
     type Event {  
-        id: Int,
+        id: ID!,
         type: String,
         name: String,  
         document_id: String,
@@ -36,82 +32,75 @@ var schema = buildSchema(`
     },
     
     type ServiceBusiness {  
-        id: String!,
-        bucket: String!,        
+        id: ID,             
         date: String,        
-        business: Business
-        service: Service
+        business: [Business]
+        service: [Service]
     },
     type MemberBusiness {  
-        id: String!,
-        bucket: String!,        
+        id: ID,              
         date: String,          
-        business: Business,
-        member: Member
+        business: [Business],
+        member: [Member]
     },
     type ServiceMember {  
-        id: String!,
-        bucket: String!,         
+        id: ID,             
         date: String,         
-        member: Member,
-        Service: Service 
+        member: [Member],
+        Service: [Service]
     },
 
-
-
     input IdpInput {  
-        id: String,
-        bucket: String!,
+        id: ID,        
         name: String
     }, 
     input ServiceInput {  
-        id: String,
-        bucket: String!,
+        id: ID,        
         name: String     
     }, 
     input MemberInput {  
-        id: String,
-        bucket: String!,
+        id: ID,        
         email:String 
     }, 
     input BusinessInput {  
-        id: String,
-        bucket: String!,
+        id: ID,        
         abn: String,
         name: String  
+    },     
+    input EventInput {  
+        id: ID,
+        type: String,
+        name: String,  
+        document_id: String,
+        date: String 
     },     
 
     
     input ServiceBusinessInput {  
-        id: String,
-        bucket: String!,        
+        id: ID,              
         date: String,          
         business: BusinessInput,
         service: ServiceInput 
     },
     input MemberBusinessInput {  
-        id: String,
-        bucket: String!,        
+        id: ID,               
         date: String,          
         business: BusinessInput,
         member: MemberInput 
     },
     input ServiceMemberInput {  
-        id: String,
-        bucket: String!,        
+        id: ID,              
         date: String,  
         member: MemberInput,
         Service: ServiceInput 
     },
-	    
-
     type Query{
 
         idp(input:IdpInput): [Idp],
         service(input:ServiceInput): [Service],
         business(input:BusinessInput): [Business],
         member(input:MemberInput): [Member],
-
+        event(input:EventInput): [Event],
         serviceBusiness(input:ServiceBusinessInput): [ServiceBusiness],
         memberBusiness(input:MemberBusinessInput): [MemberBusiness],
         serviceMember(input:ServiceMemberInput): [ServiceMember]
@@ -131,7 +120,7 @@ class GovCore {
     } 
     //THIS ONE GOES TO THE ENTITY BUCKET TO FIND AN ANSWER
     get(input) {  
-        var inputs = new Array(input, input,input);        
+        var inputs = new Array(input);        
         return inputs;
     }  
     set(input){

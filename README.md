@@ -24,6 +24,7 @@ First step towards implementing GovCore concept  through building  GovAuth use c
 
 5. GovCore
    - Documentation
+        - [Templates under graphQL Schema Definition Language](https://github.com/City-of-Melbourne/govAuth/tree/master/research/govAuthGraphQLTemplates.md)
    - Implementation       
 
 ## Road map

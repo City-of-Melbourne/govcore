@@ -169,6 +169,7 @@
             }
         },
         methods: {
+            //UI METHODS
              start() {
                 this.isLoading = true
                 setTimeout(() => {
@@ -215,7 +216,23 @@
                     opener.location.href = "/handsbills/success";
                     window.close();
                 }, 1 * 1000)
-            }
+            },
+            // AXIOS METHODS - CALLING GRAPHQL TO GET RESPONSES
+            async getLanguage () {
+                    try {
+
+                        const res = await axios.post(
+                        'http://localhost:4000/graphql', {
+                        query: '{ language }'
+                        })
+                        
+                        this.example1 = res.data.data.language
+
+
+                    } catch (e) {
+                        console.log('err', e)
+                    }
+                }
         }
     }
 </script>

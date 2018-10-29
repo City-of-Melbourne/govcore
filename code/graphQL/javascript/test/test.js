@@ -6,8 +6,8 @@ var { buildSchema } = require('graphql');
 var schema = buildSchema(`
   type RandomDie {
     numSides: Int!
-    rollOnce: Int!
-    roll(numRolls: Int!): [Int]
+    rollOnce: Int! 
+    rollee(4)   
   }
 
   type Query {
