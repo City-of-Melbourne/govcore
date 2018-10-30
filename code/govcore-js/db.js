@@ -16,7 +16,7 @@ const GovCoreDB = function(dataFile) {
     let id = randomID();
 
     // Add ID to doc
-    doc = Object.assign({'_id': id }, doc);
+    doc = Object.assign({'id': id }, doc);
 
     // load data
     let data = JSON.parse(fs.readFileSync(dataFile));
@@ -34,21 +34,13 @@ const GovCoreDB = function(dataFile) {
   }
 
   const update = function(doc) {
-    console.log('doc', doc)
-    let id = doc._id
-
-    console.log('id', id, typeof id)
+    let id = doc.id
 
     // load data
     let data = JSON.parse(fs.readFileSync(dataFile));
     let oldDoc = data[id];
 
-    console.log('oldDoc', oldDoc)
-
-
     let updatedDoc = Object.assign(oldDoc, doc);
-
-    console.log('updatedDoc', updatedDoc);
 
     // update data
     data[id] = updatedDoc;
