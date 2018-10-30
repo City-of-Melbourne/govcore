@@ -3,11 +3,13 @@ const fs = require('fs');
 // TODO handle errors {result: object, error: blah}
 
 const GovCoreDB = function(dataFile) {
-
   // TODO Create dataFile if it doesn't exists.
 
   // TODO use uuid library
   const randomID = () => Array(10).fill().map(n => Math.floor(Math.random() * 10)).join('')
+
+  // TODO const loadData =
+  // TODO const saveData =
 
   const create = function(doc) {
     // TODO valdate doc is valid json
@@ -48,6 +50,15 @@ const GovCoreDB = function(dataFile) {
     return updatedDoc
   }
 
+  const _delete = function(id) {
+    // load data
+    let data = JSON.parse(fs.readFileSync(dataFile));
+    let doc = data[id];
+    delete data[id];
+    fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
+    return doc
+  }
+
   const list = function(type) {
     // load data
     let data = JSON.parse(fs.readFileSync(dataFile));
@@ -59,7 +70,7 @@ const GovCoreDB = function(dataFile) {
     get:    get,
     list:   list,
     update: update,
-    // delete: _delete,
+    delete: _delete,
   }
 }
 

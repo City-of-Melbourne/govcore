@@ -4,26 +4,33 @@ let data_file = 'data.json';
 
 let db = GovCoreDB(data_file);
 
-console.log('Create')
+const puts = console.log;
+
+puts('Create')
 let createResult = db.create({
   bucket: 'entities',
   type: 'person',
   name: 'Pedro'
 });
-console.log(createResult);
 
-console.log()
+puts(createResult);
 
-console.log("Get")
-let getResult = db.get(createResult.id);
-console.log(getResult)
+puts();
+puts("Get")
+puts(db.get(createResult.id));
 
-console.log("Update")
-let updateResult = db.update({id: createResult.id, name: 'Walter'});
-console.log(updateResult)
+puts();
+puts("Update")
+puts(db.update({id: createResult.id, name: 'Walter'}));
 
-console.log()
+puts();
+puts("List")
+puts(db.list('person'));
 
-console.log("List")
-let listResult = db.list('person');
-console.log(listResult)
+puts();
+puts("Delete")
+puts(db.delete(createResult.id));
+
+puts();
+puts("List")
+puts(db.list('person'));
