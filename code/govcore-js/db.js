@@ -4,65 +4,57 @@ const fs = require('fs');
 
 const GovCoreDB = function(dataFile) {
   // TODO Create dataFile if it doesn't exists.
+  const loadData = () => JSON.parse(fs.readFileSync(dataFile));
+  const saveData = (data) => fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
 
   // TODO use uuid library
   const randomID = () => Array(10).fill().map(n => Math.floor(Math.random() * 10)).join('')
 
-  // TODO const loadData =
-  // TODO const saveData =
-
   const create = function(doc) {
     // TODO valdate doc is valid json
     // TODO valdate keys exist: bucket, type
-    // Add a random id to the doc
     let id = randomID();
 
     // Add ID to doc
     doc = Object.assign({'id': id }, doc);
 
-    // load data
-    let data = JSON.parse(fs.readFileSync(dataFile));
+    let data = loadData();
 
     // update data
     data[id] = doc;
-    fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
-    return doc
+    saveData(data);
+    return doc;
   }
 
   const get = function(id) {
-    // load data
-    let data = JSON.parse(fs.readFileSync(dataFile));
-    return data[id]
+    let data = loadData();
+    return data[id];
   }
 
   const update = function(doc) {
     let id = doc.id
 
-    // load data
-    let data = JSON.parse(fs.readFileSync(dataFile));
+    let data = loadData();
     let oldDoc = data[id];
 
     let updatedDoc = Object.assign(oldDoc, doc);
 
     // update data
     data[id] = updatedDoc;
-    fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
-    return updatedDoc
+    saveData(data);
+    return updatedDoc;
   }
 
   const _delete = function(id) {
-    // load data
-    let data = JSON.parse(fs.readFileSync(dataFile));
+    let data = loadData();
     let doc = data[id];
     delete data[id];
-    fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
+    saveData(data);
     return doc
   }
 
   const list = function(type) {
-    // load data
-    let data = JSON.parse(fs.readFileSync(dataFile));
-    return Object.values(data).filter(x => x.type === type)
+    return Object.values(loadData()).filter(x => x.type === type)
   }
 
   return {
