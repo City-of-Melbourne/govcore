@@ -7,6 +7,8 @@ const cors = require('cors')
 // SCHEMA 
 var schema = buildSchema(`   
 type Business  {  
+
+    
     id: ID!
     abn: String
     name: String
@@ -16,6 +18,11 @@ type Business  {
     services(       
             first: Int          
             ):BussinessServiceConnection!  
+
+
+
+
+            
 }
 type BussinessMemberConnection{    
     nodes:[Member]    

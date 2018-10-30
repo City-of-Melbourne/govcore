@@ -1,0 +1,70 @@
+
+type Graph_Edge {
+    id: ID!
+    type: String
+    a: Int
+    b: Int
+    
+}
+type Person {  
+    id: ID,        
+    name:String        
+    email:String        
+}     
+type Service {  
+    id: ID,        
+    name: String        
+}
+type Business {  
+    id: ID,    
+    name: String   
+    abn: String
+}
+type Event {  
+    id: ID!,
+    type: String,
+    name: String,  
+    document_id: String,
+    date: String 
+}
+type Idp {  
+    id: ID,        
+    name: String
+}
+
+input PersonInput { 
+        id:String  
+        name:String        
+        email:String  
+    }
+
+
+type Query {
+    
+    Person(id: ID!): Person
+    Persons(limit: Int): [Person]
+
+    Service(id: ID!): Service
+    Services(limit: Int): [Service]
+
+    Business(id: ID!): Business
+    Businesses(limit: Int): [Business]
+
+
+    Idp(id: ID!): Idp
+    Idps(limit: Int): [Idp]
+
+    Graph_Edges(limit: Int,type: String,a:Int,b:Int): [Graph_Edge]    
+    Graph_Edge(type: String,a:Int): Graph_Edge
+    
+}
+
+type Mutation {
+
+    createPerson(input:PersonInput): Person
+    updatePerson(input:PersonInput): Person
+
+    createPerson(input:PersonInput): Person
+    updatePerson(input:PersonInput): Person
+
+}

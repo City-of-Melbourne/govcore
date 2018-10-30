@@ -1,0 +1,16 @@
+{
+  "1413622924": {
+    "id": "1413622924", 
+    "name": "test",
+    "email": "test@hotmail.com",
+    "bucket": "entities",
+    "type": "person"
+  },
+  "4279314197": {
+    "id": "4279314197",    
+    "name": "Updated!",
+    "email": "test@hotmail.com",
+    "bucket": "entities",
+    "type": "person"
+  }
+}

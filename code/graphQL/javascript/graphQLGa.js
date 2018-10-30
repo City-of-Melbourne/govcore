@@ -34,20 +34,22 @@ var schema = buildSchema(`
     type ServiceBusiness {  
         id: ID,             
         date: String,        
-        business: [Business]
-        service: [Service]
+        a: Business
+        b: Service
     },
+
     type MemberBusiness {  
         id: ID,              
         date: String,          
-        business: [Business],
-        member: [Member]
+        a: Business,
+        b: Member
     },
+
     type ServiceMember {  
         id: ID,             
         date: String,         
-        member: [Member],
-        Service: [Service]
+        a: Member,
+        b: Service
     },
 
     input IdpInput {  
@@ -79,20 +81,20 @@ var schema = buildSchema(`
     input ServiceBusinessInput {  
         id: ID,              
         date: String,          
-        business: BusinessInput,
-        service: ServiceInput 
+        a: BusinessInput,
+        b: ServiceInput 
     },
     input MemberBusinessInput {  
         id: ID,               
         date: String,          
-        business: BusinessInput,
-        member: MemberInput 
+        a: BusinessInput,
+        b: MemberInput 
     },
     input ServiceMemberInput {  
         id: ID,              
         date: String,  
-        member: MemberInput,
-        Service: ServiceInput 
+        a: MemberInput,
+        b: ServiceInput 
     },
     type Query{
 
