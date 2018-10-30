@@ -18,6 +18,10 @@ console.log("Get")
 let getResult = db.get(createResult._id);
 console.log(getResult)
 
+console.log("Update")
+let updateResult = db.update({_id: createResult._id, name: 'Walter'});
+console.log(updateResult)
+
 console.log()
 
 console.log("List")
