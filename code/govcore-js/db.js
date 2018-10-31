@@ -18,15 +18,13 @@ const GovCoreDB = function(dataPath) {
   const create = function(doc) {
     // TODO valdate doc is valid json
     // TODO valdate keys exist: bucket, type
-    let id = randomID();
 
-    // Add ID to doc
-    doc = Object.assign({'id': id }, doc);
+    doc.id = randomID();
 
     let data = loadData();
 
     // update data
-    data[id] = doc;
+    data[doc.id] = doc;
     saveData(data);
     return doc;
   }
@@ -37,15 +35,13 @@ const GovCoreDB = function(dataPath) {
   }
 
   const update = function(doc) {
-    let id = doc.id
-
     let data = loadData();
-    let oldDoc = data[id];
+    let oldDoc = data[doc.id];
 
     let updatedDoc = Object.assign(oldDoc, doc);
 
     // update data
-    data[id] = updatedDoc;
+    data[updatedDoc.id] = updatedDoc;
     saveData(data);
     return updatedDoc;
   }

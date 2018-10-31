@@ -1,36 +1,39 @@
+const fs = require('fs');
+
 const GovCoreDB = require('./db.js')
 
-let data_file = 'data.json';
+let dataPath = 'test_data.json';
 
-let db = GovCoreDB(data_file);
+fs.writeFileSync(dataPath, '{}', null, 2);
+
+let db = GovCoreDB(dataPath);
 
 const puts = console.log;
 
 puts('Create')
-let createResult = db.create({
-  bucket: 'entities',
-  type: 'person',
-  name: 'Pedro'
-});
+let createResult = db.create({bucket: 'entities', type: 'person', name: 'Pedro'})
+puts(createResult)
 
-puts(createResult);
+puts()
+puts('Create with id')
+puts(db.create({id: '', bucket: 'entities', type: 'person', name: 'Ideal'}))
 
-puts();
+puts()
 puts("Get")
-puts(db.get(createResult.id));
+puts(db.get(createResult.id))
 
-puts();
+puts()
 puts("Update")
-puts(db.update({id: createResult.id, name: 'Walter'}));
+puts(db.update({id: createResult.id, name: 'Walter'}))
 
-puts();
+puts()
 puts("List")
-puts(db.list('person'));
+puts(db.list('person'))
 
-puts();
+puts()
 puts("Delete")
-puts(db.delete(createResult.id));
+puts(db.delete(createResult.id))
 
-puts();
+puts()
 puts("List")
-puts(db.list('person'));
+puts(db.list('person'))
