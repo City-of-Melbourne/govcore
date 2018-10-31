@@ -1,11 +1,16 @@
 const fs = require('fs');
 
-// TODO handle errors {result: object, error: blah}
+const GovCoreDB = function(dataPath) {
 
-const GovCoreDB = function(dataFile) {
-  // TODO Create dataFile if it doesn't exists.
-  const loadData = () => JSON.parse(fs.readFileSync(dataFile));
-  const saveData = (data) => fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
+  // Create dataFile if it doesn't exist
+  if (!fs.existsSync(dataPath)) {
+    console.log(`DB file doesn't exist. Creating one at ${dataPath}.`)
+    fs.writeFileSync(dataPath, '{}', null, 2);
+  }
+
+  const loadData = () => JSON.parse(fs.readFileSync(dataPath));
+
+  const saveData = (data) => fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
 
   // TODO use uuid library
   const randomID = () => Array(10).fill().map(n => Math.floor(Math.random() * 10)).join('')
