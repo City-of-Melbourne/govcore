@@ -69,48 +69,34 @@
 
 > Querying entities
 
-        {
-        idp(input: {id: "a0c1f114-f138-426c-9c84-99f319613a52",  name: "479332973"}) {
-            id            
-            name
-        }
-        member(input: {id: "a0c1f114-f138-426c-9c84-99f319613a52",  email: "479332973"}) {
-            id            
-            email
-        }
-        service(input: {id: "3b8611aa-23a0-49fc-95b2-ac33cbad0b2c",  name: "479332973"}) {
-            id            
-            name
-        }
-        business(input: {id: "903f00dc-1c3a-49be-9e82-1a4f093a61c5",  name: "479332973", abn: "479332973"}) {
-            id            
-            name
-        }
-        serviceBusiness(input: {id: "49be-9e82-1a4f093a61c5", date: "01/01/1989", service: {id: "asd" }}) {
-            id            
-            service {
-            id
-            name            
-            }
-            business {
-            id
-            name            
-            }
-        }
-        }
+  {
+	query{
+	  Person(id:"4279314197"){
+		name
+		id
+		email
+	  }
+	  Persons{
+	  name
+		id
+		email
+	  }
+	}
+
+}
 
 
 
 > Mutating entities
 
 
-mutation{
-  member(input:{id:"adsfasdf",bucket:"asdfasdf",email:"jonathan"}){
-    id,
-    bucket,
-    email
-  }
-  
+mutation{	
+    
+    createPerson(input:{name:"test",email:"test@hotmail.com"}){
+        id
+        name
+        email
+    }
 }
 
 

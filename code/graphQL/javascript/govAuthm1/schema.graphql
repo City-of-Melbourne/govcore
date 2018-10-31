@@ -1,10 +1,9 @@
 
-type Graph_Edge {
+type GraphEdge {
     id: ID!
     type: String
-    a: Int
-    b: Int
-    
+    a: String
+    b: String    
 }
 type Person {  
     id: ID,        
@@ -22,22 +21,41 @@ type Business {
 }
 type Event {  
     id: ID!,
-    type: String,
-    name: String,  
-    document_id: String,
+    type: String
+    name: String
+    document_id: String
     date: String 
 }
 type Idp {  
-    id: ID,        
+    id: ID        
     name: String
 }
-
 input PersonInput { 
-        id:String  
+        id: ID,        
         name:String        
         email:String  
     }
+input ServiceInput { 
+        id: ID,        
+        name: String 
+    }
+input BusinessInput { 
+        id: ID,    
+        name: String   
+        abn: String  
+    }
+input IdpInput { 
+        id: ID     
+        name: String
+    }
+input GraphEdgeInput { 
+        id: ID
+        type: String
+        a: String
+        b: String   
+    }
 
+    
 
 type Query {
     
@@ -50,21 +68,26 @@ type Query {
     Business(id: ID!): Business
     Businesses(limit: Int): [Business]
 
-
     Idp(id: ID!): Idp
     Idps(limit: Int): [Idp]
 
-    Graph_Edges(limit: Int,type: String,a:Int,b:Int): [Graph_Edge]    
-    Graph_Edge(type: String,a:Int): Graph_Edge
-    
+    GraphEdges(limit: Int,type: String,a:Int,b:Int): [GraphEdge]    
+    GraphEdge(type: String,a:Int): GraphEdge    
 }
 
 type Mutation {
 
     createPerson(input:PersonInput): Person
     updatePerson(input:PersonInput): Person
+    createService(input:ServiceInput): Service
+    updateService(input:ServiceInput): Service
+    createBusiness(input:BusinessInput): Business
+    updateBusiness(input:BusinessInput): Business
 
-    createPerson(input:PersonInput): Person
-    updatePerson(input:PersonInput): Person
+    createIdp(input:IdpInput): Idp
+    updateIdp(input:IdpInput): Idp
+    createGraphEdge(input:GraphEdgeInput): GraphEdge
+   
+    
 
 }

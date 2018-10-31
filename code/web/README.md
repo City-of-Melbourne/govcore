@@ -19,3 +19,7 @@ npm install -D sass-loader node-sass
 - Install project dependencies
 
 npm install
+
+- and finally execute 
+
+npm run serve
