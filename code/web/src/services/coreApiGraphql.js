@@ -66,7 +66,4 @@ export default class coreApiGraphql {
         
         return this.postData(query); 
       }
- 
-
-
-  }
+ }
