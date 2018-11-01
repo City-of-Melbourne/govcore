@@ -20,7 +20,7 @@ export default new Router({
       meta: { layout: "no-sidebar" },
       component: require("@/pages/404.vue").default
     },
-    {
+     {
       path: "/login",
       name: "login",
       meta: { layout: "no-sidebar" },

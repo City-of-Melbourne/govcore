@@ -155,37 +155,22 @@
 </template>
 <script>
 
-
- 
-
-
-    
     import { Toast } from 'buefy/dist/components/toast';
     import coreApiGraphql from '../services/coreApiGraphql';
 
     const apicore = new coreApiGraphql();
-
-  
-
-    
-
 
     export default {      
 
         data() {
             return {
                 isLoading: false,
-                isStep: 3,
+                isStep: 1,
                 model: { id: "", name: "", email: "test@gmail.com", abn: "" }
                 
             }
         },
-
-
-
-        methods: {
-
-           
+        methods: {           
             start() {
                 this.isLoading = true
                 setTimeout(() => {
@@ -209,7 +194,6 @@
             },        
             myDashboard() {
                 this.isLoading = true
-
                 setTimeout(() => {
                     this.isLoading = false;
                     //router.push({ name: "dash" });
@@ -229,13 +213,41 @@
             // AXIOS HTTP CALLS - REQUESTING DATA FROM  GRAPHQL
              createBusiness() {  
                  
-                apicore.createBusiness(this.model);
+                apicore.createBusiness(this.model).then((result) => {
+                        Toast.open({
+                            message: 'Registration happened correctly!',
+                            type: 'is-success'
+                        });
+                        this.isStep=4;  
+                        }).catch(err => {
+                            Toast.open({
+                                duration: 5000,
+                                message: `Something's not good, try again`,
+                                position: 'is-top',
+                                type: 'is-danger'
+                            });    
+                     });
                 //this.isStep=4;                
             }
             ,createPerson(){
-                apicore.createPerson(this.model);
+                apicore.createPerson(this.model).then((result) => {
+                        Toast.open({
+                            message: 'Registration happened correctly!',
+                            type: 'is-success'
+                        });
+                        this.isStep=4;  
+                        }).catch(err => {
+                            Toast.open({
+                                duration: 5000,
+                                message: `Something's not good, try again`,
+                                position: 'is-top',
+                                type: 'is-danger'
+                            });    
+                     });  
+            }
+                     
 
             }
         }
-    }
+    
 </script>

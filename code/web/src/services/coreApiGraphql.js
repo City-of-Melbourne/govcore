@@ -29,7 +29,9 @@ export default class coreApiGraphql {
                                             a:business.createBusiness.id,
                                             b:person.createPerson.id
                                             })
-
+                    this.createGraphEdge({  type:"person_idp",
+                                            a:person.createPerson.id,
+                                            b:1})
             })
         }); 
     }
@@ -41,8 +43,17 @@ export default class coreApiGraphql {
                       name
                   }
               }`;  
-         return this.postData(query);  
-      }  
+        //TODO: We need  to use real Idp values , for now using a predefined '1'
+         return this.postData(query).then((person)=>{
+
+                this.createGraphEdge({  type:"person_idp",
+                a:person.createPerson.id,
+                b:1})
+                return person;
+
+         });
+           
+    }      
     createGraphEdge(obj){    
         // createGraphEdge(input:${JSON.stringify(obj)})
         var query=` mutation{
@@ -56,4 +67,6 @@ export default class coreApiGraphql {
         }`;                
         return this.postData(query); 
     }
+
+    
  }
