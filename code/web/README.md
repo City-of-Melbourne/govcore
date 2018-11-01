@@ -11,13 +11,13 @@ To build this frontend the following technologies has been used:
 ## Project setup
 
 - Install Vue/Cli
-npm install -g @vue/cli-service-global
+__npm install -g @vue/cli-service-global__
 
 - Install Sass preprocessor
-npm install -D sass-loader node-sass
+__npm install -D sass-loader node-sass__
 
 - Install project dependencies
-npm install
+__npm install__
 
 - Execute 
-npm run serve
+__npm run serve__
