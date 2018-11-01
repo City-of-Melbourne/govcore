@@ -31,5 +31,6 @@ First step towards implementing GovCore concept  through building  GovAuth use c
 
 - [x] Model of GovAuth
 - [x] Research and Implement model using a readable format (Json)
-- [x] Web site for GovAuth
-- [ ] Bridging  Model With Gov Auth web site somehow 👈 doing
+- [x] Prototype for GovAuth(Just Wireframes)
+- [ ] Bridging  Model With Gov Auth web site somehow through GovCore 👈 doing (Making GovAuth Prototype Live)
+
