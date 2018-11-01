@@ -17,9 +17,7 @@ npm install -g @vue/cli-service-global
 npm install -D sass-loader node-sass
 
 - Install project dependencies
-
 npm install
 
-- and finally execute 
-
+- Execute 
 npm run serve
