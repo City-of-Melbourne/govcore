@@ -81,8 +81,8 @@ type Query {
     Idp(id: ID!): Idp
     Idps(limit: Int): [Idp]
 
-    GraphEdges(limit: Int,type: String,a:Int,b:Int): [GraphEdge]    
-    GraphEdge(type: String,a:Int): GraphEdge    
+    GraphEdge(id: ID!): GraphEdge
+    GraphEdges(type: String, a: String, b: String): [GraphEdge]
 }
 
 type Mutation {

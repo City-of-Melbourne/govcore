@@ -13,24 +13,27 @@ const cors = require('cors')
 let data_file = 'data.json';
 let db = GovCoreDB(data_file);
 
+// TODO: Does this belong to the db?
+// Filtering functions
+
 const resolvers = {
 
     Query: {     
 
-        Persons: () => db.list('person'),
-        Person: (_, { id }) => db.list('person').find(e => e.id == id),
+        Persons: () => db.find({ type: 'person' }),
+        Person: (_, { id }) => db.get(id),
 
-        Services: () => db.list('service'),
-        Service: (_, { id }) => db.list('service').find(e => e.id == id),
+        Services: () => db.find({ type: 'service' }),
+        Service: (_, { id }) => db.get(id),
 
-        Businesses: () => db.list('business'),
-        Business: (_, { id }) => db.list('business').find(e => e.id == id),
+        Businesses: () => db.find({ type: 'business' }),
+        Business: (_, { id }) => db.get(id),
        
-        Idps: () => db.list('idp'),
-        Idp: (_, { id }) => db.list('idp').find(e => e.id == id),
-     
-        GraphEdge:(_, { type,a,b}) => db.list('graph_edge').filter(graph_edge => graph_edge.type == type && (  graph_edge.a==a || a==null) && (  graph_edge.b==b || b==null))
-                
+        Idps: () => db.find({ type: "idp" }),
+        Idp: (_, { id }) => db.get(id),
+
+        GraphEdges: (_, { type, a, b }) => db.find({ bucket: "graph_edges", type: type, a: a, b: b }),
+        GraphEdge: (_, { id }) => db.get(id)
     },
     Mutation:{
 

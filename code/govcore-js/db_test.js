@@ -27,13 +27,13 @@ puts("Update")
 puts(db.update({id: createResult.id, name: 'Walter'}))
 
 puts()
-puts("List")
-puts(db.list('person'))
+puts("Find")
+puts(db.find({type: 'person'}))
 
 puts()
 puts("Delete")
 puts(db.delete(createResult.id))
 
 puts()
-puts("List")
-puts(db.list('person'))
+puts("Find")
+puts(db.find({type: 'person'}))

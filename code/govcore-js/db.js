@@ -54,16 +54,21 @@ const GovCoreDB = function(dataPath) {
     return doc
   }
 
-  const list = function(type) {
-    return Object.values(loadData()).filter(x => x.type === type)
+  const find = function(props) {
+    return Object.keys(props)
+      .filter((k) => props[k] !== undefined)
+      .reduce(
+        (xs, k) => xs.filter((x) => x[k] === props[k]),
+        Object.values(loadData())
+      )
   }
 
   return {
     create: create,
     get:    get,
-    list:   list,
     update: update,
     delete: _delete,
+    find: find
   }
 }
 
