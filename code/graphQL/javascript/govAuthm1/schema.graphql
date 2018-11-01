@@ -3,8 +3,11 @@ type GraphEdge {
     id: ID!
     type: String
     a: String
-    b: String    
+    b: String 
+    date:String
+    
 }
+
 type Person {  
     id: ID,        
     name:String        
@@ -30,6 +33,11 @@ type Idp {
     id: ID        
     name: String
 }
+type BusinessService {
+    id: ID!       
+    date: String
+    membership: String
+}
 input PersonInput { 
         id: ID,        
         name:String        
@@ -52,7 +60,9 @@ input GraphEdgeInput {
         id: ID
         type: String
         a: String
-        b: String   
+        b: String 
+        date:String
+       
     }
 
     

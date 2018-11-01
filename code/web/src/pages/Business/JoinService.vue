@@ -32,12 +32,7 @@
 
                 <b-table-column field="user.name" label="Service" sortable>
                     {{ props.row.name }}
-                </b-table-column>
-
-                <b-table-column field="user.membership" label="Membership" sortable>
-                    {{ props.row.membership }}
-                </b-table-column>
-
+                </b-table-column>               
                 <b-table-column field="date" label="Joined date" sortable centered>
                     <span class="tag is-success">
                         {{ new Date(props.row.joined).toLocaleDateString() }}
@@ -70,8 +65,7 @@
                                         </a>
                                     </p> 
                                 </div>
-                            </div>
-                                          
+                            </div>                                        
                                              
                             
                         </div>
@@ -91,9 +85,7 @@
 
     let serviceData =  [];
    
-    export default {
-
-        
+    export default {        
         
         async created(){
 

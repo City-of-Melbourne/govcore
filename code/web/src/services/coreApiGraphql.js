@@ -73,7 +73,7 @@ export default class coreApiGraphql {
     }
     async getServices(){    
         var data;
-        // createGraphEdge(input:${JSON.stringify(obj)})
+        
         var query=`{
                 Services(limit:0){
                   id
@@ -88,7 +88,7 @@ export default class coreApiGraphql {
     
     async getBusinessServices(obj){    
         var data;
-        // createGraphEdge(input:${JSON.stringify(obj)})
+        
         var query=`{
                 Services(limit:0){
                   id
@@ -98,6 +98,10 @@ export default class coreApiGraphql {
             await this.postData(query).then( (response) => {               
                  data=response; 
             });    
+
+            
+
+
           return data.Services;
     }
 
