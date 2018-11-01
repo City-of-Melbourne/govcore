@@ -6,19 +6,21 @@
 
                 <div class="column is-four-fifths">
 
-                    <b-autocomplete rounded v-model="name" :data="filteredDataArray" placeholder="e.g. Handsbills" icon="magnify"
+                    <b-autocomplete rounded v-model="name" :data="filteredDataArray" field="name" placeholder="e.g. Handsbills" icon="magnify"
                         @select="option => selected = option">
                         <template slot="empty">No services found</template>
                     </b-autocomplete>
+                   
 
                 </div>
                 <div class="column">
-                    <a class="button is-success">
+                    <a class="button is-success" @click="joinService()">
                         <span class="icon is-small">
                             <i class="fas fa-plus"></i>
                         </span>
                         <span>Join</span>
                     </a>
+                     
                 </div>
             </div>
         </section>
@@ -81,35 +83,71 @@
 </template>
 
 <script>
-    const serviceData = require('@/data/ServiceSample.json');
     
+
+    import { Toast } from 'buefy/dist/components/toast';
+    import  coreApiGraphql from '../../services/coreApiGraphql';
+    const apicore = new coreApiGraphql();
+
+    let serviceData =  [];
+   
     export default {
 
-        data() {
+        
+        
+        async created(){
+
+                this.serviceData= await apicore.getBusinessServices();
+                this.services= await apicore.getServices();
+                
+        },
+        data() {       
+           
+           
             return {
-                data: [
-                    'Grants',
-                    'Skip Bins',
-                    'Handsbills'
-                ],
-                serviceData,
+                services: [],                
+                serviceData,                
                 defaultOpenedDetails: [0],
                 name: '',
                 selected: null
             }
-        },
+        }        ,
         computed: {
             filteredDataArray() {
-                return this.data.filter((option) => {
-                    return option
+            if(this.services!= undefined)   {
+                return this.services.filter((option) => {                    
+                    
+                    return option.name
                         .toString()
                         .toLowerCase()
                         .indexOf(this.name.toLowerCase()) >= 0
                 })
             }
+
+                
+            }
+        },
+        methods: { 
+            joinService(){                
+                
+                if(this.selected!=null){
+                    alert(this.selected.id);
+                }else{
+                     Toast.open({
+                                duration: 3000,
+                                message: `Please select a service!`,
+                                position: 'is-top',
+                                type: 'is-danger'
+                            });    
+                }
+               
+                
+            }
+
         }
 
+    
     }
-
+ 
 
 </script>

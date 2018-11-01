@@ -157,7 +157,6 @@
 
     import { Toast } from 'buefy/dist/components/toast';
     import coreApiGraphql from '../services/coreApiGraphql';
-
     const apicore = new coreApiGraphql();
 
     export default {      
@@ -221,7 +220,7 @@
                         this.isStep=4;  
                         }).catch(err => {
                             Toast.open({
-                                duration: 5000,
+                                duration: 3000,
                                 message: `Something's not good, try again`,
                                 position: 'is-top',
                                 type: 'is-danger'
@@ -238,7 +237,7 @@
                         this.isStep=4;  
                         }).catch(err => {
                             Toast.open({
-                                duration: 5000,
+                                duration: 3000,
                                 message: `Something's not good, try again`,
                                 position: 'is-top',
                                 type: 'is-danger'

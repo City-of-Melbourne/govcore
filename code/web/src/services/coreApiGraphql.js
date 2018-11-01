@@ -1,3 +1,7 @@
+import { resolve } from "path";
+
+
+
 const axios = require("axios");
 export default class coreApiGraphql {   
 
@@ -9,7 +13,7 @@ export default class coreApiGraphql {
              method: 'post',
              data: { query }
          }
-         ).then((result) => { return result.data.data} )
+         ).then((result) => { return (result.data.data) } )
              .catch(err => {
                  /* eslint-disable */
                  console.log('graphql error:', err);                
@@ -67,6 +71,35 @@ export default class coreApiGraphql {
         }`;                
         return this.postData(query); 
     }
-
+    async getServices(){    
+        var data;
+        // createGraphEdge(input:${JSON.stringify(obj)})
+        var query=`{
+                Services(limit:0){
+                  id
+                  name
+                }
+            }`;               
+            await this.postData(query).then( (response) => {               
+                 data=response; 
+            });    
+          return data.Services;
+    }
     
+    async getBusinessServices(obj){    
+        var data;
+        // createGraphEdge(input:${JSON.stringify(obj)})
+        var query=`{
+                Services(limit:0){
+                  id
+                  name
+                }
+            }`;               
+            await this.postData(query).then( (response) => {               
+                 data=response; 
+            });    
+          return data.Services;
+    }
+
+
  }
