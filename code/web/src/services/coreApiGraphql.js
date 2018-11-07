@@ -57,20 +57,18 @@ export default class coreApiGraphql {
 
          });
            
-    }      
-    createGraphEdge(obj){    
-        // createGraphEdge(input:${JSON.stringify(obj)})
-        var query=` mutation{
-            createGraphEdge(input:{type:"${obj.type}",a:"${obj.a}",b:"${obj.b}"})
-                            {
-                                type
-                                id
-                                a
-                                b
-                            } 
-        }`;                
-        return this.postData(query); 
     }
+
+    createGraphEdge(obj) {
+        var query = `mutation{
+            createGraphEdge(input: { type: "${obj.type}", a: "${obj.a}", b: "${obj.b}", date: "${obj.date}" }){
+                type id a b date
+            }
+        }`;
+
+        return this.postData(query);
+    }
+
     async getServices(){    
         var data;
         
@@ -108,5 +106,12 @@ export default class coreApiGraphql {
           return data.BusinessServices;
     }
 
-
- }
+    linkBusinessAndService(obj) {
+        return this.createGraphEdge({
+            type: "business_service",
+            a: obj.businessId,
+            b: obj.serviceId,
+            date: (new Date()).toISOString()
+        });
+    }
+}

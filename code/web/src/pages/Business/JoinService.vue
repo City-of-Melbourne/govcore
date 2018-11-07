@@ -23,7 +23,7 @@
             </div>
         </section>
         <br>
-        <b-table :data="serviceData" paginated per-page="5" :opened-detailed="defaultOpenedDetails" detailed detail-key="id"
+        <b-table :data="serviceData" paginated per-page="10" :opened-detailed="defaultOpenedDetails" detailed detail-key="id"
             @details-open="(row, index) => $toast.open(`Expanded ${row.service.name}`)">
 
             <template slot-scope="props">
@@ -79,21 +79,21 @@
     const apicore = new coreApiGraphql();
 
     let serviceData =  [];
-   
+
+    // TODO: Replace with logged in business
+    let BUSINESS  = { id: "0828152973" };
+
     export default {        
         
         async created(){
 
-                this.serviceData= await apicore.getBusinessServices({business:{id:"0828152973"}});
+                this.serviceData= await apicore.getBusinessServices({ business: BUSINESS });
                 this.services= await apicore.getServices();
-                
         },
-        data() {       
-           
-           
+        data() {
             return {
                 services: [],                
-                serviceData,                
+                serviceData,
                 defaultOpenedDetails: [0],
                 name: '',
                 selected: null
@@ -114,27 +114,45 @@
                 
             }
         },
-        methods: { 
-            joinService(){                
-                
-                if(this.selected!=null){
-                    alert(this.selected.id);
-                }else{
-                     Toast.open({
-                                duration: 3000,
-                                message: `Please select a service!`,
-                                position: 'is-top',
-                                type: 'is-danger'
-                            });    
+        methods: {
+            joinService() {
+                if (this.selected == null) {
+                    Toast.open({
+                        duration: 3000,
+                        message: `Please select a service!`,
+                        position: 'is-top',
+                        type: 'is-danger'
+                    });
+                    return
                 }
-               
-                
+
+                // create a relationship between business and service
+                let relationship = {
+                    businessId: BUSINESS.id,
+                    serviceId: this.selected.id
+                }
+                apicore.linkBusinessAndService(relationship).then((result) => {
+                    Toast.open({
+                        message: 'You have joined the service!',
+                        type: 'is-success'
+                    });
+
+                    // TODO: fund a better way to do this.
+                    let ctx = this;
+                    apicore.getBusinessServices({ business: BUSINESS })
+                    .then((serviceData) => ctx.serviceData = serviceData)
+
+                }).catch(err => {
+                    // TODO extract into function
+                    Toast.open({
+                        duration: 3000,
+                        message: "Something's not good, try again",
+                        position: 'is-top',
+                        type: 'is-danger'
+                    });
+                });
             }
-
         }
-
-    
     }
- 
 
 </script>

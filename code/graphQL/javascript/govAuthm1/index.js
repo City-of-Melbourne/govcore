@@ -93,7 +93,7 @@ const resolvers = {
             return db.update(input);
         },
         createGraphEdge: (_, { input }) => { 
-            var doc=Object.assign(input, { bucket: 'graph'});          
+            var doc=Object.assign(input, { bucket: 'graph_edges'});
             return db.create(doc);
         },
     }
