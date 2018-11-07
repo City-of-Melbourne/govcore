@@ -90,19 +90,22 @@ export default class coreApiGraphql {
         var data;
         
         var query=`{
-                Services(limit:0){
-                  id
-                  name
-                }
+            BusinessServices(business:"${obj.business.id}"){
+    
+                id
+                date
+                    business{id,name}
+                    service{id,name}
+              }
             }`;               
             await this.postData(query).then( (response) => {               
                  data=response; 
             });    
 
             
+        
 
-
-          return data.Services;
+          return data.BusinessServices;
     }
 
 

@@ -30,12 +30,12 @@
 
             <template slot-scope="props">
 
-                <b-table-column field="user.name" label="Service" sortable>
-                    {{ props.row.name }}
+                <b-table-column field="service.name" label="Service" sortable>
+                    {{ props.row.service.name }}
                 </b-table-column>               
                 <b-table-column field="date" label="Joined date" sortable centered>
                     <span class="tag is-success">
-                        {{ new Date(props.row.joined).toLocaleDateString() }}
+                        {{ new Date(props.row.date).toLocaleDateString() }}
                     </span>
                 </b-table-column>
 
@@ -46,7 +46,7 @@
                     <div class="media-content">
                         <div class="content">      
 
-                            <div class="columns is-desktop">
+                            <!-- <div class="columns is-desktop">
 
                                
                                 <div class="column">
@@ -65,7 +65,7 @@
                                         </a>
                                     </p> 
                                 </div>
-                            </div>                                        
+                            </div>                                         -->
                                              
                             
                         </div>
@@ -89,7 +89,7 @@
         
         async created(){
 
-                this.serviceData= await apicore.getBusinessServices();
+                this.serviceData= await apicore.getBusinessServices({business:{id:"0828152973"}});
                 this.services= await apicore.getServices();
                 
         },

@@ -32,9 +32,36 @@ const resolvers = {
         Idps: () => db.find({ type: "idp" }),
         Idp: (_, { id }) => db.get(id),
 
-        GraphEdges: (_, { type, a, b }) => db.find({ bucket: "graph_edges", type: type, a: a, b: b }),
-        GraphEdge: (_, { id }) => db.get(id)
+        GraphEdges: (_, { type, a, b }) => {
+                                var edge=db.find({ bucket: "graph_edges", type: type, a: a, b: b })
+                                var a =  db.get(edge.a);
+                                var b =  db.get(edge.b);
+                                return Object.assign(edge,{a:a,b:b});                                   
+                                
+                            },
+        GraphEdge: (_, { id }) => db.get(id),
+        
+        BusinessServices: (_, {  business, service }) => {
+            var edges=db.find({ bucket: "graph_edges", type: "business_service", a: business, b: service })
+           
+            return edges.map(function(edge){
+                        return   Object.assign(edge,{business:db.get(edge.a),service:db.get(edge.b)}); 
+               })
+
+                                       
+            
+        },
+        BusinessService: (_, { id }) =>  {
+
+            var edge=db.get(id)
+            return Object.assign(edge,{business:db.get(edge.a),service:db.get(edge.b)}); 
+
+        }
+
+        
     },
+
+   
     Mutation:{
 
         createPerson: (_, { input }) => { 

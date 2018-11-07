@@ -1,24 +1,32 @@
 
+type BusinessService {
+    id: ID!    
+    business: Business
+    service: Service 
+    date:String    
+}   
 type GraphEdge {
     id: ID!
     type: String
     a: String
     b: String 
     date:String    
-}
+}   
 type Person {  
     id: ID,        
     name:String        
     email:String        
 }     
 type Service {  
-    id: ID,        
-    name: String        
+    id: ID!        
+    name: String 
+    bucket: String       
 }
 type Business {  
-    id: ID,    
+    id: ID! 
     name: String   
     abn: String
+    bucket: String
 }
 type Event {  
     id: ID!,
@@ -31,11 +39,7 @@ type Idp {
     id: ID        
     name: String
 }
-type BusinessService {
-    id: ID!       
-    date: String
-    membership: String
-}
+
 input PersonInput { 
         id: ID,        
         name:String        
@@ -61,8 +65,9 @@ input GraphEdgeInput {
         b: String 
         date:String       
     }
-type Query {
-    
+type Query {   
+  
+
     Person(id: ID!): Person
     Persons(limit: Int): [Person]
 
@@ -77,7 +82,13 @@ type Query {
 
     GraphEdge(id: ID!): GraphEdge
     GraphEdges(type: String, a: String, b: String): [GraphEdge]
+
+    BusinessServices( business: ID, service: ID): [BusinessService]
+    BusinessService(id: ID!): BusinessService
 }
+
+  
+
 type Mutation {
 
     createPerson(input:PersonInput): Person
