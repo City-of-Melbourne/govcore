@@ -4,10 +4,8 @@ type GraphEdge {
     type: String
     a: String
     b: String 
-    date:String
-    
+    date:String    
 }
-
 type Person {  
     id: ID,        
     name:String        
@@ -61,12 +59,8 @@ input GraphEdgeInput {
         type: String
         a: String
         b: String 
-        date:String
-       
+        date:String       
     }
-
-    
-
 type Query {
     
     Person(id: ID!): Person
@@ -84,7 +78,6 @@ type Query {
     GraphEdge(id: ID!): GraphEdge
     GraphEdges(type: String, a: String, b: String): [GraphEdge]
 }
-
 type Mutation {
 
     createPerson(input:PersonInput): Person
@@ -97,7 +90,4 @@ type Mutation {
     createIdp(input:IdpInput): Idp
     updateIdp(input:IdpInput): Idp
     createGraphEdge(input:GraphEdgeInput): GraphEdge
-   
-    
-
 }

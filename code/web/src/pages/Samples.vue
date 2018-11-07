@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="columns  is-desktop">
                     <div class="column ">
-                        <h1 class="title">GovAuth On Action</h1>
+                        <h1 class="title">GovAuth</h1>
                         <h2 class="subtitle">Samples how GovAuth would work across different CoM platforms </h2>
                     </div>
                 </div>
