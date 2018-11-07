@@ -9,9 +9,7 @@
                     <b-autocomplete rounded v-model="name" :data="filteredDataArray" field="name" placeholder="e.g. Handsbills" icon="magnify"
                         @select="option => selected = option">
                         <template slot="empty">No services found</template>
-                    </b-autocomplete>
-                   
-
+                    </b-autocomplete> 
                 </div>
                 <div class="column">
                     <a class="button is-success" @click="joinService()">
@@ -26,7 +24,7 @@
         </section>
         <br>
         <b-table :data="serviceData" paginated per-page="5" :opened-detailed="defaultOpenedDetails" detailed detail-key="id"
-            @details-open="(row, index) => $toast.open(`Expanded ${row.user.name}`)">
+            @details-open="(row, index) => $toast.open(`Expanded ${row.service.name}`)">
 
             <template slot-scope="props">
 
@@ -46,15 +44,12 @@
                     <div class="media-content">
                         <div class="content">      
 
-                            <!-- <div class="columns is-desktop">
+                            <div class="columns is-desktop">
 
-                               
                                 <div class="column">
-                                    <strong>{{ props.row.name }}</strong>
-                                    <small> -> {{ props.row.membership }}</small>                                    
+                                    <strong>{{ props.row.service.name}}</strong>                                                                   
                                     <br>
-                                    <small>{{props.row.description}}</small>
-                                    
+                                    <small>{{props.row.date}}</small>                                    
                                 </div>
                                  <div class="column is-one-fifth"><p class="control">                                       
                                         <a class="button is-danger">
@@ -65,7 +60,7 @@
                                         </a>
                                     </p> 
                                 </div>
-                            </div>                                         -->
+                            </div>                                        
                                              
                             
                         </div>
