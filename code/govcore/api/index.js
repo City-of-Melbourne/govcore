@@ -96,6 +96,7 @@ const resolvers = {
             var doc=Object.assign(input, { bucket: 'graph_edges'});
             return db.create(doc);
         },
+        deleteGraphEdge: (_, { id }) => db.delete(id),
     }
 };
 

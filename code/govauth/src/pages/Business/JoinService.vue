@@ -52,7 +52,7 @@
                                     <small>{{props.row.date}}</small>                                    
                                 </div>
                                  <div class="column is-one-fifth"><p class="control">                                       
-                                        <a class="button is-danger">
+                                        <a class="button is-danger" @click="leaveService(props.row.id)">
                                             <span class="icon is-small">
                                                 <i class="fas fa-minus"></i>
                                             </span>
@@ -98,7 +98,7 @@
                 name: '',
                 selected: null
             }
-        }        ,
+        },
         computed: {
             filteredDataArray() {
             if(this.services!= undefined)   {
@@ -137,10 +137,10 @@
                         type: 'is-success'
                     });
 
-                    // TODO: fund a better way to do this.
+                    // TODO: find a better way to pass context
                     let ctx = this;
                     apicore.getBusinessServices({ business: BUSINESS })
-                    .then((serviceData) => ctx.serviceData = serviceData)
+                           .then((serviceData) => ctx.serviceData = serviceData)
 
                 }).catch(err => {
                     // TODO extract into function
@@ -150,6 +150,14 @@
                         position: 'is-top',
                         type: 'is-danger'
                     });
+                });
+            },
+            leaveService(graphEdgeId) {
+                apicore.deleteGraphEdge(graphEdgeId).then((result) => {
+                    // TODO: find a better way to pass context
+                    let ctx = this;
+                    apicore.getBusinessServices({ business: BUSINESS })
+                           .then((serviceData) => ctx.serviceData = serviceData)
                 });
             }
         }

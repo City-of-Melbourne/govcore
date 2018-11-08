@@ -69,6 +69,10 @@ export default class coreApiGraphql {
         return this.postData(query);
     }
 
+    deleteGraphEdge(id) {
+        return this.postData(`mutation { deleteGraphEdge(id: "${id}") { id } }`);
+    }
+
     async getServices(){    
         var data;
         
