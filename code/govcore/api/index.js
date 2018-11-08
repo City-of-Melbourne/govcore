@@ -7,11 +7,11 @@ const { makeExecutableSchema } = require('graphql-tools');
 
 const schemaFile = path.join(__dirname, 'schema.graphql');
 const typeDefs = fs.readFileSync(schemaFile, 'utf8');
-const GovCoreDB = require('../../../govcore-js/db.js');
+const GovCoreStore = require('../store/store.js');
 const cors = require('cors')
 
 let data_file = 'data.json';
-let db = GovCoreDB(data_file);
+let db = GovCoreStore(data_file);
 
 // TODO: Does this belong to the db?
 // Filtering functions

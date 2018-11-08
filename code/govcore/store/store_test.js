@@ -1,12 +1,12 @@
 const fs = require('fs');
 
-const GovCoreDB = require('./db.js')
+const GovCoreStore = require('./store.js')
 
 let dataPath = 'test_data.json';
 
 fs.writeFileSync(dataPath, '{}', null, 2);
 
-let db = GovCoreDB(dataPath);
+let db = GovCoreStore(dataPath);
 
 const puts = console.log;
 

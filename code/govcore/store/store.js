@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const GovCoreDB = function(dataPath) {
+const GovCoreStore = function(dataPath) {
 
   // Create dataFile if it doesn't exist
   if (!fs.existsSync(dataPath)) {
@@ -72,4 +72,4 @@ const GovCoreDB = function(dataPath) {
   }
 }
 
-module.exports = GovCoreDB;
+module.exports = GovCoreStore;
