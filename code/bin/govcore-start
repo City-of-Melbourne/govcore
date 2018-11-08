@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+echo "Starting GovCore API"
+node govcore/api/index.js
