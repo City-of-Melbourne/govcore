@@ -55,6 +55,16 @@ export default class coreApiGraphql {
            
     }
 
+    updatePerson(model) {
+        console.log("updatePerson(model)")
+        var query = `mutation {
+            updatePerson(input:{id: ${model.id}, email:"${model.email}", name:"${model.name}"}){
+                id email name
+            }
+        }`;
+        return this.postData(query);
+    }
+
     createGraphEdge(obj) {
         var query = `mutation{
             createGraphEdge(input: { type: "${obj.type}", a: "${obj.a}", b: "${obj.b}", date: "${obj.date}" }){

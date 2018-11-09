@@ -20,7 +20,7 @@
     Dash-Com Admin
   </p>
   <ul class="menu-list" v-if="false">
-    <li><a >Businesess</a></li>
+    <li><a >Businesses</a></li>
     <li><a >Services</a></li>
     <li><a >Users</a></li>
     <li><a >IDP</a></li>
