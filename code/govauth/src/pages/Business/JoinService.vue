@@ -81,12 +81,12 @@
     let serviceData =  [];
 
     // TODO: Replace with logged in business
-    let BUSINESS  = { id: "0828152973" };
+    let BUSINESS  = { id: "3357665841" };
 
     export default {        
         
         async created(){
-
+                  
                 this.serviceData= await apicore.getBusinessServices({ business: BUSINESS });
                 this.services= await apicore.getServices();
         },
@@ -131,6 +131,7 @@
                     businessId: BUSINESS.id,
                     serviceId: this.selected.id
                 }
+                // eslint-disable-next-line 
                 apicore.linkBusinessAndService(relationship).then((result) => {
                     Toast.open({
                         message: 'You have joined the service!',
@@ -142,17 +143,19 @@
                     apicore.getBusinessServices({ business: BUSINESS })
                            .then((serviceData) => ctx.serviceData = serviceData)
 
-                }).catch(err => {
-                    // TODO extract into function
-                    Toast.open({
-                        duration: 3000,
-                        message: "Something's not good, try again",
-                        position: 'is-top',
-                        type: 'is-danger'
-                    });
+                }).catch(// eslint-disable-next-line 
+                    err => {
+                        // TODO extract into function
+                        Toast.open({
+                            duration: 3000,
+                            message: "Something's not good, try again",
+                            position: 'is-top',
+                            type: 'is-danger'
+                        });
                 });
             },
             leaveService(graphEdgeId) {
+                // eslint-disable-next-line 
                 apicore.deleteGraphEdge(graphEdgeId).then((result) => {
                     // TODO: find a better way to pass context
                     let ctx = this;

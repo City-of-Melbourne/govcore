@@ -1,7 +1,3 @@
-import { resolve } from "path";
-
-
-
 const axios = require("axios");
 export default class coreApiGraphql {   
 
@@ -117,5 +113,59 @@ export default class coreApiGraphql {
             b: obj.serviceId,
             date: (new Date()).toISOString()
         });
+    }
+
+    async getRoles(){    
+        var data;
+        
+        var query=`{
+                Roles(limit:0){
+                  id
+                  name
+                }
+            }`;               
+            await this.postData(query).then( (response) => {               
+                 data=response; 
+            });    
+          return data.Roles;
+    }
+    async getBusinessUsers(obj){    
+        var data;
+        
+        var query=`{
+            BusinessServices(business:"${obj.business.id}"){
+    
+                id
+                date
+                    business{id,name}
+                    service{id,name}
+              }
+            }`;               
+            await this.postData(query).then( (response) => {               
+                 data=response; 
+            });    
+            
+          return data.BusinessServices;
+    }
+    async getBusinessUserRequests(obj){    
+        var data;
+        
+        var query=`{
+            BusinessServices(business:"${obj.business.id}"){
+    
+                id
+                date
+                    business{id,name}
+                    service{id,name}
+              }
+            }`;               
+            await this.postData(query).then( (response) => {               
+                 data=response; 
+            });    
+
+            
+        
+
+          return data.BusinessServices;
     }
 }

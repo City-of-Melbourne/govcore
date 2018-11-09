@@ -5,6 +5,18 @@ type BusinessService {
     service: Service 
     date:String    
 }   
+type BusinessPerson {
+    id: ID!    
+    business: Business
+    person: Person 
+    date:String    
+}   
+type BusinessPersonRequest {
+    id: ID!    
+    business: Business
+    person: Person 
+    date:String    
+}   
 type GraphEdge {
     id: ID!
     type: String
@@ -18,6 +30,11 @@ type Person {
     email:String        
 }     
 type Service {  
+    id: ID!        
+    name: String 
+    bucket: String       
+}
+type Role {  
     id: ID!        
     name: String 
     bucket: String       
@@ -74,6 +91,9 @@ type Query {
     Service(id: ID!): Service
     Services(limit: Int): [Service]
 
+    Role(id: ID!): Role
+    Roles(limit: Int): [Role]
+
     Business(id: ID!): Business
     Businesses(limit: Int): [Business]
 
@@ -85,6 +105,12 @@ type Query {
 
     BusinessServices( business: ID, service: ID): [BusinessService]
     BusinessService(id: ID!): BusinessService
+
+    BusinessPersons( business: ID, person: ID): [BusinessPerson]
+    BusinessPerson(id: ID!): BusinessPerson
+
+    BusinessPersonRequests( business: ID, person: ID): [BusinessPersonRequest]
+    BusinessPersonRequest(id: ID!): BusinessPersonRequest
 }
 
   

@@ -141,13 +141,28 @@
     </div>
 </template>
 
-<script>
-    const axios = require("axios")
-    const usersData = require('@/data/SampleUsers.json');
-    const usersReqData = require('@/data/SampleUsersReq.json');
+<script>    
+
+
+    
+    import  coreApiGraphql from '../../services/coreApiGraphql';
+    const apicore = new coreApiGraphql();
+
+    const usersData = [];
+    const usersReqData = [];
+
+    let BUSINESS  = { id: "3357665841" };
+
     export default {
+         async created(){
+            
+                this.usersData= await apicore.getBusinessUsers({ business: BUSINESS });
+                this.usersReqData= await apicore.getBusinessUserRequests({ business: BUSINESS });
+                this.roles= await apicore.getRoles();
+        },
         data() {
             return {
+                roles: [], 
                 usersData,
                 usersReqData,
                 defaultOpenedDetails: [0],

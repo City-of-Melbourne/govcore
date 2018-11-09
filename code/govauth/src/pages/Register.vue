@@ -211,14 +211,15 @@
             },                   
             // AXIOS HTTP CALLS - REQUESTING DATA FROM  GRAPHQL
              createBusiness() {  
-                 
+                 // eslint-disable-next-line 
                 apicore.createBusiness(this.model).then((result) => {
                         Toast.open({
                             message: 'Registration happened correctly!',
                             type: 'is-success'
                         });
                         this.isStep=4;  
-                        }).catch(err => {
+                        }).catch(// eslint-disable-next-line  
+                            err => {
                             Toast.open({
                                 duration: 3000,
                                 message: `Something's not good, try again`,
@@ -229,19 +230,22 @@
                 //this.isStep=4;                
             }
             ,createPerson(){
+                // eslint-disable-next-line 
                 apicore.createPerson(this.model).then((result) => {
                         Toast.open({
                             message: 'Registration happened correctly!',
                             type: 'is-success'
                         });
                         this.isStep=4;  
-                        }).catch(err => {
-                            Toast.open({
-                                duration: 3000,
-                                message: `Something's not good, try again`,
-                                position: 'is-top',
-                                type: 'is-danger'
-                            });    
+                        }).catch(
+                            // eslint-disable-next-line 
+                            err => {
+                                Toast.open({
+                                    duration: 3000,
+                                    message: `Something's not good, try again`,
+                                    position: 'is-top',
+                                    type: 'is-danger'
+                                });    
                      });  
             }
                      
