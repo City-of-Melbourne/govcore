@@ -77,7 +77,7 @@ const resolvers = {
                })                
         },
         BusinessPerson: (_, { id }) =>  {
-
+            
             var edge=db.get(id)
             return Object.assign(edge,{business:db.get(edge.a),service:db.get(edge.b)}); 
 

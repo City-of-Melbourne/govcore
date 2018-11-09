@@ -6,19 +6,23 @@
 
                 <div class="column is-four-fifths">
                     <b-field>
-                        <b-input placeholder="Email" type="email" icon="email">
+                        <b-input placeholder="Email" type="email" icon="email" v-model="model.email">
                         </b-input>
                     </b-field>
                 </div>
                 <div class="column">
-                    <b-dropdown>
+                    <b-dropdown v-model="model.role">
                         <button class="button is-primary" slot="trigger">
                             <span>Role</span>
                             <b-icon icon="menu-down"></b-icon>
-                        </button>
-                        <b-dropdown-item>Admin</b-dropdown-item>
-                        <b-dropdown-item>Login</b-dropdown-item>
+                        </button>                     
+                          <b-dropdown-item 
+                          v-for="option in roles" 
+                            :key="option.id" 
+                            :value="option.name"> {{option.name}}</b-dropdown-item >
+
                     </b-dropdown>
+                    
                 </div>
                 <div class="column">
                     <a class="button is-success">
@@ -159,6 +163,7 @@
                 this.usersData= await apicore.getBusinessUsers({ business: BUSINESS });
                 this.usersReqData= await apicore.getBusinessUserRequests({ business: BUSINESS });
                 this.roles= await apicore.getRoles();
+                
         },
         data() {
             return {
@@ -167,7 +172,8 @@
                 usersReqData,
                 defaultOpenedDetails: [0],
                 name: '',
-                selected: null
+                selected: null,
+                model:{email:"",role:""}
             }
         },
         computed: {
