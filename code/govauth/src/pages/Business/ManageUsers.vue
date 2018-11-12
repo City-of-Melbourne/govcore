@@ -1,35 +1,32 @@
 <template>
     <div>
         <section>
-            <h1 class="title">Users</h1>
+            <h1 class="title">User</h1>
             <div class="columns is-desktop">
 
-                <div class="column is-four-fifths">
+                <div class="column is-10">
                     <b-field>
                         <b-input placeholder="Email" type="email" icon="email" v-model="model.email">
                         </b-input>
                     </b-field>
                 </div>
-                <div class="column">
+                <div class="column is-1">
                     <b-dropdown v-model="model.role">
                         <button class="button is-primary" slot="trigger">
                             <span>Role</span>
                             <b-icon icon="menu-down"></b-icon>
-                        </button>                     
-                          <b-dropdown-item 
-                          v-for="option in roles" 
-                            :key="option.id" 
-                            :value="option.name"> {{option.name}}</b-dropdown-item >
+                        </button>
+                        <b-dropdown-item v-for="option in roles" :key="option.id" :value="option.name"> {{option.name}}</b-dropdown-item>
 
                     </b-dropdown>
-                    
+
                 </div>
-                <div class="column">
-                    <a class="button is-success">
+                <div class="column is-1">
+                    <a class="button is-success" @click="addUser()">
                         <span class="icon is-small">
                             <i class="fas fa-plus"></i>
                         </span>
-                        <span>Join</span>
+                        <span>Add</span>
                     </a>
                 </div>
 
@@ -44,19 +41,19 @@
                     <template slot-scope="props">
 
                         <b-table-column field="user.name" label="User" sortable>
-                            {{ props.row.name }}
+                            {{ props.row.person.name }}
                         </b-table-column>
 
                         <b-table-column field="row.email" label="Email" sortable>
-                            {{ props.row.email }}
+                            {{ props.row.person.email }}
                         </b-table-column>
                         <b-table-column field="user.role" label="Role" sortable>
-                            {{ props.row.role }}
+                            {{ props.row.role.name }}
                         </b-table-column>
 
                         <b-table-column field="date" label="Joined date" sortable centered>
                             <span class="tag is-success">
-                                {{ new Date(props.row.joined).toLocaleDateString() }}
+                                {{ new Date(props.row.date).toLocaleDateString() }}
                             </span>
                         </b-table-column>
 
@@ -71,19 +68,17 @@
 
 
                                         <div class="column">
-                                            <strong>{{ props.row.email }} ({{ props.row.name }})</strong>
-                                            <small> -> {{ props.row.role }}</small>
+                                            <strong>{{ props.row.person.email }} ({{ props.row.person.name }})</strong>
+                                            <small> -> {{ props.row.role.name }}</small>
                                             <br>
-                                            <small>{{props.row.description}}</small>
-
                                         </div>
                                         <div class="column is-one-fifth">
                                             <p class="control">
-                                                <a class="button is-danger">
+                                                <a class="button is-danger" @click="deleteUser(props.row.id)">
                                                     <span class="icon is-small">
                                                         <i class="fas fa-minus"></i>
                                                     </span>
-                                                    <span>Leave</span>
+                                                    <span>Delete</span>
                                                 </a>
                                             </p>
                                         </div>
@@ -123,7 +118,7 @@
                                 </span>
                                 <span>Accept</span>
                             </a>
-                            <a class="button is-danger">
+                            <a class="button is-danger" >
                                 <span class="icon is-small">
                                     <i class="fas fa-minus"></i>
                                 </span>
@@ -145,35 +140,32 @@
     </div>
 </template>
 
-<script>    
-
-
-    
-    import  coreApiGraphql from '../../services/coreApiGraphql';
+<script>
+    import coreApiGraphql from '../../services/coreApiGraphql';
     const apicore = new coreApiGraphql();
 
     const usersData = [];
     const usersReqData = [];
 
-    let BUSINESS  = { id: "3357665841" };
+    let BUSINESS = { id: "3357665841" };
 
     export default {
-         async created(){
-            
-                this.usersData= await apicore.getBusinessUsers({ business: BUSINESS });
-                this.usersReqData= await apicore.getBusinessUserRequests({ business: BUSINESS });
-                this.roles= await apicore.getRoles();
-                
+        async created() {
+
+            this.usersData = await apicore.getBusinessPersons({ business: BUSINESS });
+            //this.usersReqData = await apicore.getBusinessPersonRequests({ business: BUSINESS });
+            this.roles = await apicore.getRoles();
+
         },
         data() {
             return {
-                roles: [], 
+                roles: [],
                 usersData,
                 usersReqData,
                 defaultOpenedDetails: [0],
                 name: '',
                 selected: null,
-                model:{email:"",role:""}
+                model: { email: "", role: "" }
             }
         },
         computed: {
@@ -186,31 +178,86 @@
                 })
             }
         },
-        methods:{
-            // AXIOS HTTP CALLS - REQUESTING DATA FROM  GRAPHQL
-            async getUsersBusiness () {                   
-                
-                        // axios({
-                        //     url: 'https://1jzxrj179.lp.gql.zone/graphql',
-                        //     method: 'post',
-                        //     data: {
-                        //         query: `
-                        //                 query PostsForAuthor {
-                        //                     author(id: 1) {
-                        //                     firstName
-                        //                         posts {
-                        //                         title
-                        //                         votes
-                        //                         }
-                        //                     }
-                        //                     }
-                        //         `
-                        //     }
-                        //     }).then((result) => {
-                        //         //console.log(result.data)                                
-                        //     });
-
+        methods: {
+            
+            addUser() {
+                if (this.selected == null) {
+                    this.$toast.open({
+                        duration: 3000,
+                        message: `Please select a role!`,
+                        position: 'is-top',
+                        type: 'is-danger'
+                    });
+                    return
                 }
+
+                // create a relationship between business and person
+                let relationship = {
+                    businessId: BUSINESS.id,
+                    roleId: this.selected.id
+                }
+                // eslint-disable-next-line 
+                apicore.linkBusinessAndService(relationship).then((result) => {
+                    this.$toast.open({
+                        message: 'You have invited the user!',
+                        type: 'is-success'
+                    });
+
+                    // TODO: find a better way to pass context
+                    let ctx = this;
+                    apicore.getBusinessPersons({ business: BUSINESS })
+                        .then((usersData) => ctx.usersData = usersData)
+
+                }).catch(// eslint-disable-next-line 
+                    err => {
+                        // TODO extract into function
+                        this.$toast.open({
+                            duration: 3000,
+                            message: "Something's not good, try again",
+                            position: 'is-top',
+                            type: 'is-danger'
+                        });
+                    });
+            },
+            deleteUser(graphEdgeId) {
+                // eslint-disable-next-line 
+                apicore.deleteGraphEdge(graphEdgeId).then((result) => {
+                    // TODO: find a better way to pass context
+                    this.$toast.open({
+                        message: 'You have deleted the user!',
+                        type: 'is-success'
+                    });
+                    let ctx = this;
+                    apicore.getBusinessPersons({ business: BUSINESS })
+                        .then((usersData) => ctx.usersData = usersData)
+                });
+            },
+            aceptRequest(graphEdgeId) {
+                // eslint-disable-next-line 
+                apicore.deleteGraphEdge(graphEdgeId).then((result) => {
+                    // TODO: find a better way to pass context
+                    this.$toast.open({
+                        message: 'You have disabled the user!',
+                        type: 'is-success'
+                    });
+                    let ctx = this;
+                    apicore.getBusinessPersons({ business: BUSINESS })
+                        .then((usersData) => ctx.usersData = usersData)
+                });
+            },
+            ignoreRequest(graphEdgeId) {
+                // eslint-disable-next-line 
+                apicore.deleteGraphEdge(graphEdgeId).then((result) => {
+                    // TODO: find a better way to pass context
+                    this.$toast.open({
+                        message: 'You have disabled the user!',
+                        type: 'is-success'
+                    });
+                    let ctx = this;
+                    apicore.getBusinessPersons({ business: BUSINESS })
+                        .then((usersData) => ctx.usersData = usersData)
+                });
+            }
         }
     }
 </script>

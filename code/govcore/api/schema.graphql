@@ -9,6 +9,7 @@ type BusinessPerson {
     id: ID!    
     business: Business
     person: Person 
+    role: Role 
     date:String    
 }   
 type BusinessPersonRequest {
@@ -57,6 +58,8 @@ type Idp {
     name: String
 }
 
+
+
 input PersonInput { 
         id: ID,        
         name:String        
@@ -82,8 +85,8 @@ input GraphEdgeInput {
         b: String 
         date:String       
     }
-type Query {   
-  
+    
+type Query {     
 
     Person(id: ID!): Person
     Persons(limit: Int): [Person]

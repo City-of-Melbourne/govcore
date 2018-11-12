@@ -139,25 +139,25 @@ export default class coreApiGraphql {
             });    
           return data.Roles;
     }
-    async getBusinessUsers(obj){    
+    async getBusinessPersons(obj){    
         var data;
         
         var query=`{
-            BusinessServices(business:"${obj.business.id}"){
-    
+            BusinessPersons(business:"${obj.business.id}"){    
                 id
                 date
                     business{id,name}
-                    service{id,name}
+                    person{id,name,email}
+                    role{id,name}
               }
             }`;               
             await this.postData(query).then( (response) => {               
                  data=response; 
             });    
             
-          return data.BusinessServices;
+          return data.BusinessPersons;
     }
-    async getBusinessUserRequests(obj){    
+    async getBusinessPersonRequests(obj){    
         var data;
         
         var query=`{
@@ -172,9 +172,6 @@ export default class coreApiGraphql {
             await this.postData(query).then( (response) => {               
                  data=response; 
             });    
-
-            
-        
 
           return data.BusinessServices;
     }

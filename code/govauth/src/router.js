@@ -24,44 +24,44 @@ export default new Router({
       path: "/login",
       name: "login",
       meta: { layout: "no-sidebar" },
-      component: require("@/pages/Login.vue")
+      component: require("@/pages/Login.vue").default
     },
     {
       path: "/samples",
       name: "samples",
       meta: { layout: "no-sidebar" },
-      component: require("@/pages/Samples.vue")
+      component: require("@/pages/Samples.vue").default
     },
     // Handsbills sample
     {
       path: "/handsbills/login",
       name: "hbLogin",
       meta: { layout: "empty" },
-      component: require("@/pages/handsbills/Login.vue")
+      component: require("@/pages/handsbills/Login.vue").default
     },
     {
       path: "/handsbills/register",
       name: "hbRegister",
       meta: { layout: "empty" },
-      component: require("@/pages/handsbills/Register.vue")
+      component: require("@/pages/handsbills/Register.vue").default
     },
     {
       path: "/handsbills/success",
       name: "success",
       meta: { layout: "empty" },
-      component: require("@/pages/handsbills/Success.vue")
+      component: require("@/pages/handsbills/Success.vue").default
     },
     {
       path: "/register",
       name: "register",
       meta: { layout: "no-sidebar" },
-      component: require("@/pages/Register.vue")
+      component: require("@/pages/Register.vue").default
     },
     // Dash
     {
       path: "/dash",
       name: "dash",
-      component: () => import("@/pages/Dash.vue")
+      component: () => import("@/pages/Dash.vue").default
     },
     {
       path: "/joinservice",

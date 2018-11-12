@@ -70,16 +70,16 @@ const resolvers = {
             return Object.assign(edge,{business:db.get(edge.a),service:db.get(edge.b)}); 
         },
 
-        BusinessPersons: (_, {  business, service }) => {
-            var edges=db.find({ bucket: "graph_edges", type: "business_person", a: business, b: service })           
+        BusinessPersons: (_, {  business, person }) => {
+            var edges=db.find({ bucket: "graph_edges", type: "business_person", a: business, b: person })           
             return edges.map(function(edge){
-                        return   Object.assign(edge,{business:db.get(edge.a),service:db.get(edge.b)}); 
+                        return   Object.assign(edge,{business:db.get(edge.a),person:db.get(edge.b),role:db.get(edge.role)}); 
                })                
         },
         BusinessPerson: (_, { id }) =>  {
             
             var edge=db.get(id)
-            return Object.assign(edge,{business:db.get(edge.a),service:db.get(edge.b)}); 
+            return Object.assign(edge,{business:db.get(edge.a),person:db.get(edge.b),role:db.get(edge.role)}); 
 
         }
 
