@@ -138,6 +138,19 @@ export default class coreApiGraphql {
             date: (new Date()).toISOString()
         });
     }
+  
+
+    linkPersonToBusiness(obj) {  
+
+        var query = `mutation{
+            createGraphEdge(input: { type: "business_person", a: "${obj.businessId}", b: "${obj.personId}", role: "${obj.roleId}", date: "${(new Date()).toISOString()}" }){
+                type id a b date
+            }
+        }`;
+        return this.postData(query);
+    }
+
+    
 
     async getRoles(){    
         var data;
@@ -190,12 +203,13 @@ export default class coreApiGraphql {
             
           return data.BusinessPersons;
     }
+
     async getBusinessPersonRequests(obj){    
         var data;
         
         var query=`{
-            BusinessPersonRequests(business:"${obj.business.id}"){
-    
+            BusinessPersonRequests(business:"${obj.business.id}",type:"person_business_request"){
+   
                 id
                 date
                     business{id,name}
@@ -210,11 +224,24 @@ export default class coreApiGraphql {
 
           return data.BusinessPersonRequests;
     }
+    
+
+    createPersonToBusinessRequest(obj) {        
+
+
+        var query = `mutation{
+            createGraphEdge(input: { type: "person_business_request", a: "${obj.businessId}", b: "${obj.personId}", role: "${obj.roleId}", date: "${(new Date()).toISOString()}" }){
+                type id a b date
+            }
+        }`;
+
+        return this.postData(query);
+    }
     async getPersonBusinessRequests(obj){    
         var data;
         
         var query=`{
-            BusinessPersonRequests(person:"${obj.person.id}"){
+            BusinessPersonRequests(person:"${obj.person.id}",type:"person_business_request"){
     
                 id
                 date

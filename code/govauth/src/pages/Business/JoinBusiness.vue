@@ -19,7 +19,7 @@
                             <span>Role</span>
                             <b-icon icon="menu-down"></b-icon>
                         </button>
-                        <b-dropdown-item v-for="option in roles" :key="option.id" :value="option.name"> {{option.name}}</b-dropdown-item>
+                        <b-dropdown-item v-for="option in roles" :key="option.id" :value="option.id"> {{option.name}}</b-dropdown-item>
 
                     </b-dropdown>
 
@@ -110,17 +110,12 @@
                         </b-table-column>
 
                         <b-table-column field="date" label="Action" sortable centered>
-                            <a class="button is-success">
-                                <span class="icon is-small">
-                                    <i class="fas fa-plus"></i>
-                                </span>
-                                <span>Join</span>
-                            </a>
-                             <a class="button is-danger" @click="ignoreBusinessRequest(props.row.id)">
+                            
+                             <a class="button is-danger" @click="deletePersonToBusinessRequest(props.row.id)">
                                             <span class="icon is-small">
                                                 <i class="fas fa-minus"></i>
                                             </span>
-                                            <span>Ignore</span>
+                                            <span>Delete</span>
                                         </a>
                         </b-table-column>
                       
@@ -132,6 +127,9 @@
 
 
             </b-tab-item>
+
+
+           
            
 
         </b-tabs>
@@ -145,6 +143,7 @@
 
     let businessData  = [];
     let businessReqData=[];
+    let businessInvData=[];
 
     // TODO: Replace with logged in business
     let PERSON = { id: "5676081261" };
@@ -153,8 +152,10 @@
 
         async created() {
 
-            this.businessData = await apicore.getPersonsBusinesses({ person: PERSON });
-            this.businessReqData = await apicore.getPersonBusinessRequests({ person: PERSON });
+            this.businessData = await apicore.getPersonsBusinesses({ person: PERSON });            
+            this.businessReqData = await apicore.getPersonBusinessRequests({ person: PERSON,business:"" });
+
+            
             
 
             this.businesses = await apicore.getBusinesses();
@@ -167,10 +168,11 @@
                 roles: [],
                 businessData,
                 businessReqData,
+                businessInvData,
                 defaultOpenedDetails: [0],
                 name: '',
                 selected: null,                
-                model: { email: "", role: "" }
+                model: { email: null, role: null }
             }
         },
         computed: {
@@ -199,23 +201,37 @@
                     });
                     return
                 }
+                
+                if (this.model.role== null) {
+                    this.$toast.open({
+                        duration: 3000,
+                        message: `Please select a role!`,
+                        position: 'is-top',
+                        type: 'is-danger'
+                    });
+                    return
+                }
 
                 // create a relationship between business and service
                 let relationship = {
+                    
                     businessId:  this.selected.id ,
-                    personId: PERSON.id
+                    personId: PERSON.id,
+                    roleId: this.model.role,
+
                 }
                 // eslint-disable-next-line 
-                apicore.linkBusinessAndPerson(relationship).then((result) => {
+                apicore.createPersonToBusinessRequest(relationship).then((result) => {
                     this.$toast.open({
-                        message: 'You have joined the service!',
+                        message: 'You have sent a request to join to the business!',
                         type: 'is-success'
                     });
 
                     // TODO: find a better way to pass context
                     let ctx = this;
-                    apicore.getBusinessServices({ business: BUSINESS })
-                        .then((serviceData) => ctx.serviceData = serviceData)
+                     
+                    apicore.getPersonBusinessRequests({ person: PERSON })
+                        .then((businessReqData) => ctx.businessReqData = businessReqData)
 
                 }).catch(// eslint-disable-next-line 
                     err => {
@@ -237,10 +253,67 @@
                         type: 'is-success'
                     });
                     let ctx = this;
-                    apicore.getPersonsBusinesses({ person: PERSON })                   
-                        .then((serviceData) => ctx.serviceData = serviceData)
+                    apicore.getPersonsBusinesses({ person: PERSON })                  
+                        .then((businessData) => ctx.businessData= businessData)
                 });
-            },            
+            },     
+            deletePersonToBusinessRequest(graphEdgeId) {
+                // eslint-disable-next-line 
+                apicore.deleteGraphEdge(graphEdgeId).then((result) => {
+                    // TODO: find a better way to pass context
+                    this.$toast.open({
+                        message: 'You have deleted your request!',
+                        type: 'is-success'
+                    });
+                    let ctx = this;
+                    apicore.getPersonBusinessRequests({ person: PERSON })                  
+                        .then((businessReqData) => ctx.businessReqData= businessReqData)
+                });
+            }, 
+            
+            acceptBusinessRequest(row) {
+                
+                
+                // create a relationship between business and service
+                let relationship = {
+                    businessId: row.business.id,
+                    persond: row.person.id,
+                    roleId: row.role.id
+                }
+                // eslint-disable-next-line 
+                apicore.linkPersonToBusiness(relationship).then((result) => {
+                    this.$toast.open({
+                        message: 'You have accepted the business request!',
+                        type: 'is-success'
+                    });
+                    // TODO: find a better way to pass context
+                    let ctx = this;                    
+                    // eslint-disable-next-line 
+                        apicore.deleteGraphEdge(row.id).then((result) => {
+                            // TODO: find a better way to pass context                            
+                            let ctx = this;
+                            apicore.getBusinessPersonRequests({ person: PERSON })                  
+                                .then((businessInvData) => ctx.businessInvData= businessInvData)
+                        });
+
+                    apicore.getPersonsBusinesses({ person: PERSON })                   
+                        .then((businessData) => ctx.businessData = businessData)
+
+                    
+
+                }).catch(// eslint-disable-next-line 
+                    err => {
+                        // TODO extract into function
+                        this.$toast.open({
+                            duration: 3000,
+                            message: "Something's not good, try again",
+                            position: 'is-top',
+                            type: 'is-danger'
+                        });
+                    });
+
+                
+            },
             ignoreBusinessRequest(graphEdgeId) {
                 // eslint-disable-next-line 
                 apicore.deleteGraphEdge(graphEdgeId).then((result) => {
@@ -254,7 +327,7 @@
                     apicore.getPersonBusinessRequests({ person: PERSON })                   
                         .then((businessReqData) => ctx.businessReqData = businessReqData)
                 });
-            },
+            }
         }
     }
 </script>

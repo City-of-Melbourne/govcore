@@ -112,13 +112,13 @@
                                 </b-table-column>
                         
                         <b-table-column field="date" label="Action" sortable centered>
-                            <a class="button is-success">
+                            <a class="button is-success" @click="aceptUserRequest(props.row)">
                                 <span class="icon is-small">
                                     <i class="fas fa-plus"></i>
                                 </span>
                                 <span>Accept</span>
                             </a>
-                            <a class="button is-danger" >
+                            <a class="button is-danger" @click="ignoreUserRequest(props.row.id)" >
                                 <span class="icon is-small">
                                     <i class="fas fa-minus"></i>
                                 </span>
@@ -230,7 +230,7 @@
                         .then((usersData) => ctx.usersData = usersData)
                 });
             },
-            aceptRequest(graphEdgeId) {
+            aceptUserRequest(graphEdgeId) {
                 // eslint-disable-next-line 
                 apicore.deleteGraphEdge(graphEdgeId).then((result) => {
                     // TODO: find a better way to pass context
@@ -243,17 +243,18 @@
                         .then((usersData) => ctx.usersData = usersData)
                 });
             },
-            ignoreRequest(graphEdgeId) {
+            ignoreUserRequest(graphEdgeId) {
                 // eslint-disable-next-line 
                 apicore.deleteGraphEdge(graphEdgeId).then((result) => {
                     // TODO: find a better way to pass context
                     this.$toast.open({
-                        message: 'You have disabled the user!',
+                        message: 'You have ignored the user request!',
                         type: 'is-success'
                     });
                     let ctx = this;
-                    apicore.getBusinessPersons({ business: BUSINESS })
-                        .then((usersData) => ctx.usersData = usersData)
+                    
+                    apicore.getBusinessPersonRequests({ business: BUSINESS })
+                        .then((usersReqData) => ctx.usersReqData = usersReqData)
                 });
             }
         }

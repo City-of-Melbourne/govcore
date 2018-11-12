@@ -84,6 +84,7 @@ input GraphEdgeInput {
         type: String
         a: String
         b: String 
+        role: String 
         date:String       
     }
 
@@ -113,7 +114,7 @@ type Query {
     BusinessPersons( business: ID, person: ID): [BusinessPerson]
     BusinessPerson(id: ID!): BusinessPerson
 
-    BusinessPersonRequests( business: ID, person: ID): [BusinessPersonRequest]
+    BusinessPersonRequests( type: String, business: ID, person: ID): [BusinessPersonRequest]
     BusinessPersonRequest(id: ID!): BusinessPersonRequest
 }
 

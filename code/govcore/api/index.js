@@ -68,8 +68,8 @@ const resolvers = {
             return Object.assign(edge,{business:db.get(edge.a),person:db.get(edge.b),role:db.get(edge.role)}); 
 
         },
-        BusinessPersonRequests: (_, {  business, person }) => {
-            var edges=db.find({ bucket: "graph_edges", type: "business_person_request", a: business, b: person })
+        BusinessPersonRequests: (_, {  type,business, person }) => {
+            var edges=db.find({ bucket: "graph_edges", type: type, a: business, b: person })
            
             return edges.map(function(edge){
                         return   Object.assign(edge,{business:db.get(edge.a), person:db.get(edge.b) ,role:db.get(edge.role) }); 
