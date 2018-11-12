@@ -93,6 +93,20 @@ export default class coreApiGraphql {
             });    
           return data.Services;
     }
+    async getBusinesses(){    
+        var data;
+        
+        var query=`{
+            Businesses(limit:0){
+                  id
+                  name
+                }
+            }`;               
+            await this.postData(query).then( (response) => {               
+                 data=response; 
+            });    
+          return data.Businesses;
+    }
     
     async getBusinessServices(obj){    
         var data;
@@ -139,6 +153,25 @@ export default class coreApiGraphql {
             });    
           return data.Roles;
     }
+    async getPersonsBusinesses(obj){    
+        var data;
+        
+        var query=`{
+            BusinessPersons(person:"${obj.person.id}"){    
+                id
+                date
+                    business{id,name}
+                    person{id,name,email}
+                    role{id,name}
+              }
+            }`;               
+            await this.postData(query).then( (response) => {               
+                 data=response; 
+            });    
+            
+          return data.BusinessPersons;
+    }
+
     async getBusinessPersons(obj){    
         var data;
         
@@ -161,18 +194,40 @@ export default class coreApiGraphql {
         var data;
         
         var query=`{
-            BusinessServices(business:"${obj.business.id}"){
+            BusinessPersonRequests(business:"${obj.business.id}"){
     
                 id
                 date
                     business{id,name}
-                    service{id,name}
+                    person{id,name,email}
+                    role{id,name}
               }
-            }`;               
+            }`;  
+                   
             await this.postData(query).then( (response) => {               
                  data=response; 
             });    
 
-          return data.BusinessServices;
+          return data.BusinessPersonRequests;
+    }
+    async getPersonBusinessRequests(obj){    
+        var data;
+        
+        var query=`{
+            BusinessPersonRequests(person:"${obj.person.id}"){
+    
+                id
+                date
+                    business{id,name}
+                    person{id,name,email}
+                    role{id,name}
+              }
+            }`;  
+                      
+            await this.postData(query).then( (response) => {               
+                 data=response; 
+            });    
+
+          return data.BusinessPersonRequests;
     }
 }

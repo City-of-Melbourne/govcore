@@ -94,23 +94,23 @@
 
                     <template slot-scope="props">
 
-                        <b-table-column field="row.name" label="User" sortable>
-                            {{ props.row.name }}
-                        </b-table-column>
-                        <b-table-column field="row.email" label="Email" sortable>
-                            {{ props.row.email }}
-                        </b-table-column>
-                        <b-table-column field="row.role" label="Role" sortable>
-                            {{ props.row.role }}
-                        </b-table-column>
-
-
-
-                        <b-table-column field="date" label="Invitation date" sortable centered>
-                            <span class="tag is-success">
-                                {{ new Date(props.row.invited).toLocaleDateString() }}
-                            </span>
-                        </b-table-column>
+                            <b-table-column field="user.name" label="User" sortable>
+                                    {{ props.row.person.name }}
+                                </b-table-column>
+                                <b-table-column field="user.email" label="Email" sortable>
+                                        {{ props.row.person.email }}
+                                    </b-table-column>
+        
+                                <b-table-column field="user.role" label="Role" sortable>
+                                    {{ props.row.role.name }}
+                                </b-table-column>
+        
+                                <b-table-column field="date" label="Joined date" sortable centered>
+                                    <span class="tag is-success">
+                                        {{ new Date(props.row.date).toLocaleDateString() }}
+                                    </span>
+                                </b-table-column>
+                        
                         <b-table-column field="date" label="Action" sortable centered>
                             <a class="button is-success">
                                 <span class="icon is-small">
@@ -151,11 +151,9 @@
 
     export default {
         async created() {
-
             this.usersData = await apicore.getBusinessPersons({ business: BUSINESS });
-            //this.usersReqData = await apicore.getBusinessPersonRequests({ business: BUSINESS });
+            this.usersReqData = await apicore.getBusinessPersonRequests({ business: BUSINESS });
             this.roles = await apicore.getRoles();
-
         },
         data() {
             return {

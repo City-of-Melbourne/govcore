@@ -56,20 +56,6 @@ const resolvers = {
             var edge=db.get(id)
             return Object.assign(edge,{business:db.get(edge.a),service:db.get(edge.b)}); 
         },
-
-        BusinessPersonRequests: (_, {  business, service }) => {
-            var edges=db.find({ bucket: "graph_edges", type: "business_person_request", a: business, b: service })
-           
-            return edges.map(function(edge){
-                        return   Object.assign(edge,{business:db.get(edge.a),service:db.get(edge.b)}); 
-               })          
-        },
-        BusinessPersonRequest: (_, { id }) =>  {
-
-            var edge=db.get(id)
-            return Object.assign(edge,{business:db.get(edge.a),service:db.get(edge.b)}); 
-        },
-
         BusinessPersons: (_, {  business, person }) => {
             var edges=db.find({ bucket: "graph_edges", type: "business_person", a: business, b: person })           
             return edges.map(function(edge){
@@ -81,7 +67,21 @@ const resolvers = {
             var edge=db.get(id)
             return Object.assign(edge,{business:db.get(edge.a),person:db.get(edge.b),role:db.get(edge.role)}); 
 
-        }
+        },
+        BusinessPersonRequests: (_, {  business, person }) => {
+            var edges=db.find({ bucket: "graph_edges", type: "business_person_request", a: business, b: person })
+           
+            return edges.map(function(edge){
+                        return   Object.assign(edge,{business:db.get(edge.a), person:db.get(edge.b) ,role:db.get(edge.role) }); 
+               })          
+        },
+        BusinessPersonRequest: (_, { id }) =>  {
+
+            var edge=db.get(id)
+            return Object.assign(edge,{business:db.get(edge.a),person:db.get(edge.b),role:db.get(edge.role)}); 
+        },
+
+
 
         
     },

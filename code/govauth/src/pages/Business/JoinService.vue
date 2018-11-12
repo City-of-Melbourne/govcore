@@ -10,6 +10,8 @@
                         icon="magnify" @select="option => selected = option">
                         <template slot="empty">No services found</template>
                     </b-autocomplete>
+
+
                 </div>
                 <div class="column">
                     <a class="button is-success" @click="joinService()">
@@ -24,7 +26,7 @@
         </section>
         <br>
         <b-table :data="serviceData" paginated per-page="10" :opened-detailed="defaultOpenedDetails" detailed
-            detail-key="id" @details-open="(row, index) => $toast.open(`Expanded ${row.service.name}`)">
+            detail-key="id" >
 
             <template slot-scope="props">
 
@@ -99,6 +101,7 @@
         computed: {
             filteredDataArray() {
                 if (this.services != undefined) {
+                    
                     return this.services.filter((option) => {
 
                         return option.name

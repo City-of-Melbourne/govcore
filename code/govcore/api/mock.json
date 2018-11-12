@@ -6,12 +6,33 @@
     "bucket": "entities",
     "type": "business"
   },
+  "3357665842": {
+    "id": "3357665842",
+    "name": "Company B",
+    "abn": "54654987",
+    "bucket": "entities",
+    "type": "business"
+  },
+  "3357665843": {
+    "id": "3357665843",
+    "name": "Company C",
+    "abn": "54654987",
+    "bucket": "entities",
+    "type": "business"
+  },
   "5676081261": {
     "name": "User A",
-    "email": "default@email.com",
+    "email": "usera@email.com",
     "bucket": "entities",
     "type": "person",
     "id": "5676081261"
+  },
+  "5676081272": {
+    "name": "User B",
+    "email": "userb@email.com",
+    "bucket": "entities",
+    "type": "person",
+    "id": "5676081272"
   },
   "5676081262": {
     "name": "Grants",   
@@ -95,5 +116,23 @@
     "role": "5676081265",
     "bucket": "graph_edges",
     "id": "0589717018"
-  }
+  },
+  "0589717019": {
+    "type": "business_person_request",
+    "a": "3357665842",
+    "b": "5676081261",
+    "date": "2018-11-11T23:12:28.163Z",
+    "role": "5676081265",
+    "bucket": "graph_edges",
+    "id": "0589717019"
+  } ,
+  "0589717020": {
+    "type": "business_person_request",
+    "a": "3357665841",
+    "b": "5676081272",
+    "date": "2018-11-11T23:12:28.163Z",
+    "role": "56760812670",
+    "bucket": "graph_edges",
+    "id": "0589717020"
+  }   
 }

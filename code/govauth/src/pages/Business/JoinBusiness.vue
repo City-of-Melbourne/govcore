@@ -6,14 +6,26 @@
 
                 <div class="column is-four-fifths">
 
-                    <b-autocomplete rounded v-model="name" :data="filteredDataArray" placeholder="e.g. Company Name" icon="magnify"
-                        @select="option => selected = option">
+                    <b-autocomplete rounded v-model="name" :data="filteredDataArray" field="name" placeholder="e.g. Business Name" 
+                        icon="magnify"  @select="option => selected = option">
                         <template slot="empty">No businesses found</template>
                     </b-autocomplete>
 
                 </div>
-                <div class="column">
-                    <a class="button is-success">
+                
+                <div class="column is-1">
+                    <b-dropdown v-model="model.role">
+                        <button class="button is-primary" slot="trigger">
+                            <span>Role</span>
+                            <b-icon icon="menu-down"></b-icon>
+                        </button>
+                        <b-dropdown-item v-for="option in roles" :key="option.id" :value="option.name"> {{option.name}}</b-dropdown-item>
+
+                    </b-dropdown>
+
+                </div>
+                <div class="column is-1">
+                    <a class="button is-success" @click="joinBusiness()">
                         <span class="icon is-small">
                             <i class="fas fa-plus"></i>
                         </span>
@@ -27,22 +39,22 @@
         <b-tabs type="is-toggle" expanded>
             <b-tab-item label="Businesses" icon="book">
                 <b-table :data="businessData" paginated per-page="5" :opened-detailed="defaultOpenedDetails" detailed
-                    detail-key="id" @details-open="(row, index) => $toast.open(`Expanded ${row.user.name}`)">
+                    detail-key="id" >
 
                     <template slot-scope="props">
 
                         <b-table-column field="user.name" label="Company" sortable>
-                            {{ props.row.name }}
+                            {{ props.row.business.name }}
                         </b-table-column>
 
 
                         <b-table-column field="user.role" label="Role" sortable>
-                            {{ props.row.role }}
+                            {{ props.row.role.name }}
                         </b-table-column>
 
                         <b-table-column field="date" label="Joined date" sortable centered>
                             <span class="tag is-success">
-                                {{ new Date(props.row.joined).toLocaleDateString() }}
+                                {{ new Date(props.row.date).toLocaleDateString() }}
                             </span>
                         </b-table-column>
 
@@ -57,15 +69,13 @@
 
 
                                         <div class="column">
-                                            <strong>{{ props.row.name }}</strong>
-                                            <small> -> {{ props.row.role }}</small>
+                                            <strong>{{ props.row.business.name }}</strong>
+                                            <small> -> {{ props.row.role.name }}</small>
                                             <br>
-                                            <small>{{props.row.description}}</small>
-
                                         </div>
                                         <div class="column is-one-fifth">
                                             <p class="control">
-                                                <a class="button is-danger">
+                                                <a class="button is-danger" @click="leaveBusiness(props.row.id)">
                                                     <span class="icon is-small">
                                                         <i class="fas fa-minus"></i>
                                                     </span>
@@ -80,29 +90,25 @@
                     </template>
                 </b-table>
             </b-tab-item>
-            <b-tab-item label="Invites" icon="exclamation">
-                <b-table :data="businessInvData" paginated per-page="5"  detail-key="id" >
+            <b-tab-item label="Requests" icon="exclamation">
+                <b-table :data="businessReqData" paginated per-page="5"  detail-key="id" >
 
                     <template slot-scope="props">
 
-                        <b-table-column field="row.name" label="Company" sortable>
-                            {{ props.row.name }}
+                        <b-table-column field="user.name" label="Company" sortable>
+                            {{ props.row.business.name }}
                         </b-table-column>
 
+                        <b-table-column field="user.role" label="Role" sortable>
+                            {{ props.row.role.name }}
+                        </b-table-column>
 
-                        <b-table-column field="row.role" label="Role" sortable>
-                            {{ props.row.role }}
-                        </b-table-column>                     
-                        <b-table-column field="row.responsible" label="Responsible" sortable>
-                            {{ props.row.responsible }}
-                        </b-table-column>                     
-                 
-
-                        <b-table-column field="date" label="Invitation date" sortable centered>
+                        <b-table-column field="date" label="Joined date" sortable centered>
                             <span class="tag is-success">
-                                {{ new Date(props.row.invited).toLocaleDateString() }}
+                                {{ new Date(props.row.date).toLocaleDateString() }}
                             </span>
                         </b-table-column>
+
                         <b-table-column field="date" label="Action" sortable centered>
                             <a class="button is-success">
                                 <span class="icon is-small">
@@ -110,7 +116,7 @@
                                 </span>
                                 <span>Join</span>
                             </a>
-                             <a class="button is-danger">
+                             <a class="button is-danger" @click="ignoreBusinessRequest(props.row.id)">
                                             <span class="icon is-small">
                                                 <i class="fas fa-minus"></i>
                                             </span>
@@ -126,6 +132,7 @@
 
 
             </b-tab-item>
+           
 
         </b-tabs>
 
@@ -133,33 +140,121 @@
 </template>
 
 <script>
-    const businessData = require('@/data/SampleBusinesses.json');
-    const businessInvData = require('@/data/SampleBusinessesInv.json');
+    import coreApiGraphql from '../../services/coreApiGraphql';
+    const apicore = new coreApiGraphql();
+
+    let businessData  = [];
+    let businessReqData=[];
+
+    // TODO: Replace with logged in business
+    let PERSON = { id: "5676081261" };
+
     export default {
+
+        async created() {
+
+            this.businessData = await apicore.getPersonsBusinesses({ person: PERSON });
+            this.businessReqData = await apicore.getPersonBusinessRequests({ person: PERSON });
+            
+
+            this.businesses = await apicore.getBusinesses();
+            this.roles = await apicore.getRoles();
+            
+        },
         data() {
             return {
-                data: [
-                    'Company',
-                    'Kartaway',
-                    'Bingo',
-                    'Bin & Bang',
-                ],
+                businesses: [],
+                roles: [],
                 businessData,
-                businessInvData,
+                businessReqData,
                 defaultOpenedDetails: [0],
                 name: '',
-                selected: null
+                selected: null,                
+                model: { email: "", role: "" }
             }
         },
         computed: {
             filteredDataArray() {
-                return this.data.filter((option) => {
-                    return option
-                        .toString()
-                        .toLowerCase()
-                        .indexOf(this.name.toLowerCase()) >= 0
-                })
+                
+                if (this.businesses != undefined) {
+                    
+                    return this.businesses.filter((option) => {
+
+                        return option.name
+                            .toString()
+                            .toLowerCase()
+                            .indexOf(this.name.toLowerCase()) >= 0
+                    })
+                }
             }
+        },
+        methods: {
+            joinBusiness() {
+                if (this.selected == null) {
+                    this.$toast.open({
+                        duration: 3000,
+                        message: `Please select a business!`,
+                        position: 'is-top',
+                        type: 'is-danger'
+                    });
+                    return
+                }
+
+                // create a relationship between business and service
+                let relationship = {
+                    businessId:  this.selected.id ,
+                    personId: PERSON.id
+                }
+                // eslint-disable-next-line 
+                apicore.linkBusinessAndPerson(relationship).then((result) => {
+                    this.$toast.open({
+                        message: 'You have joined the service!',
+                        type: 'is-success'
+                    });
+
+                    // TODO: find a better way to pass context
+                    let ctx = this;
+                    apicore.getBusinessServices({ business: BUSINESS })
+                        .then((serviceData) => ctx.serviceData = serviceData)
+
+                }).catch(// eslint-disable-next-line 
+                    err => {
+                        // TODO extract into function
+                        this.$toast.open({
+                            duration: 3000,
+                            message: "Something's not good, try again",
+                            position: 'is-top',
+                            type: 'is-danger'
+                        });
+                    });
+            },
+            leaveBusiness(graphEdgeId) {
+                // eslint-disable-next-line 
+                apicore.deleteGraphEdge(graphEdgeId).then((result) => {
+                    // TODO: find a better way to pass context
+                    this.$toast.open({
+                        message: 'You have left the business!',
+                        type: 'is-success'
+                    });
+                    let ctx = this;
+                    apicore.getPersonsBusinesses({ person: PERSON })                   
+                        .then((serviceData) => ctx.serviceData = serviceData)
+                });
+            },            
+            ignoreBusinessRequest(graphEdgeId) {
+                // eslint-disable-next-line 
+                apicore.deleteGraphEdge(graphEdgeId).then((result) => {
+                    // TODO: find a better way to pass context
+                    this.$toast.open({
+                        message: 'You have rejected the business request!',
+                        type: 'is-success'
+                    });
+                    let ctx = this;
+                    
+                    apicore.getPersonBusinessRequests({ person: PERSON })                   
+                        .then((businessReqData) => ctx.businessReqData = businessReqData)
+                });
+            },
         }
     }
 </script>

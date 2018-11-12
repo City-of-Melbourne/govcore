@@ -16,6 +16,7 @@ type BusinessPersonRequest {
     id: ID!    
     business: Business
     person: Person 
+    role: Role 
     date:String    
 }   
 type GraphEdge {
@@ -85,7 +86,7 @@ input GraphEdgeInput {
         b: String 
         date:String       
     }
-    
+
 type Query {     
 
     Person(id: ID!): Person
