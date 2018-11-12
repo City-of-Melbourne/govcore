@@ -269,65 +269,8 @@
                     apicore.getPersonBusinessRequests({ person: PERSON })                  
                         .then((businessReqData) => ctx.businessReqData= businessReqData)
                 });
-            }, 
-            
-            acceptBusinessRequest(row) {
-                
-                
-                // create a relationship between business and service
-                let relationship = {
-                    businessId: row.business.id,
-                    persond: row.person.id,
-                    roleId: row.role.id
-                }
-                // eslint-disable-next-line 
-                apicore.linkPersonToBusiness(relationship).then((result) => {
-                    this.$toast.open({
-                        message: 'You have accepted the business request!',
-                        type: 'is-success'
-                    });
-                    // TODO: find a better way to pass context
-                    let ctx = this;                    
-                    // eslint-disable-next-line 
-                        apicore.deleteGraphEdge(row.id).then((result) => {
-                            // TODO: find a better way to pass context                            
-                            let ctx = this;
-                            apicore.getBusinessPersonRequests({ person: PERSON })                  
-                                .then((businessInvData) => ctx.businessInvData= businessInvData)
-                        });
-
-                    apicore.getPersonsBusinesses({ person: PERSON })                   
-                        .then((businessData) => ctx.businessData = businessData)
-
-                    
-
-                }).catch(// eslint-disable-next-line 
-                    err => {
-                        // TODO extract into function
-                        this.$toast.open({
-                            duration: 3000,
-                            message: "Something's not good, try again",
-                            position: 'is-top',
-                            type: 'is-danger'
-                        });
-                    });
-
-                
-            },
-            ignoreBusinessRequest(graphEdgeId) {
-                // eslint-disable-next-line 
-                apicore.deleteGraphEdge(graphEdgeId).then((result) => {
-                    // TODO: find a better way to pass context
-                    this.$toast.open({
-                        message: 'You have rejected the business request!',
-                        type: 'is-success'
-                    });
-                    let ctx = this;
-                    
-                    apicore.getPersonBusinessRequests({ person: PERSON })                   
-                        .then((businessReqData) => ctx.businessReqData = businessReqData)
-                });
-            }
+            }            
+           
         }
     }
 </script>

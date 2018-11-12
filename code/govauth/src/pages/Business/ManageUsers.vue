@@ -230,18 +230,46 @@
                         .then((usersData) => ctx.usersData = usersData)
                 });
             },
-            aceptUserRequest(graphEdgeId) {
+            aceptUserRequest(row) {
                 // eslint-disable-next-line 
-                apicore.deleteGraphEdge(graphEdgeId).then((result) => {
-                    // TODO: find a better way to pass context
+                  // create a relationship between business and service
+                  let relationship = {
+                    businessId: row.business.id,
+                    personId: row.person.id,
+                    roleId: row.role.id
+                }
+                // eslint-disable-next-line 
+                apicore.linkPersonToBusiness(relationship).then((result) => {
                     this.$toast.open({
-                        message: 'You have disabled the user!',
+                        message: 'You have accepted the user request!',
                         type: 'is-success'
                     });
-                    let ctx = this;
-                    apicore.getBusinessPersons({ business: BUSINESS })
+                    // TODO: find a better way to pass context
+                    let ctx = this;                    
+                    // eslint-disable-next-line 
+                        apicore.deleteGraphEdge(row.id).then((result) => {
+                            // TODO: find a better way to pass context                            
+                            let ctx = this;
+                            apicore.getBusinessPersonRequests({ business: BUSINESS })                  
+                                .then((usersReqData) => ctx.usersReqData= usersReqData)
+                        });
+
+                    apicore.getBusinessPersons({ business: BUSINESS })               
                         .then((usersData) => ctx.usersData = usersData)
-                });
+
+                    
+
+                }).catch(// eslint-disable-next-line 
+                    err => {
+                        // TODO extract into function
+                        this.$toast.open({
+                            duration: 3000,
+                            message: "Something's not good, try again",
+                            position: 'is-top',
+                            type: 'is-danger'
+                        });
+                    });
+
             },
             ignoreUserRequest(graphEdgeId) {
                 // eslint-disable-next-line 
@@ -253,8 +281,10 @@
                     });
                     let ctx = this;
                     
-                    apicore.getBusinessPersonRequests({ business: BUSINESS })
-                        .then((usersReqData) => ctx.usersReqData = usersReqData)
+                   
+
+                    apicore.getBusinessPersonRequests({ business: BUSINESS })                  
+                                .then((usersReqData) => ctx.usersReqData= usersReqData)
                 });
             }
         }
