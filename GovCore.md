@@ -1,13 +1,8 @@
+![1 Govcore Intro](assets/1-govcore-intro.png)
+
 # GovCore
 
-An open source government platform concept
-
-Simon Weller
-
-[CC Image Image]
-
-[CoM Image Image]
-
+An open source government platform concept by Simon Weller.
 
 # Think Bigger
 
@@ -86,7 +81,7 @@ We are at the point of transition between Arts & Crafts and Modernity – we nee
 
 ## The pain
 
-[Incumbent Vendors Bespoke Build Twisted Fit Image]
+![7 Incunmbent Bespoke Twisted](assets/7-incunmbent-bespoke-twisted.png)
 
 Our reality is three system options:
 
@@ -141,7 +136,7 @@ Problems:
 
 ## Outside the box
 
-[GovCore Image]
+![9 Govcore Outsite](assets/9-govcore-outsite.png)
 
 The vision of GovCore is an open source platform built on robust scalable big data technology, designed to maximise innovation in both customer experience, data management and business process automation.
 
@@ -167,7 +162,7 @@ It may be even bigger than this? How do we find out?
 
 ## Widening gap
 
-[Widening gap Image]
+![11 Widening The Gap](assets/11-widening-the-gap.png)
 
 The longer we wait to adopt new approaches and platforms the wider the gap becomes
 
@@ -177,15 +172,15 @@ Government continuous improvement
 
 ## Reusability
 
-[Reusability Image]
+![12 Reusability](assets/12-reusability.png)
 
 ## A Common Target
 
-[p.13 left image ]
+![13 1 Common Target](assets/13-1-common-target.png)
 
 IT projects – including (and especially) digital transformations – tend to be independent and don’t work towards a common goal
 
-[p.13 right image]
+![13 2 Common Target](assets/13-2-common-target.png)
 
 This architecture vision provides a common target to aim for whilst still supporting agile principles of small iterative builds, minimum viable products and early tangible deliverables.
 
@@ -233,29 +228,15 @@ So yes...with the proviso that:
 
 Open source examples exist where the software is freely available but commercial opportunities are exploited around:
 
+- Hosting (Drupal is an Open Source Web content management system, Acquia is a hosting service)
 
-### Hosting
+- Distribution, Support and Training (Linux is an open source operating system, Red Hat is a hosting, support and assurance service)
 
-Drupal → Acquia
-
-Drupal is an Open Source Web content management system, Acquia is a hosting service
-
-### Distribution, Support and Training
-
-Linux → redhat
-
-Linux is an open source operating system, Red Hat is a hosting, support and assurance service
-
-### TODO
-
-GovCore → Melbourne Digital Enterprices
-
-TODO: GovCore is? Melbourne Digital Enterprices is?
-
+![18 Commercial Opportunity](assets/18-commercial-opportunity.png)
 
 ## Commercial ecosystem
 
-[p.19 Commercial ecosystem image]
+![19 Commercial Ecosystem](assets/19-commercial-ecosystem.png)
 
 ## GovCore Marketplace
 
@@ -273,51 +254,13 @@ A key consideration is management and orchestration of both the marketplace and 
 
 ## Platform independent
 
-### Pure Open Source
-
-    Drupal
-    GovCore
-    Kupernetes, Apache, Linux
-
-### Freemiun
-
-    govCMS
-    GovCore
-    Neo4J, MongoDB, Splunk
-
-
-### Microsoft
-
-    SiteCore / PowerApps
-    GovCore
-    Azure
-
-### Amazon
-
-    Amazon
-    GovCore
-    Dynamo, Neptune
-
-
-### Heroku
-
-    Acquia
-    GovCore
-    Graphine, CouchDB
-
-
-### High-end Commercial
-
-    Adobe
-    GovCore
-    Oracle
-
+![21 Platform Independent](assets/21-platform-independent.png)
 
 Portability is vital to future proof the platform, but also to support the diversity in size and skill-base of local councils (and other agencies)
 
 ## Salesforce Heroku
 
-[p.22 Salesforce Heroku image]
+![22 Heroku Salesforce](assets/22-heroku-salesforce.png)
 
 - provides a rapid prototyping sandbox
 - is a genuine Open Source platform
@@ -332,7 +275,7 @@ Heroku offers a sandbox platform to rapidly prove the key elements of the GovCor
 
 ## Built on big data
 
-[p.24 Image]
+![24 Govcore Buckets](assets/24-govcore-buckets.png)
 
 ## Why three data stores?
 
@@ -358,19 +301,17 @@ Unlimited scale
 
 ## Combined it looks like this
 
-[p.26 Image]
+![26 Govcore Combined](assets/26-govcore-combined.png)
 
 Real-world entities and relationships reflected much more accurately, flexibly and naturally than relational databases can.
 
 ## What I mean by document (json)
 
-[p.27 left Image]
-
-[p.27 right Image]
+![27 Json Document Template](assets/27-json-document-template.png)
 
 ## Ensuring data quality
 
-[p.28 Image]
+![28 Ensuring Data Quality](assets/28-ensuring-data-quality.png)
 
 Data in each document governed 28 by template during create/update
 
@@ -378,7 +319,7 @@ Key value pairs in templates define data validation rules, lookups, types
 
 ## Minimum code 1 of 2
 
-[p.29 Image]
+![29 Minimum Code 1 Of 2](assets/29-minimum-code-1-of-2.png)
 
 The ultimate in reductionism – the only entity (class/object) the code has to manage is a ‘document’.
 
@@ -389,7 +330,7 @@ The ultimate in reductionism – the only entity (class/object) the code has to 
 Seek a function-rich platform to minimise functions in GovCore
 (e.g. Drupal, jBPM, Apache ODE)
 
-[p. 30 Image]
+![30 Minimum Code 2 Of 2](assets/30-minimum-code-2-of-2.png)
 
 > Architecture principle: If there is a credible open source function already, use it. Don’t code if you don’t have to.
 
@@ -397,11 +338,11 @@ Seek a function-rich platform to minimise functions in GovCore
 
 Envisaging government as an information processing ‘production line’, taking ‘raw’ information in (e.g. requests and applications), processing it and exporting ‘value-added’ information (e.g. permits, decisions, etc). All processes are born digital – no paper!
 
-[p.31 Workflow Image]
+![31 Workflow](assets/31-workflow.png)
 
 ## Architecture
 
-[p.32 Architecture Image]
+![32 Architecture](assets/32-architecture.png)
 
 After that, innovation flourishes in template and workflow design and improvement as well as freeing UX designers and developers to explore and create new user experiences.
 
@@ -409,7 +350,7 @@ After that, innovation flourishes in template and workflow design and improvemen
 
 ## User experience
 
-[p.33 User interface Image]
+![33 Workspace](assets/33-workspace.png)
 
 A basic user-configurable interface with flexible widgets is just one
 
@@ -417,7 +358,7 @@ A fertile ecosystem of user experiences to suit different agencies’ needs and 
 
 ## Agile Build approach
 
-[p.34 Agile Image]
+![34 Agile](assets/34-agile.png)
 
 Build approach will be a typical use-case by use-case incremental build. At some point the core will be complete and become relatively static.  However, innovation around user experience, workflow, data analytics will continue to snow-ball.
 
@@ -427,12 +368,7 @@ Build approach will be a typical use-case by use-case incremental build. At some
 
 Logs in traditional relational systems are huge, unintelligible, drag on the performance of the system and often fall short of ever-increasing auditor expectations. A big data log stash logs orders of magnitude more data and provides searchability and advanced analytics.
 
-
-    TRANSPARENCY AND ACCOUNTABILITY                                         PERFORMANCE AND IMPROVEMENT
-    
-    When             | Someone     | Did something | To what               | For whom              | Cost | Revenue | Co2e     | Satisfaction
-    20/04/2018 12:19 | Officer 123 | Created       | Infringement Notice   | Licence plate ABC 123 | $43  | $120    | 0.0001T  | :)
-    20/04/2018 12:20 | CR Agent    | Created       | Service Request       | Cust ID 1234          | $16  |   $0    | 0.002T   | :(
+![37 Log Stash](assets/37-log-stash.png)
 
 By logging every single time a document or graph-relationship changes, every conceivable audit request can be addressed.
 Combined with universal version control on documents, a complete record of government activity is created, assuring the community of unprecedented accountability and opportunity for appropriate transparency.
@@ -452,8 +388,7 @@ These six universal metrics provide the foundation for standardised performance 
 
 To bake rapid continuous improvement in from the start, we have to assume everything will always change...
 
-[p.38 template document workflow Image]
-
+![38 Version Control](assets/38-version-control.png)
 
 Options are needed to define what happens when templates are changed: i) keep documents on old version, ii) update documents as they’re re-saved or iii) retrospectively apply change in bulk.
 
@@ -465,12 +400,10 @@ Despite using big data platforms with theoretically ‘unlimited’ scale, there
 
 ## Lakes and puddles – deployment options
 
-[p.39 monolithic implementation Image]
+![39 Deployment Options](assets/39-deployment-options.png)
 
 A single monolithic implementation is feasible with a single large document datastore across multiple domains.
 A downside of this is a single point for failure and a data honeypot.
-
-[p.39 separate implementations Image]
 
 Smaller separate implementations for different purposes may reduce risk but increase maintenance overheads and potentially data integration challenges.
 
@@ -478,7 +411,7 @@ Smaller separate implementations for different purposes may reduce risk but incr
 
 Because GovCore is green-fields, blockchain support can be baked in from the start providing options for an immutable ledger...
 
-[p.40 Blockchain image]
+![40 Blockchain](assets/40-blockchain.png)
 
 > Architecture principle: blockchain is compute-intensive so use it wisely
 
@@ -502,13 +435,13 @@ Candidates could include:
 
 Instead of a massive data cleaning effort to prepare data for import into a new system with a rigid data model, we import the data largely* as-as, use basic machine learning to determine the nature of the data and auto-generate a template (with data rules). The business is no worse-off in terms of data quality, and is now in a system that supports rapid continuous improvement of both data and process.
 
-[p.42 Auto-configuration Image]
+![42 Auto Configuration](assets/42-auto-configuration.png)
 
 Applying template headers and domain superclass fields (and as much data cleansing as possible) will yield better results, obviously – but not mandatory because document store can hold ‘bad’ data until its touched by a user and template rules enforce correction on save. Templates can then be progressively improved and standardised.
 
 ## Document Editing and Linking
 
-[p.43 Document Editing and Linking Image]
+![43 Document Editing And Linking](assets/43-document-editing-and-linking.png)
 
 Platform should support Office365 and Google – ensuring portability and platform independence at every layer.
 
@@ -518,17 +451,13 @@ Platform should support Office365 and Google – ensuring portability and platfo
 
 Traditional architectures separate the spatial attributes of an object (in a specialist spatial system) from the aspatial attributes (in a typical line-of-business system) making data maintenance vastly onerous, duplicative and error-prone.
 
-[p.44 Spatial Data Maintenance Image]
+![44 Spacial Data](assets/44-spacial-data.png)
 
 The solution needs to solve the challenge of individual and bulk maintenance of spatial data – combining spatial and aspatial attributes in a common document structure is a huge step forward.
 
-Platform independence...
-
-[p.44 Platform independence Image]
-
 ## Position
 
-[p.45 Position Image]
+![45 Position](assets/45-position.png)
 
 Position Description: an interesting artefact is that you could extract the responsibilities of a Position from the actions assigned to it ...
 
@@ -538,7 +467,7 @@ Position Description: an interesting artefact is that you could extract the resp
 
 Global standards can often be theoretical and unachievable and entirely dependent on the capability of vendors, the capacity of agencies and the will of legislators. Similarly, after 60 years of computing, the gap between records management best practice and actual data management practice seems insurmountable.
 
-[p.46 Records and Standards Compliance Image]
+![46 Records And Standard Compilance](assets/46-records-and-standard-compilance.png)
 
 In this model international standards for data management and domain best-practice are instantiated in the document templates (as well as workflows).
 
