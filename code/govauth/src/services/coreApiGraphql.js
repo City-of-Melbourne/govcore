@@ -17,7 +17,7 @@ export default class coreApiGraphql {
     }
     createBusiness(model) {      
         var query=` mutation{
-            createBusiness(input:{id:"${model.id}",abn:"${model.abn}",name:"${model.name}"}){
+            createBusiness(input:{id:"${model.id}",abn:"${model.abn}",name:"${model.name}",date:"${(new Date()).toISOString()}"}){
                 id                                            
                 abn
                 name
@@ -27,11 +27,13 @@ export default class coreApiGraphql {
             this.createPerson(model).then((person)=>{                     
                     this.createGraphEdge({  type:"business_person",
                                             a:business.createBusiness.id,
-                                            b:person.createPerson.id
+                                            b:person.createPerson.id,
+                                            date: (new Date()).toISOString()
                                             })
                     this.createGraphEdge({  type:"person_idp",
                                             a:person.createPerson.id,
-                                            b:1})
+                                            b:1,
+                                            date: (new Date()).toISOString()})
             })
         }); 
     }
@@ -46,7 +48,7 @@ export default class coreApiGraphql {
     }
     createPerson(model) {        
         var query=` mutation{
-                  createPerson(input:{email:"${model.email}",name:"${model.name}"}){
+                  createPerson(input:{email:"${model.email}",name:"${model.name}",date:"${(new Date()).toISOString()}"}){
                       id                                            
                       email
                       name
@@ -57,7 +59,8 @@ export default class coreApiGraphql {
 
                 this.createGraphEdge({  type:"person_idp",
                 a:person.createPerson.id,
-                b:1})
+                b:1,
+                date: (new Date()).toISOString()})
                 return person;
 
          });

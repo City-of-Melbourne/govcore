@@ -81,7 +81,7 @@
     export default {
 
         async created() {
-            this.BUSINESS=this.$root.$data.business;
+            this.BUSINESS=JSON.parse(localStorage.getItem('objsession')).business;
             this.serviceData = await apicore.getBusinessServices({ business: this.BUSINESS });
             this.services = await apicore.getServices();
         },

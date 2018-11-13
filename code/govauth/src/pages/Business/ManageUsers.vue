@@ -4,24 +4,26 @@
             <h1 class="title">User</h1>
             <div class="columns is-desktop">
 
-                <div class="column is-10">
+                
+                <div class="column is-8">
                     <b-field>
                         <b-input placeholder="Email" type="email" icon="email" v-model="model.email">
                         </b-input>
                     </b-field>
                 </div>
-                <div class="column is-1">
-                    <b-dropdown v-model="model.role">
-                        <button class="button is-primary" slot="trigger">
-                            <span>Role</span>
-                            <b-icon icon="menu-down"></b-icon>
-                        </button>
-                        <b-dropdown-item v-for="option in roles" :key="option.id" :value="option.name"> {{option.name}}</b-dropdown-item>
-
-                    </b-dropdown>
+                <div class="column is-2">
+                    
+                    <b-select v-model="model.role" placeholder="Select a role">
+                        <option
+                            v-for="option in roles"
+                            :value="option.id"
+                            :key="option.id">
+                            {{ option.name }}
+                        </option>
+                    </b-select>
 
                 </div>
-                <div class="column is-1">
+                <div class="column is-2">
                     <a class="button is-success" @click="addUser()">
                         <span class="icon is-small">
                             <i class="fas fa-plus"></i>
@@ -149,7 +151,7 @@
 
     export default {
         async created() {
-            this.BUSINESS = this.$root.$data.business,
+            this.BUSINESS =JSON.parse(localStorage.getItem('objsession')).business,
             this.usersData = await apicore.getBusinessPersons({ business: this.BUSINESS });
             this.usersReqData = await apicore.getBusinessPersonRequests({ business: this.BUSINESS });
             this.roles = await apicore.getRoles();
@@ -163,7 +165,7 @@
                 defaultOpenedDetails: [0],
                 name: '',
                 selected: null,
-                model: { email: "", role: "" }
+                model: { email: "", role: "5676081265" }
             }
         },
         computed: {

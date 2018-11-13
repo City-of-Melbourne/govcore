@@ -10,7 +10,7 @@
                 </div>
                 <div class="columns  is-desktop">
                     <div class="column">
-                        <h2 class="title">Handsbills</h2>
+                        <h2 class="subtitle">1. Handsbills</h2>
                     </div>
                 </div>
                 <div class="columns  is-desktop">

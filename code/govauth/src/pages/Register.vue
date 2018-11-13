@@ -165,7 +165,7 @@
             return {
                 isLoading: false,
                 isStep: 1,
-                model: { id: "", name: "", email: "test@gmail.com", abn: "" }
+                model: { id: "", name: "", email: "email@email.com", abn: ""}
                 
             }
         },

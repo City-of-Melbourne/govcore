@@ -13,7 +13,11 @@ export default new Router({
   base,
 
   routes: [
-
+    {
+      path: "/",      
+      meta: { layout: "no-sidebar" },
+      component: require("@/pages/404.vue").default
+    },
     {
       path: "*",
       name: "404*",

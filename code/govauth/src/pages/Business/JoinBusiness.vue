@@ -4,7 +4,7 @@
             <h1 class="title">Join Business</h1>
             <div class="columns is-desktop">
 
-                <div class="column is-four-fifths">
+                <div class="column is-8">
 
                     <b-autocomplete rounded v-model="name" :data="filteredDataArray" field="name" placeholder="e.g. Business Name" 
                         icon="magnify"  @select="option => selected = option">
@@ -13,15 +13,16 @@
 
                 </div>
                 
-                <div class="column is-1">
-                    <b-dropdown v-model="model.role">
-                        <button class="button is-primary" slot="trigger">
-                            <span>Role</span>
-                            <b-icon icon="menu-down"></b-icon>
-                        </button>
-                        <b-dropdown-item v-for="option in roles" :key="option.id" :value="option.id"> {{option.name}}</b-dropdown-item>
+                <div class="column is-2">                 
 
-                    </b-dropdown>
+                       <b-select v-model="model.role" placeholder="Select a role">
+                        <option
+                            v-for="option in roles"
+                            :value="option.id"
+                            :key="option.id">
+                            {{ option.name }}
+                        </option>
+                    </b-select>
 
                 </div>
                 <div class="column is-1">
@@ -150,7 +151,7 @@
     export default {
 
         async created() {
-            this.PERSON=this.$root.$data.person;
+            this.PERSON=JSON.parse(localStorage.getItem('objsession')).person;
             this.businessData = await apicore.getPersonsBusinesses({ person: this.PERSON });            
             this.businessReqData = await apicore.getPersonBusinessRequests({ person: this.PERSON });
             
@@ -171,7 +172,7 @@
                 defaultOpenedDetails: [0],
                 name: '',
                 selected: null,                
-                model: { email: null, role: null }
+                model: { email: null, role: "5676081265" }
             }
         },
         computed: {

@@ -21,9 +21,14 @@
     const apicore = new coreApiGraphql();
 
     export default {      
+        created(){
+                // eslint-disable-next-line 
+             
+                this.person=JSON.parse(localStorage.getItem('objsession')).person;
+        },
         data() {
             return {
-                person: this.$root.$data.person
+                person: {}
             }
         }, 
         methods: {

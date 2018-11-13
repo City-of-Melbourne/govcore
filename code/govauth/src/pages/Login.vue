@@ -1,16 +1,26 @@
 <template>
-    <div>       
+    <div>
         <!--SELECTING IDP -->
         <section class="section">
             <div class="container">
+
                 <div class="columns  is-desktop">
-                    <div class="column ">
-                        <h1 class="title">Welcome to GovAuth</h1>  
-                    </div>         
-                             
+                    <div class="column">
+                        <h1 class="title">Welcome to GovAuth</h1>
+                    </div>
+                </div>
+                <div class="columns  is-desktop" v-if="use === 'govauth'">
+                    <div class="column">
+                        <b-field label="Select a Profile">
+                            <b-select placeholder="Select a Profile" v-model="profile" icon="account">
+                                <option value="business">Business</option>
+                                <option value="user">User</option>
+                            </b-select>
+                        </b-field>
+                    </div>
                 </div>
                 <div class="columns  is-desktop">
-                    
+
                     <div class="column">
                         <a class="button is-large is-fullwidth" @click="closePopup">
                             <span class="icon">
@@ -68,23 +78,63 @@
 </template>
 
 <script>
-    
+
     export default {
+        created() {
+
+            if (opener != null) {
+                this.use = "authenticator";
+            }
+            else {
+                this.use = "govauth";
+            }
+
+        },
         data() {
             return {
-                isLoading: false                
+                isLoading: false,
+                use: "",
+                profile: "business"
+
             }
         },
         methods: {
-             closePopup() {
-                 
+            closePopup() {
+
                 this.isLoading = true
                 setTimeout(() => {
                     this.isLoading = false;
-                    window.close();
-                    opener.location.href = "/handsbills/success";
-                }, 1 * 1000)
-                
+                    if (this.use == "authenticator") {
+                        window.close();
+                        opener.location.href = "/handsbills/success";
+                    } else {
+
+                        let objsession = {
+                            person: {
+                                name: "User A",
+                                email: "usera@email.com",
+                                mobile: "665465",
+                                bucket: "entities",
+                                type: "person",
+                                id: "5676081261"
+                            },
+                            business: {                                
+                                id: "3357665841",
+                                name: "Company A",
+                                abn: "54654987",
+                                bucket: "entities",
+                                type: "business"
+                            },
+                            profile: this.profile,
+                            logged: true
+                        }
+
+                        localStorage.setItem("objsession", JSON.stringify(objsession));
+                        location.href = "/dash"
+
+                    }
+                }, 1 * 500)
+
             }
         }
     }

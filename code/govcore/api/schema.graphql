@@ -59,14 +59,12 @@ type Idp {
     id: ID        
     name: String
 }
-
-
-
 input PersonInput { 
         id: ID,        
         name:String        
         email:String  
-        mobile:String         
+        mobile:String     
+        date:String    
     }
 input ServiceInput { 
         id: ID,        
@@ -76,6 +74,7 @@ input BusinessInput {
         id: ID,    
         name: String   
         abn: String  
+        date: String
     }
 input IdpInput { 
         id: ID     

@@ -17,10 +17,13 @@
     import  coreApiGraphql from '../../services/coreApiGraphql';
     const apicore = new coreApiGraphql();
 
-    export default {      
+    export default {    
+        created(){
+                this.business=JSON.parse(localStorage.getItem('objsession')).business;
+        },
         data() {
             return {
-                business: this.$root.$data.business
+                business: null
             }
         }, 
         methods: {
