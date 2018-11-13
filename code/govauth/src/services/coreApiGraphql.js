@@ -35,6 +35,15 @@ export default class coreApiGraphql {
             })
         }); 
     }
+    updateBusiness(model) {
+        
+        var query = `mutation {
+            updateBusiness(input:{id: ${model.id}, name:"${model.name}", abn:"${model.abn}"}){
+                id name abn
+            }
+        }`;
+        return this.postData(query);
+    }
     createPerson(model) {        
         var query=` mutation{
                   createPerson(input:{email:"${model.email}",name:"${model.name}"}){
@@ -56,9 +65,9 @@ export default class coreApiGraphql {
     }
 
     updatePerson(model) {
-        console.log("updatePerson(model)")
+        
         var query = `mutation {
-            updatePerson(input:{id: ${model.id}, email:"${model.email}", name:"${model.name}"}){
+            updatePerson(input:{id: ${model.id}, email:"${model.email}", name:"${model.name}", mobile:"${model.mobile}" }){
                 id email name
             }
         }`;

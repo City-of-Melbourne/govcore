@@ -17,11 +17,20 @@ Vue.use(Buefy)
 
 // TODO replace with logged user
 const person = {
-    name: "V",
-    email: "v@cfa.org",
+    
+    name: "User A",
+    email: "usera@email.com",
     bucket: "entities",
+    mobile: "0414556549",
     type: "person",
-    id: "3786048077"
+    id: "5676081261"
+}
+const business = {    
+    id: "3357665841",
+    name: "Company A",
+    abn: "54654987",
+    bucket: "entities",
+    type: "business"
 }
 
 
@@ -29,6 +38,7 @@ new Vue({
   router,
   render: h => h(App),
   data: {
-      person: person
+      person: person,
+      business: business
   }
 }).$mount('#app')

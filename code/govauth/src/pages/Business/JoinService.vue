@@ -76,21 +76,18 @@
 <script>
     import coreApiGraphql from '../../services/coreApiGraphql';
     const apicore = new coreApiGraphql();
-
     let serviceData = [];
-
-    // TODO: Replace with logged in business
-    let BUSINESS = { id: "3357665841" };
-
+    
     export default {
 
         async created() {
-
-            this.serviceData = await apicore.getBusinessServices({ business: BUSINESS });
+            this.BUSINESS=this.$root.$data.business;
+            this.serviceData = await apicore.getBusinessServices({ business: this.BUSINESS });
             this.services = await apicore.getServices();
         },
         data() {
             return {
+                BUSINESS:null,
                 services: [],
                 serviceData,
                 defaultOpenedDetails: [0],
@@ -128,7 +125,7 @@
 
                 // create a relationship between business and service
                 let relationship = {
-                    businessId: BUSINESS.id,
+                    businessId: this.BUSINESS.id,
                     serviceId: this.selected.id
                 }
                 // eslint-disable-next-line 
@@ -140,7 +137,7 @@
 
                     // TODO: find a better way to pass context
                     let ctx = this;
-                    apicore.getBusinessServices({ business: BUSINESS })
+                    apicore.getBusinessServices({ business: this.BUSINESS })
                         .then((serviceData) => ctx.serviceData = serviceData)
 
                 }).catch(// eslint-disable-next-line 
@@ -163,7 +160,7 @@
                         type: 'is-success'
                     });
                     let ctx = this;
-                    apicore.getBusinessServices({ business: BUSINESS })
+                    apicore.getBusinessServices({ business: this.BUSINESS })
                         .then((serviceData) => ctx.serviceData = serviceData)
                 });
             }

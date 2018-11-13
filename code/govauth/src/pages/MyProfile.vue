@@ -7,6 +7,9 @@
         <b-field label="Email">
             <b-input v-model="person.email" disabled></b-input>
         </b-field>
+        <b-field label="Mobile">
+            <b-input v-model="person.mobile" ></b-input>
+        </b-field>
         <a class="button is-success" @click="updatePerson()">
             <span>Update</span>
         </a>
@@ -25,10 +28,22 @@
         }, 
         methods: {
             updatePerson() {
-                apicore.updatePerson(this.person).then(() => {
-                    this.$toast.open({ message: 'Profile updated.' })
-                })
-            }
+                apicore.updatePerson(this.person).then(() => {                    
+                    this.$toast.open({
+                        message: 'Profile updated!',
+                        type: 'is-success'
+                    });
+                }).catch(// eslint-disable-next-line 
+                    err => {
+                        // TODO extract into function
+                        this.$toast.open({
+                            duration: 3000,
+                            message: "Something's not good, try again",
+                            position: 'is-top',
+                            type: 'is-danger'
+                        });
+                    });
+                }
         }
     }
 </script>

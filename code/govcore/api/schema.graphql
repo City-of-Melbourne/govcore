@@ -29,7 +29,8 @@ type GraphEdge {
 type Person {  
     id: ID,        
     name:String        
-    email:String        
+    email:String     
+    mobile:String         
 }     
 type Service {  
     id: ID!        
@@ -65,6 +66,7 @@ input PersonInput {
         id: ID,        
         name:String        
         email:String  
+        mobile:String         
     }
 input ServiceInput { 
         id: ID,        

@@ -82,12 +82,7 @@ export default new Router({
       path: "/mybusiness",
       name: "mybusiness",
       component: () => import("@/pages/Business/MyBusiness.vue")
-    },
-    {
-      path: "/business/profile",
-      name: "businessprofile",
-      component: () => import("@/pages/Business/MyProfile.vue")
-    },
+    },    
     {
       path: "/myprofile",
       name: "myprofile",

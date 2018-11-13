@@ -145,18 +145,18 @@
     const apicore = new coreApiGraphql();
 
     const usersData = [];
-    const usersReqData = [];
-
-    let BUSINESS = { id: "3357665841" };
+    const usersReqData = [];   
 
     export default {
         async created() {
-            this.usersData = await apicore.getBusinessPersons({ business: BUSINESS });
-            this.usersReqData = await apicore.getBusinessPersonRequests({ business: BUSINESS });
+            this.BUSINESS = this.$root.$data.business,
+            this.usersData = await apicore.getBusinessPersons({ business: this.BUSINESS });
+            this.usersReqData = await apicore.getBusinessPersonRequests({ business: this.BUSINESS });
             this.roles = await apicore.getRoles();
         },
         data() {
             return {
+                BUSINESS:null,
                 roles: [],
                 usersData,
                 usersReqData,
@@ -191,7 +191,7 @@
 
                 // create a relationship between business and person
                 let relationship = {
-                    businessId: BUSINESS.id,
+                    businessId: this.BUSINESS.id,
                     roleId: this.selected.id
                 }
                 // eslint-disable-next-line 
@@ -203,7 +203,7 @@
 
                     // TODO: find a better way to pass context
                     let ctx = this;
-                    apicore.getBusinessPersons({ business: BUSINESS })
+                    apicore.getBusinessPersons({ business: this.BUSINESS })
                         .then((usersData) => ctx.usersData = usersData)
 
                 }).catch(// eslint-disable-next-line 
@@ -226,7 +226,7 @@
                         type: 'is-success'
                     });
                     let ctx = this;
-                    apicore.getBusinessPersons({ business: BUSINESS })
+                    apicore.getBusinessPersons({ business: this.BUSINESS })
                         .then((usersData) => ctx.usersData = usersData)
                 });
             },
@@ -250,11 +250,11 @@
                         apicore.deleteGraphEdge(row.id).then((result) => {
                             // TODO: find a better way to pass context                            
                             let ctx = this;
-                            apicore.getBusinessPersonRequests({ business: BUSINESS })                  
+                            apicore.getBusinessPersonRequests({ business: this.BUSINESS })                  
                                 .then((usersReqData) => ctx.usersReqData= usersReqData)
                         });
 
-                    apicore.getBusinessPersons({ business: BUSINESS })               
+                    apicore.getBusinessPersons({ business: this.BUSINESS })               
                         .then((usersData) => ctx.usersData = usersData)
 
                     
@@ -283,7 +283,7 @@
                     
                    
 
-                    apicore.getBusinessPersonRequests({ business: BUSINESS })                  
+                    apicore.getBusinessPersonRequests({ business: this.BUSINESS })                  
                                 .then((usersReqData) => ctx.usersReqData= usersReqData)
                 });
             }

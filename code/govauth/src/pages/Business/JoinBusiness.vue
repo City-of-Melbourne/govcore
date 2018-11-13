@@ -146,15 +146,13 @@
     let businessInvData=[];
 
     // TODO: Replace with logged in business
-    let PERSON = { id: "5676081261" };
 
     export default {
 
         async created() {
-
-            this.businessData = await apicore.getPersonsBusinesses({ person: PERSON });            
-            this.businessReqData = await apicore.getPersonBusinessRequests({ person: PERSON,business:"" });
-
+            this.PERSON=this.$root.$data.person;
+            this.businessData = await apicore.getPersonsBusinesses({ person: this.PERSON });            
+            this.businessReqData = await apicore.getPersonBusinessRequests({ person: this.PERSON });
             
             
 
@@ -164,6 +162,7 @@
         },
         data() {
             return {
+                PERSON:null,
                 businesses: [],
                 roles: [],
                 businessData,
@@ -216,7 +215,7 @@
                 let relationship = {
                     
                     businessId:  this.selected.id ,
-                    personId: PERSON.id,
+                    personId: this.PERSON.id,
                     roleId: this.model.role,
 
                 }
@@ -230,7 +229,7 @@
                     // TODO: find a better way to pass context
                     let ctx = this;
                      
-                    apicore.getPersonBusinessRequests({ person: PERSON })
+                    apicore.getPersonBusinessRequests({ person: this.PERSON })
                         .then((businessReqData) => ctx.businessReqData = businessReqData)
 
                 }).catch(// eslint-disable-next-line 
@@ -253,7 +252,7 @@
                         type: 'is-success'
                     });
                     let ctx = this;
-                    apicore.getPersonsBusinesses({ person: PERSON })                  
+                    apicore.getPersonsBusinesses({ person: this.PERSON })                  
                         .then((businessData) => ctx.businessData= businessData)
                 });
             },     
@@ -266,7 +265,7 @@
                         type: 'is-success'
                     });
                     let ctx = this;
-                    apicore.getPersonBusinessRequests({ person: PERSON })                  
+                    apicore.getPersonBusinessRequests({ person: this.PERSON })                  
                         .then((businessReqData) => ctx.businessReqData= businessReqData)
                 });
             }            
