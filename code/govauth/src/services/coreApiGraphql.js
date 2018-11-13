@@ -119,6 +119,20 @@ export default class coreApiGraphql {
             });    
           return data.Businesses;
     }
+    async getPersons(){    
+        var data;        
+        var query=`{
+            Persons(limit:0){
+                    id
+                    name
+                    email
+                }
+            }`;               
+            await this.postData(query).then( (response) => {               
+                 data=response; 
+            });    
+          return data.Persons;
+    }
     
     async getBusinessServices(obj){    
         var data;

@@ -12,10 +12,11 @@
                     </b-autocomplete>
 
                 </div>
-                
-                <div class="column is-2">                 
+                <div class="column is-4">
 
-                       <b-select v-model="model.role" placeholder="Select a role">
+                    <div class="field is-grouped">
+                        <div class="control">
+                             <b-select v-model="model.role" placeholder="Select a role">
                         <option
                             v-for="option in roles"
                             :value="option.id"
@@ -23,16 +24,17 @@
                             {{ option.name }}
                         </option>
                     </b-select>
-
-                </div>
-                <div class="column is-1">
-                    <a class="button is-success" @click="joinBusiness()">
-                        <span class="icon is-small">
-                            <i class="fas fa-plus"></i>
-                        </span>
-                        <span>Join</span>
-                    </a>
-                </div>
+                        </div>
+                        <div class="control">
+                              <a class="button is-success" @click="joinBusiness()">
+                                    <span class="icon is-small">
+                                        <i class="fas fa-plus"></i>
+                                    </span>
+                                    <span>Join</span>
+                                </a>
+                        </div>
+                    </div>
+                 </div>
 
             </div>
         </section>
@@ -44,12 +46,11 @@
 
                     <template slot-scope="props">
 
-                        <b-table-column field="user.name" label="Company" sortable>
+                        <b-table-column field="business.name" label="Company" sortable>
                             {{ props.row.business.name }}
                         </b-table-column>
 
-
-                        <b-table-column field="user.role" label="Role" sortable>
+                        <b-table-column field="role.role" label="Role" sortable>
                             {{ props.row.role.name }}
                         </b-table-column>
 

@@ -2,35 +2,43 @@
     <div>
         <section>
             <h1 class="title">User</h1>
-            <div class="columns is-desktop">
+            <div class="columns is-mobile">
 
                 
                 <div class="column is-8">
-                    <b-field>
-                        <b-input placeholder="Email" type="email" icon="email" v-model="model.email">
-                        </b-input>
-                    </b-field>
-                </div>
-                <div class="column is-2">
+                   
                     
-                    <b-select v-model="model.role" placeholder="Select a role">
-                        <option
-                            v-for="option in roles"
-                            :value="option.id"
-                            :key="option.id">
-                            {{ option.name }}
-                        </option>
-                    </b-select>
+                    <b-autocomplete rounded :data="filteredDataArray" field="email" placeholder="e.g. Email@email.com" 
+                        icon="magnify"  @select="option => selected = option">
+                        <template slot="empty">No users found</template>
+                    </b-autocomplete>
 
                 </div>
-                <div class="column is-2">
-                    <a class="button is-success" @click="addUser()">
-                        <span class="icon is-small">
-                            <i class="fas fa-plus"></i>
-                        </span>
-                        <span>Add</span>
-                    </a>
+                <div class="column is-4">
+
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <b-select v-model="model.role" placeholder="Select a role">
+                                <option
+                                v-for="option in roles"
+                                :value="option.id"
+                                :key="option.id">
+                                {{ option.name }}
+                                </option>
+                            </b-select>
+                        </div>
+                        <div class="control">
+                            <a class="button is-success" @click="addUser()">
+                                <span class="icon is-small">
+                                    <i class="fas fa-plus"></i>
+                                </span>
+                                <span>Add</span>
+                            </a>
+                        </div>
+                    </div>  
+
                 </div>
+                
 
             </div>
         </section>
@@ -38,18 +46,18 @@
         <b-tabs type="is-toggle" expanded>
             <b-tab-item label="Users" icon="book">
                 <b-table :data="usersData" paginated per-page="5" :opened-detailed="defaultOpenedDetails" detailed
-                    detail-key="id" @details-open="(row, index) => $toast.open(`Expanded ${row.user.name}`)">
+                    detail-key="id" @details-open="(row, index) => $toast.open(`Expanded ${row.person.name}`)">
 
                     <template slot-scope="props">
 
-                        <b-table-column field="user.name" label="User" sortable>
+                        <b-table-column field="person.name" label="User" sortable>
                             {{ props.row.person.name }}
                         </b-table-column>
 
-                        <b-table-column field="row.email" label="Email" sortable>
+                        <b-table-column field="person.email" label="Email" sortable>
                             {{ props.row.person.email }}
                         </b-table-column>
-                        <b-table-column field="user.role" label="Role" sortable>
+                        <b-table-column field="role.name" label="Role" sortable>
                             {{ props.row.role.name }}
                         </b-table-column>
 
@@ -155,11 +163,13 @@
             this.usersData = await apicore.getBusinessPersons({ business: this.BUSINESS });
             this.usersReqData = await apicore.getBusinessPersonRequests({ business: this.BUSINESS });
             this.roles = await apicore.getRoles();
+            this.persons = await apicore.getPersons();
         },
         data() {
             return {
                 BUSINESS:null,
                 roles: [],
+                persons: [],
                 usersData,
                 usersReqData,
                 defaultOpenedDetails: [0],
@@ -170,43 +180,50 @@
         },
         computed: {
             filteredDataArray() {
-                return this.data.filter((option) => {
-                    return option
-                        .toString()
-                        .toLowerCase()
-                        .indexOf(this.name.toLowerCase()) >= 0
-                })
+                  if (this.persons != undefined) {
+                    
+                    return this.persons.filter((option) => {
+
+                        return option.name
+                            .toString()
+                            .toLowerCase()
+                            .indexOf(this.name.toLowerCase()) >= 0
+                    })
+                }
             }
+
+          
         },
-        methods: {
-            
-            addUser() {
+        methods: {            
+            addUser() {               
                 if (this.selected == null) {
                     this.$toast.open({
                         duration: 3000,
-                        message: `Please select a role!`,
+                        message: `Please select a user!`,
                         position: 'is-top',
                         type: 'is-danger'
                     });
                     return
                 }
-
                 // create a relationship between business and person
                 let relationship = {
                     businessId: this.BUSINESS.id,
-                    roleId: this.selected.id
-                }
-                // eslint-disable-next-line 
-                apicore.linkBusinessAndService(relationship).then((result) => {
+                    roleId: this.model.role,
+                    personId: this.selected.id
+                }                 
+                 // eslint-disable-next-line 
+                apicore.linkPersonToBusiness(relationship).then((result) => {
                     this.$toast.open({
-                        message: 'You have invited the user!',
+                        message: 'You have added an user to your business!',
                         type: 'is-success'
                     });
-
                     // TODO: find a better way to pass context
-                    let ctx = this;
-                    apicore.getBusinessPersons({ business: this.BUSINESS })
+                    let ctx = this;                   
+                    
+
+                    apicore.getBusinessPersons({ business: this.BUSINESS })               
                         .then((usersData) => ctx.usersData = usersData)
+
 
                 }).catch(// eslint-disable-next-line 
                     err => {
