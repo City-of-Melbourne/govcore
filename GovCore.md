@@ -96,8 +96,8 @@ Our reality is three system options:
 
 ### Incumbent Vendors
 
-- Inform
-- Civicam
+- Infor
+- Civica
 - Technology One
 
 Problems:
