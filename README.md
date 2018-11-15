@@ -13,7 +13,8 @@ First step towards implementing GovCore concept  through building  GovAuth use c
     - [Template Representation](https://github.com/City-of-Melbourne/govAuth/blob/master/research/template-representation.md)
 
 3. Web Client (GovAuth web site  that use GovCore as a backend) 
-    - [Code](https://github.com/City-of-Melbourne/govAuth/tree/master/code/web)
+    - [Code](https://github.com/City-of-Melbourne/govAuth/tree/master/code/govauth)
+    - [Heroku App](https://govauth.herokuapp.com)
 
 4. Bridging Gaps
 
