@@ -2,7 +2,7 @@
 
 # GovCore
 
-An open source government platform concept by Simon Weller.
+An open source government platform concept by Simon Weller. The views and opinions in this article are those of the author and do not necessarily reflect the views or opinions of the City of Melbourne.
 
 # Think Bigger
 
@@ -96,8 +96,8 @@ Our reality is three system options:
 
 ### Incumbent Vendors
 
-- Inform
-- Civicam
+- Infor
+- Civica
 - Technology One
 
 Problems:
