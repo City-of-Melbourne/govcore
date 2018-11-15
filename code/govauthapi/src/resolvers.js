@@ -26,7 +26,7 @@ module.exports = {
       var b = dataSources.GovCoreApi.getDocument({ Id: edge.b });
       return Object.assign(edge, { a: a, b: b });
     },
-    
+
     BusinessServices: (_, { business, service }, { dataSources }) => {
 
       var edges = dataSources.GovCoreApi.findDocument({ bucket: "graph_edges", type: "business_service", a: business, b: service })
@@ -71,6 +71,7 @@ module.exports = {
 
   },
   Mutation: {
+    
     createPerson: (_, { input }, { dataSources }) => dataSources.GovCoreApi.createDocument({ Input: input, bucket: 'entities', type: 'person' }),
     updatePerson: (_, { input }, { dataSources }) => dataSources.GovCoreApi.updateDocument({ Input: input, bucket: 'entities', type: 'person' }),
 
