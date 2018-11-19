@@ -29,11 +29,13 @@ module.exports = {
 
     BusinessServices: (_, { business, service }, { dataSources }) => {
 
-      var edges = dataSources.GovCoreApi.findDocument({ bucket: "graph_edges", type: "business_service", a: business, b: service })
+      var promise = dataSources.GovCoreApi.findDocument({ bucket: "graph_edges", type: "business_service", a: business, b: service })
 
-      return edges.map(function (edge) {
-        return Object.assign(edge, { business: dataSources.GovCoreApi.getDocument({ Id: edge.a }), service: dataSources.GovCoreApi.getDocument({ Id: edge.b }) });
-      })
+      return promise.then(edges => {
+                            edges.map(function (edge) {
+                              return Object.assign(edge, { business: dataSources.GovCoreApi.getDocument({ Id: edge.a }), service: dataSources.GovCoreApi.getDocument({ Id: edge.b }) });
+                            })
+      });
     },
     BusinessService: (_, { id }, { dataSources }) => {
 
@@ -85,6 +87,8 @@ module.exports = {
     updateIdp: (_, { input }, { dataSources }) => dataSources.GovCoreApi.updateDocument({ Input: input, bucket: 'entities', type: 'idp' }),
 
     createGraphEdge: (_, { input }, { dataSources }) => dataSources.GovCoreApi.createDocument({ Input: input, bucket: 'graph_edges' }),
+
+
     deleteGraphEdge: (_, { input }, { dataSources }) => dataSources.GovCoreApi.updateDocument({ Input: input, bucket: 'graph_edges' })
 
 

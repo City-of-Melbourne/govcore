@@ -3,20 +3,15 @@ const { RESTDataSource } = require('apollo-datasource-rest');
 class GovCoreApi extends RESTDataSource {
   constructor() {
     super();
-    this.baseURL = 'https://api.spacexdata.com/v2/';
+    this.baseURL = 'http://ec2-3-16-136-94.us-east-2.compute.amazonaws.com:3000/';
   }  
 
   willSendRequest(request) {
-    request.params.set('token', "");
+    //request.params.set('token', "");
   }
 
-  async getDocument({ Id }) {       
-   
-    const res = await this.get('doc', { id: Id });
-    
-    return res[0] && res.length ? res[0] : {};
-    
-
+  getDocument({ Id }) {  
+    return this.get(`doc/${Id}`).catch(err => { return null; });  
   } 
 
   async updateDocument({ Id,Bucket,Type }) {      
@@ -27,21 +22,25 @@ class GovCoreApi extends RESTDataSource {
     
 
   } 
-  async createDocument({ Input,Bucket,Type }) {       
+   createDocument({ Input,Bucket }) {     
 
-    var doc=Object.assign(Input, { bucket: Bucket,type: Type}); 
-    const res = await this.post('doc', doc);    
-    return res[0] && res.length ? res[0] : {};    
-
-  } 
-
-  async findDocument({ Input }) {       
-   
-    return [];
-   
+    var doc=Object.assign(Input, { bucket: Bucket}); 
+    return this.post('doc', doc).catch(err => { return null; });   
+    
 
   } 
 
+  async findDocument( Input ) {       
+   
+    return this.get('find',{props: JSON.stringify(Input)});     
+
+  } 
+
+   deleteDocument({ Id }) {      
+
+    return this.delete(`doc/${Id}`).catch(err => { return null; });  
+
+  } 
  
 
 }
