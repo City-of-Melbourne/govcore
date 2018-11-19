@@ -18,7 +18,12 @@ end
 
 get '/doc/:id' do
   doc = Store.get(bucket, params[:id])
-  doc ? JSON.dump(doc) : '{}'
+  if doc
+    JSON.dump(doc)
+  else
+    status 404
+    JSON.dump({error: 'Not Found'})
+  end
 end
 
 post '/doc' do
