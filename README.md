@@ -15,6 +15,8 @@ First step towards implementing GovCore concept  through building  GovAuth use c
 3. Web Client (GovAuth web site  that use GovCore as a backend) 
     - [Code](https://github.com/City-of-Melbourne/govAuth/tree/master/code/govauth)
     - [Heroku App](https://govauth.herokuapp.com)
+    - [Heroku API](https://govauthapi.herokuapp.com/graphql)
+
 
 4. Bridging Gaps
 

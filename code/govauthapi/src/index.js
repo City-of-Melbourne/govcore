@@ -12,11 +12,14 @@ const dataSources = () => ({
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  dataSources
+  dataSources,
+  introspection: true,
+  playground: true,
 });
 
+const p = process.env.PORT || 5000
 // Start our server if we're not in a test env.
   server
-    .listen({ port: 4000 })
+    .listen({ port: p })
     .then(({ url }) => console.log(`GovAuth API running at ${url}`));
 
