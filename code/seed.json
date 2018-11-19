@@ -1,0 +1,88 @@
+[
+  {
+    "name": "Company A",
+    "abn": "54654987",
+    "bucket": "entities",
+    "type": "business"
+  },
+  {
+    "name": "Company B",
+    "abn": "54654987",
+    "bucket": "entities",
+    "type": "business"
+  },
+  {
+    "name": "Company C",
+    "abn": "54654987",
+    "bucket": "entities",
+    "type": "business"
+  },
+  {
+    "name": "User A",
+    "email": "usera@email.com",
+    "mobile": "665465",
+    "bucket": "entities",
+    "type": "person"
+  },
+  {
+    "name": "User B",
+    "email": "userb@email.com",
+    "bucket": "entities",
+    "type": "person"
+  },
+  {
+    "name": "Grants",
+    "bucket": "entities",
+    "type": "service"
+  },
+  {
+    "name": "Skip Bins",
+    "bucket": "entities",
+    "type": "service"
+  },
+  {
+    "name": "Handsbills",
+    "bucket": "entities",
+    "type": "service"
+  },
+  {
+    "name": "Admin",
+    "bucket": "entities",
+    "type": "role"
+  },
+  {
+    "name": "Login",
+    "bucket": "entities",
+    "type": "role"
+  },
+  {
+    "name": "GitHub",
+    "bucket": "entities",
+    "type": "idp"
+  },
+  {
+    "name": "Google",
+    "bucket": "entities",
+    "type": "idp"
+  },
+  {
+    "name": "Facebook",
+    "bucket": "entities",
+    "type": "idp"
+  },
+  {
+    "name": "Outlook",
+    "bucket": "entities",
+    "type": "idp"
+  },
+  {
+    "name": "MyGov",
+    "bucket": "entities",
+    "type": "idp"
+  },
+  {
+    "name": "COM",
+    "bucket": "entities",
+    "type": "idp"
+  }
+]
