@@ -1,8 +1,13 @@
+if ARGV.include?('--daemon')
+  ARGV.delete('--daemon')
+  Process.daemon(true)
+end
+
 require 'sinatra'
 require_relative 'fdb_bucket'
 require_relative 'store'
 
-# set :server, 'webrick'
+set :server, 'webrick'
 set :bind, '0.0.0.0'
 
 before { content_type :json }
