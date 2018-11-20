@@ -12,11 +12,11 @@ First step towards implementing GovCore concept  through building  GovAuth test 
     - [Model Representation](https://github.com/City-of-Melbourne/govAuth/blob/master/research/model-representation.md)
     - [Template Representation](https://github.com/City-of-Melbourne/govAuth/blob/master/research/template-representation.md)
 
-3. Web Client (GovAuth web site  that use GovCore as a backend) 
-    - [GovAuth Prototype Code](https://github.com/City-of-Melbourne/govAuth/tree/master/code/govauth)
-    - [GovAuth Prototype -> Heroku](https://govauth.herokuapp.com)
-    - [GovAuth API Code](https://github.com/City-of-Melbourne/govAuth/tree/master/code/govauthapi)
-    - [GovAuth API Playground -> Heroku ](https://govauthapi.herokuapp.com/graphql)
+3. GovAuth 
+    - [ Prototype Code](https://github.com/City-of-Melbourne/govAuth/tree/master/code/govauth)
+    - [ Prototype -> Heroku](https://govauth.herokuapp.com)
+    - [ API Code](https://github.com/City-of-Melbourne/govAuth/tree/master/code/govauthapi)
+    - [ API Playground -> Heroku ](https://govauthapi.herokuapp.com/graphql)
 
 4. Bridging Gaps
 
