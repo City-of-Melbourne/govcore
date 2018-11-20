@@ -72,6 +72,7 @@ type GraphEdge {
     a: String
     b: String 
     date:String    
+    bucket: String
 }   
 type Person {  
     id: ID,        
@@ -133,7 +134,8 @@ input GraphEdgeInput {
         a: String
         b: String 
         role: String 
-        date:String       
+        date:String 
+              
     }
 
 `;

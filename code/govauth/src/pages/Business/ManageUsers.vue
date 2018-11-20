@@ -161,7 +161,7 @@
         async created() {
             this.BUSINESS =JSON.parse(localStorage.getItem('objsession')).business,
             this.usersData = await apicore.getBusinessPersons({ business: this.BUSINESS });
-            this.usersReqData = await apicore.getBusinessPersonRequests({ business: this.BUSINESS });
+            this.usersReqData = await apicore.getBusinessPersonRequests({ business: this.BUSINESS });            
             this.roles = await apicore.getRoles();
             this.persons = await apicore.getPersons();
         },

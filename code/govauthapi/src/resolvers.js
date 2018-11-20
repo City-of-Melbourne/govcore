@@ -71,8 +71,8 @@ module.exports = {
     createIdp: (_, { input }, { dataSources }) => dataSources.GovCoreApi.createDocument({ Input: input, bucket: 'entities', type: 'idp' }),
     updateIdp: (_, { input }, { dataSources }) => dataSources.GovCoreApi.updateDocument({ Input: input, bucket: 'entities', type: 'idp' }),
 
-    createGraphEdge: (_, { input }, { dataSources }) => dataSources.GovCoreApi.createDocument({ Input: input, bucket: 'graph_edges' }),
-    deleteGraphEdge: (_, { input }, { dataSources }) => dataSources.GovCoreApi.updateDocument({ Input: input, bucket: 'graph_edges' })
+    createGraphEdge: (_, { input }, { dataSources }) => dataSources.GovCoreApi.createDocument({  input, bucket: 'graph_edges'}),
+    deleteGraphEdge: (_, { id }, { dataSources }) => dataSources.GovCoreApi.deleteDocument({ id })
 
   }
 };

@@ -14,16 +14,26 @@ class GovCoreApi extends RESTDataSource {
     return this.get(`doc/${id}`).catch(err => { return null; });  
   } 
 
-   updateDocument({ bucket,type }) {   
+   updateDocument({ input,bucket }) {   
 
-    var doc=Object.assign(Input, { bucket,type}); 
-    return this.put('doc', doc).catch(err => { return null; });  
+    var doc=Object.assign(input, {bucket:bucket}); 
+   
+    return this.put(
+      `doc`, // path
+      JSON.stringify(doc), // request body
+    ); 
 
   } 
-   createDocument({ Input,Bucket,Type }) {     
+   createDocument({ input,bucket }) {     
 
-    var doc=Object.assign(Input, {bucket:Bucket,type:Type}); 
-    return this.post('doc', doc).catch(err => { return null; });       
+    var doc=Object.assign(input, {bucket:bucket}); 
+   
+    return this.post(
+      `doc`, // path
+      JSON.stringify(doc), // request body
+    );     
+    
+    
 
   } 
    findDocument( input ) {         
