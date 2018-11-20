@@ -10,35 +10,31 @@ class GovCoreApi extends RESTDataSource {
     //request.params.set('token', "");
   }
 
-  getDocument({ Id }) {  
-    return this.get(`doc/${Id}`).catch(err => { return null; });  
+  getDocument({ id }) {  
+    return this.get(`doc/${id}`).catch(err => { return null; });  
   } 
 
-  async updateDocument({ Id,Bucket,Type }) {      
+   updateDocument({ bucket,type }) {   
+
+    var doc=Object.assign(Input, { bucket,type}); 
+    return this.put('doc', doc).catch(err => { return null; });  
+
+  } 
+   createDocument({ Input,Bucket,Type }) {     
+
+    var doc=Object.assign(Input, {bucket:Bucket,type:Type}); 
+    return this.post('doc', doc).catch(err => { return null; });       
+
+  } 
+   findDocument( input ) {         
     
-    var doc=Object.assign(Input, { bucket: Bucket,type: Type});  
-    const res = await this.put('doc', doc);    
-    return res[0] && res.length ? res[0] : {};
-    
-
-  } 
-   createDocument({ Input,Bucket }) {     
-
-    var doc=Object.assign(Input, { bucket: Bucket}); 
-    return this.post('doc', doc).catch(err => { return null; });   
-    
+    return this.get(`find/${JSON.stringify(input)}`).catch(err => { return null; });    
 
   } 
 
-  async findDocument( Input ) {       
-   
-    return this.get('find',{props: JSON.stringify(Input)});     
+   deleteDocument({ id }) {      
 
-  } 
-
-   deleteDocument({ Id }) {      
-
-    return this.delete(`doc/${Id}`).catch(err => { return null; });  
+    return this.delete(`doc/${id}`).catch(err => { return null; });  
 
   } 
  

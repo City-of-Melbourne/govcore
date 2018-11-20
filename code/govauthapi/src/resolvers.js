@@ -1,79 +1,64 @@
 
 module.exports = {
   Query: {
-    Person: (_, { id }, { dataSources }) => dataSources.GovCoreApi.getDocument({ Id: id }),
-    Persons: (_, __, { dataSources }) => dataSources.GovCoreApi.findDocument({ Bucket: "Entity", Type: "person" }),
+    Person: (_, { id }, { dataSources }) => dataSources.GovCoreApi.getDocument({ id }),
+    Persons: (_, __, { dataSources }) => dataSources.GovCoreApi.findDocument({ bucket: "entities", type: "person" }),
 
-    Service: (_, { id }, { dataSources }) => dataSources.GovCoreApi.getDocument({ Id: id }),
-    Services: (_, __, { dataSources }) => dataSources.GovCoreApi.findDocument({ Bucket: "Entity", Type: "service" }),
+    Service: (_, { id }, { dataSources }) => dataSources.GovCoreApi.getDocument({ id: id }),
+    Services: (_, __, { dataSources }) => dataSources.GovCoreApi.findDocument({ bucket: "entities", type: "service" }),
 
-    Role: (_, { id }, { dataSources }) => dataSources.GovCoreApi.getDocument({ Id: id }),
-    Roles: (_, __, { dataSources }) => dataSources.GovCoreApi.findDocument({ Bucket: "Entity", Type: "role" }),
+    Role: (_, { id }, { dataSources }) => dataSources.GovCoreApi.getDocument({ id: id }),
+    Roles: (_, __, { dataSources }) => dataSources.GovCoreApi.findDocument({ bucket: "entities", type: "role" }),
 
-    Business: (_, { id }, { dataSources }) => dataSources.GovCoreApi.getDocument({ Id: id }),
-    Businesses: (_, __, { dataSources }) => dataSources.GovCoreApi.findDocument({ Bucket: "Entity", Type: "business" }),
+    Business: (_, { id }, { dataSources }) => dataSources.GovCoreApi.getDocument({ id: id }),
+    Businesses: (_, __, { dataSources }) => dataSources.GovCoreApi.findDocument({ bucket: "entities", type: "business" }),
 
-    Idp: (_, { id }, { dataSources }) => dataSources.GovCoreApi.getDocument({ Id: id }),
-    Idps: (_, __, { dataSources }) => dataSources.GovCoreApi.findDocument({ Bucket: "Entity", Type: "idp" }),
+    Idp: (_, { id }, { dataSources }) => dataSources.GovCoreApi.getDocument({ id: id }),
+    Idps: (_, __, { dataSources }) => dataSources.GovCoreApi.findDocument({ bucket: "entities", type: "idp" }),
 
-    GraphEdge: (_, { id }, { dataSources }) => dataSources.GovCoreApi.getDocument({ Id: id }),
-
+    GraphEdge: (_, { id }, { dataSources }) => dataSources.GovCoreApi.getDocument({ id: id }),
     // HERE
     GraphEdges: (_, { type, a, b }, { dataSources }) => {
 
-      var edge = dataSources.GovCoreApi.findDocument({ bucket: "graph_edges", type: type, a: a, b: b })
-      var a = dataSources.GovCoreApi.getDocument({ Id: edge.a });
-      var b = dataSources.GovCoreApi.getDocument({ Id: edge.b });
-      return Object.assign(edge, { a: a, b: b });
-    },
+      return dataSources.GovCoreApi.findDocument({ bucket: "graph_edges", type: type, a: a, b: b }).then(edge => { return Object.assign(edge, { a: dataSources.GovCoreApi.getDocument({ id: edge.a }), b: dataSources.GovCoreApi.getDocument({ id: edge.b }) }); })
 
+    },
     BusinessServices: (_, { business, service }, { dataSources }) => {
 
-      var promise = dataSources.GovCoreApi.findDocument({ bucket: "graph_edges", type: "business_service", a: business, b: service })
-
-      return promise.then(edges => {
-                            edges.map(function (edge) {
-                              return Object.assign(edge, { business: dataSources.GovCoreApi.getDocument({ Id: edge.a }), service: dataSources.GovCoreApi.getDocument({ Id: edge.b }) });
-                            })
+      return dataSources.GovCoreApi.findDocument({ bucket: "graph_edges", type: "business_service", a: business, b: service }).then(edges => {
+        return edges.map(function (edge) { return Object.assign(edge, { business: dataSources.GovCoreApi.getDocument({ id: edge.a }), service: dataSources.GovCoreApi.getDocument({ id: edge.b }) }); });
       });
+
     },
     BusinessService: (_, { id }, { dataSources }) => {
-
-      var edge = dataSources.GovCoreApi.getDocument({ Id: id });
-      return Object.assign(edge, { business: dataSources.GovCoreApi.getDocument({ Id: edge.a }), service: dataSources.GovCoreApi.getDocument({ Id: edge.b }) });
+      return dataSources.GovCoreApi.getDocument({ id: id }).then(edge => { return Object.assign(edge, { business: dataSources.GovCoreApi.getDocument({ id: edge.a }), service: dataSources.GovCoreApi.getDocument({ id: edge.b }) }); });
     },
     BusinessPersons: (_, { business, person }, { dataSources }) => {
 
-      var edges = dataSources.GovCoreApi.findDocument({ bucket: "graph_edges", type: "business_person", a: business, b: person })
-      return edges.map(function (edge) {
-        return Object.assign(edge, { business: dataSources.GovCoreApi.getDocument({ Id: edge.a }), person: dataSources.GovCoreApi.getDocument({ Id: edge.b }), role: dataSources.GovCoreApi.getDocument({ Id: edge.role }) });
-      })
+      return dataSources.GovCoreApi.findDocument({ bucket: "graph_edges", type: "business_person", a: business, b: person }).then(edges => {
+        return edges.map(function (edge) { return Object.assign(edge, { business: dataSources.GovCoreApi.getDocument({ id: edge.a }), person: dataSources.GovCoreApi.getDocument({ id: edge.b }), role: dataSources.GovCoreApi.getDocument({ id: edge.role }) }); });
+      });
 
     },
     BusinessPerson: (_, { id }, { dataSources }) => {
 
-      var edge = dataSources.GovCoreApi.getDocument({ Id: id });
-      return Object.assign(edge, { business: dataSources.GovCoreApi.getDocument({ Id: edge.a }), person: dataSources.GovCoreApi.getDocument({ Id: edge.b }), role: dataSources.GovCoreApi.getDocument({ Id: edge.role }) });
+      return dataSources.GovCoreApi.getDocument({ id: id }).then(edge => { return Object.assign(edge, { business: dataSources.GovCoreApi.getDocument({ id: edge.a }), person: dataSources.GovCoreApi.getDocument({ id: edge.b }), role: dataSources.GovCoreApi.getDocument({ id: edge.role }) }); });
 
     },
     BusinessPersonRequests: (_, { type, business, person }, { dataSources }) => {
-      var edges = db.find({ bucket: "graph_edges", type: type, a: business, b: person })
 
-      return edges.map(function (edge) {
-        return Object.assign(edge, { business: dataSources.GovCoreApi.getDocument({ Id: edge.a }), person: dataSources.GovCoreApi.getDocument({ Id: edge.b }), role: dataSources.GovCoreApi.getDocument({ Id: edge.role }) });
-      })
+      return dataSources.GovCoreApi.findDocument({ bucket: "graph_edges", type: type, a: business, b: person }).then(edges => {
+        return edges.map(function (edge) { return Object.assign(edge, { business: dataSources.GovCoreApi.getDocument({ id: edge.a }), person: dataSources.GovCoreApi.getDocument({ id: edge.b }), role: dataSources.GovCoreApi.getDocument({ id: edge.role }) }); });
+      });
+
     },
     BusinessPersonRequest: (_, { id }, { dataSources }) => {
+      return dataSources.GovCoreApi.getDocument({ id: id }).then(edge => { return Object.assign(edge, { business: dataSources.GovCoreApi.getDocument({ id: edge.a }), person: dataSources.GovCoreApi.getDocument({ id: edge.b }), role: dataSources.GovCoreApi.getDocument({ id: edge.role }) }); });
 
-      var edge = dataSources.GovCoreApi.getDocument({ Id: id });
-      return Object.assign(edge, { business: dataSources.GovCoreApi.getDocument({ Id: edge.a }), person: dataSources.GovCoreApi.getDocument({ Id: edge.b }), role: dataSources.GovCoreApi.getDocument({ Id: edge.role }) });
     }
-
-
-
   },
   Mutation: {
-    
+
     createPerson: (_, { input }, { dataSources }) => dataSources.GovCoreApi.createDocument({ Input: input, bucket: 'entities', type: 'person' }),
     updatePerson: (_, { input }, { dataSources }) => dataSources.GovCoreApi.updateDocument({ Input: input, bucket: 'entities', type: 'person' }),
 
@@ -87,10 +72,7 @@ module.exports = {
     updateIdp: (_, { input }, { dataSources }) => dataSources.GovCoreApi.updateDocument({ Input: input, bucket: 'entities', type: 'idp' }),
 
     createGraphEdge: (_, { input }, { dataSources }) => dataSources.GovCoreApi.createDocument({ Input: input, bucket: 'graph_edges' }),
-
-
     deleteGraphEdge: (_, { input }, { dataSources }) => dataSources.GovCoreApi.updateDocument({ Input: input, bucket: 'graph_edges' })
-
 
   }
 };
