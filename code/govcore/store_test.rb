@@ -52,6 +52,17 @@ describe Store do
     subject, _ = Store.get(@bucket, target[:id])
     assert_equal target, subject
   end
+
+  it "update" do
+    person = { bucket: 'entities', type: "person", name: "p1", email: "p1@test.io"}
+    original, _ = Store.create(@bucket, person)
+
+    Store.update(@bucket, original.merge(name: "Larry"))
+
+    subject, _ = Store.get(@bucket, original[:id])
+
+    assert_equal "Larry", subject[:name]
+  end
 end
 
 def load_fixtures
@@ -60,6 +71,10 @@ def load_fixtures
   bucket = FDBBucket.new(FDBBucket.db_open, 'test')
 
   records.each do |record|
-    response = Store.create(bucket, record, validate: false)
+    doc, errors = Store.create(bucket, record, validate: false)
+    if errors
+      raise "Couldn't create record #{record}: #{error}" if errors
+      exit
+    end
   end
 end
