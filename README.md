@@ -1,6 +1,6 @@
-# GovAuth Under GovCore Concept
+# GovCore
 
-First step towards implementing GovCore concept  through building  GovAuth use case
+First step towards implementing GovCore concept  through building  GovAuth test case
 
 ## Index
 
@@ -13,10 +13,10 @@ First step towards implementing GovCore concept  through building  GovAuth use c
     - [Template Representation](https://github.com/City-of-Melbourne/govAuth/blob/master/research/template-representation.md)
 
 3. Web Client (GovAuth web site  that use GovCore as a backend) 
-    - [Code](https://github.com/City-of-Melbourne/govAuth/tree/master/code/govauth)
-    - [Heroku App](https://govauth.herokuapp.com)
-    - [Heroku API](https://govauthapi.herokuapp.com/graphql)
-
+    - [GovAuth Prototype Code](https://github.com/City-of-Melbourne/govAuth/tree/master/code/govauth)
+    - [GovAuth Prototype -> Heroku](https://govauth.herokuapp.com)
+    - [GovAuth API Code](https://github.com/City-of-Melbourne/govAuth/tree/master/code/govauthapi)
+    - [GovAuth API Playground -> Heroku ](https://govauthapi.herokuapp.com/graphql)
 
 4. Bridging Gaps
 
@@ -26,14 +26,14 @@ First step towards implementing GovCore concept  through building  GovAuth use c
 5. GovCore Web Manangment Tool( Data and model managment )
 
 5. GovCore
-   - Documentation
-        - [Templates under graphQL Schema Definition Language](https://github.com/City-of-Melbourne/govAuth/tree/master/research/govAuthGraphQLTemplates.md)
-   - Implementation       
+   - [REST API](https://github.com/City-of-Melbourne/govcore/tree/master/code/govcore)  
+        
 
 ## Road map
 
 - [x] Model of GovAuth
 - [x] Research and Implement model using a readable format (Json)
 - [x] Prototype for GovAuth(Just Wireframes)
-- [ ] Bridging  Model With Gov Auth web site somehow through GovCore 👈 doing (Making GovAuth Prototype Live)
-
+- [x] Bridging Gov Auth single application with GovCore API through graphQL  
+- [x] Enabling Gov Auth API playground through graphQL
+- [ ] Increasing GovCore logic Layer (Template validation, enforcing rules, making template availables)  👈 doing 
