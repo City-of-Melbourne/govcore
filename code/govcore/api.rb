@@ -4,8 +4,9 @@ if ARGV.include?('--daemon')
 end
 
 require 'sinatra'
-require_relative 'fdb_bucket'
-require_relative 'store'
+require './fdb_bucket'
+require './doc'
+require './store'
 
 set :server, 'webrick'
 set :bind, '0.0.0.0'
@@ -31,7 +32,7 @@ get '/doc/:id' do
 end
 
 post '/doc' do
-  data = JSON.parse(request.body.read)
+  data = Doc.parse(request.body.read)
 
   doc, error = Store.create(bucket, data)
 
@@ -43,7 +44,7 @@ post '/doc' do
 end
 
 put '/doc' do
-  data = JSON.parse(request.body.read)
+  data = Doc.parse(request.body.read)
 
   doc, error = Store.update(bucket, data)
 
@@ -60,7 +61,7 @@ delete '/doc/:id' do
 end
 
 get '/find/:props' do
-  props = JSON.parse(params[:props])
+  props = Doc.parse(params[:props])
   docs = Store.find(bucket, props)
   JSON.dump(docs)
 end

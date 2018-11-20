@@ -1,0 +1,31 @@
+[
+    {
+        "bucket": "templates",
+        "type": "person",
+        "schema": {
+            "title": "Person",
+            "type": "object",
+            "properties": {
+                "id": { "type": "string" },
+                "bucket": {
+                    "type": "string",
+                    "pattern": "entities"
+                },
+                "type": {
+                    "type": "string",
+                    "pattern": "person"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "mobile": {
+                    "type": "string"
+                }
+            },
+            "required": [ "id", "bucket", "type", "name", "email" ]
+        }
+    }
+]
