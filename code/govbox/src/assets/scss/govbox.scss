@@ -1,0 +1,61 @@
+// Import Icons
+@import url('https://use.fontawesome.com/releases/v5.2.0/css/all.css');
+@import url('https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css');
+
+// Import Bulma's core
+@import "~bulma/sass/utilities/_all";
+
+// Set your colors
+$primary: #160642;
+$primary-invert: findColorInvert($primary);
+
+$colors: (
+    "white": ($white, $black),
+    "black": ($black, $white),
+    "light": ($light, $light-invert),
+    "dark": ($dark, $dark-invert),
+    "primary": ($primary, $primary-invert),
+    "info": ($info, $info-invert),
+    "success": ($success, $success-invert),
+    "warning": ($warning, $warning-invert),
+    "danger": ($danger, $danger-invert)   
+);
+
+// Links
+// $link: $primary;
+// $link-invert: $primary-invert;
+// $link-focus-border: $primary;
+
+
+
+// Set your brand colors
+
+// $purple: #8A4D76;
+// $pink: #FA7C91;
+// $brown: #757763;
+// $beige-light: #D0D1CD;
+// $beige-lighter: #EFF0EB;
+
+// Update Bulma's global variables
+
+// $family-sans-serif: "Nunito", sans-serif;
+// $grey-dark: $brown;
+// $grey-light: $beige-light;
+// $primary: $purple;
+// $link: $pink;
+// $widescreen-enabled: false;
+// $fullhd-enabled: false;
+
+// Update some of Bulma's component variables
+
+// $body-background-color: $beige-lighter;
+// $control-border-width: 2px;
+// $input-border-color: transparent;
+// $input-shadow: none;
+
+
+
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy";

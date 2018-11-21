@@ -1,0 +1,202 @@
+{
+	"info": {
+		"_postman_id": "58efc26e-51c4-418f-9299-efa608a8b664",
+		"name": "GOVCORE API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/doc",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://ec2-3-16-136-94.us-east-2.compute.amazonaws.com:3000/doc/4950e03f1632529af32baa7f727325bd",
+					"protocol": "http",
+					"host": [
+						"ec2-3-16-136-94",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3000",
+					"path": [
+						"doc",
+						"4950e03f1632529af32baa7f727325bd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/doc",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"a\": \"c014b39d6bd7269a707e4bcad19508ec\",\n        \"b\": \"dee7595c220b317ed30bddf2ba7c5dac\",\n        \"bucket\": \"graph_edges\",\n        \"type\": \"business_service\"\n        \n    }"
+				},
+				"url": {
+					"raw": "http://ec2-3-16-136-94.us-east-2.compute.amazonaws.com:3000/doc",
+					"protocol": "http",
+					"host": [
+						"ec2-3-16-136-94",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3000",
+					"path": [
+						"doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/doc - graphedges",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"a\": \"c014b39d6bd7269a707e4bcad19508ec\",\r\n    \"b\": \"abaf17c83070eb602fe8fef8cb55e148\",\r\n    \"bucket\": \"graph_edges\",\r\n    \"type\": \"business_service\"\r\n}"
+				},
+				"url": {
+					"raw": "http://ec2-3-16-136-94.us-east-2.compute.amazonaws.com:3000/doc",
+					"protocol": "http",
+					"host": [
+						"ec2-3-16-136-94",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3000",
+					"path": [
+						"doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/doc",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://ec2-3-16-136-94.us-east-2.compute.amazonaws.com:3000/doc/b860ce60618d81a48056a51497dcff0a",
+					"protocol": "http",
+					"host": [
+						"ec2-3-16-136-94",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3000",
+					"path": [
+						"doc",
+						"b860ce60618d81a48056a51497dcff0a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/doc",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\": \"Grant\",\r\n    \"bucket\": \"entities\",\r\n    \"type\": \"service\",\r\n    \"id\": \"abaf17c83070eb602fe8fef8cb55e148\"\r\n  }"
+				},
+				"url": {
+					"raw": "http://ec2-3-16-136-94.us-east-2.compute.amazonaws.com:3000/doc",
+					"protocol": "http",
+					"host": [
+						"ec2-3-16-136-94",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3000",
+					"path": [
+						"doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/find?props={}",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://ec2-3-16-136-94.us-east-2.compute.amazonaws.com:3000/find/{\"bucket\":\"graph_edges\"}",
+					"protocol": "http",
+					"host": [
+						"ec2-3-16-136-94",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3000",
+					"path": [
+						"find",
+						"{\"bucket\":\"graph_edges\"}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
