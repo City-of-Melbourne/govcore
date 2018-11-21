@@ -1,5 +1,0 @@
-
-## Conceptual
-
-![](img/model.png)
-
