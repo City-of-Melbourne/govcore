@@ -21,7 +21,7 @@ describe Store do
   end
 
   it "create" do
-    person = { bucket: 'entities', type: "person", name: "p1", email: "p1@test.io"}
+    person = { bucket: 'entities', type: "person", name: "p1", email: "p1@test.io", age: 1000 }
     subject, errors = Store.create(@bucket, person)
 
     assert_nil errors
@@ -40,9 +40,7 @@ describe Store do
     assert_match /No template found/, errors.first
 
     subject, errors = Store.create(@bucket, { type: 'person' })
-    assert_equal 3, errors.count
-    assert_match /not contain a required property of 'name'/, errors.join
-    assert_match /not contain a required property of 'email'/, errors.join
+    assert_equal 1, errors.count
     assert_match /not contain a required property of 'bucket'/, errors.join
   end
 
