@@ -1,6 +1,6 @@
 # GovCore
 
-First step towards implementing GovCore concept  through building  GovAuth test case
+First step towards implementing GovCore concept  through test cases
 
 ## Index
 
