@@ -1,12 +1,20 @@
 require './fdb_bucket'
 require './store'
+require './doc'
 require 'json'
 
-records = JSON.parse(File.read(ARGV.first))
+records = Doc.parse(File.read(ARGV.first))
 
 bucket = FDBBucket.new(FDBBucket.db_open, 'docs')
 
 records.each do |record|
-  response = Store.create(bucket, record)
-  puts "Created: #{response}"
+  validate = 'templates' != record['bucket']
+  doc, errors = Store.create(bucket, record, validate: validate)
+
+  if error
+    puts "ERROR: errors: #{errors}"
+    puts "  record: #{record}"
+  else
+    puts "Created: #{doc}"
+  end
 end

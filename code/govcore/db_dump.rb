@@ -1,4 +1,7 @@
-require_relative 'fdb_playground'
+require 'json'
+require './fdb_playground'
 include FDBPLayground
 
-puts db_dump(db_open)
+values = db_open.get_range('', '\xFF').map { |kv| JSON.parse(kv.value) }
+
+puts JSON.pretty_generate(values)
