@@ -8,7 +8,8 @@ records = Doc.parse(File.read(ARGV.first))
 bucket = FDBBucket.new(FDBBucket.db_open, 'docs')
 
 records.each do |record|
-  validate = 'templates' != record['bucket']
+  validate = 'templates' != record[:bucket]
+
   doc, errors = Store.create(bucket, record, validate: validate)
 
   if errors
