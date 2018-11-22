@@ -6,6 +6,8 @@ TODO: First attempt towards GovCore...GovAuth as a client to demonstrate GovCore
 
 TODO: Write about the specific of this chunk of the project (CoM <-> CodeForAustralia) (Fellowship)
 
+TODO: Hypothesis: By Lifting business data rules to versioned templates....
+
 ## TODO: Spec (Blueprint)
 
 Define the GovCore Way...
