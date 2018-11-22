@@ -11,7 +11,15 @@ require './store'
 set :server, 'webrick'
 set :bind, '0.0.0.0'
 
-before { content_type :json }
+configure do
+	enable:cross_origin
+end
+
+before do
+   content_type :json    
+   headers 'Access-Control-Allow-Origin' => '*', 
+            'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST']  
+end
 
 def bucket
   FDBBucket.new(FDBBucket.db_open, 'docs')
