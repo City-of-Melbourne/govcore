@@ -1,36 +1,49 @@
 # GovCore
 
-TODO: Introduce GovCore briefly... [link to govcore](#todo)
+![Govcore](docs/assets/1-govcore-intro.png)
 
-## About the Project 
+TODO: Introduce GovCore briefly then link to the [GovCore Concept](docs/govcore.md)
 
-TODO: First attempt towards govcore...
+TODO: First attempt towards GovCore...GovAuth as a client to demonstrate GovCore
 
-TODO: Write about the specific of this project (CoM <-> CodeForAustralia) (Fellowship)
+TODO: Write about the specific of this chunk of the project (CoM <-> CodeForAustralia) (Fellowship)
 
-TODO: govauth as a client to demonstrate govcore
+## TODO: Spec (Blueprint)
 
-## The Concept
+Define the GovCore Way...
 
-TODO: Overview of the concept
+The [GovCore Concept](docs/govcore.md) sets the Vision/Goals. We need to go down one level and specify the concept in more detail. We need to include enough information to able to implement GovCore in any platform/database/language.
 
-TODO: [link to docs](docs/)
+## Implementation
 
-## The Implementation
+TODO: Review focus on GovCore/GovAuth
+
+- [GovAuth Graphql Templates](doc/govauth-graphql-templates.md)
+- [GovAuth Model](doc/govauth-model.md)
+- [GraphQL](doc/graphQL.md)
+- [Graphs](doc/graphs.md)
+- [Model Representation](doc/model-representation.md)
+- [Template Representation](doc/template-representation.md)
+- [Template Validation](doc/template-validation.md)
+- [Basic Operations](doc/basic-operations.md)
+
+## Code
+
+TODO: Diagram of current architecture GovAuth <-> GovCore
 
 TODO: What was built govcore, govauth, govbox
 
 TODO: How far we got (feature list checklist)
 
-TODO: Next
+TODO: What's next?
 
-## Road map
+## Roadmap
 
-TODO: review
+TODO: review focus on GovCore
 
 - [x] Model of GovAuth
 - [x] Research and Implement model using a readable format (Json)
 - [x] Prototype for GovAuth(Just Wireframes)
-- [x] Bridging Gov Auth single application with GovCore API through graphQL  
+- [x] Bridging Gov Auth single application with GovCore API through graphQL
 - [x] Enabling Gov Auth API playground through graphQL
-- [ ] Increasing GovCore logic Layer (Template validation, enforcing rules, making template availables)  👈 doing 
+- [ ] Increasing GovCore logic Layer (Template validation, enforcing rules, making template availables)  👈 doing
