@@ -24,18 +24,18 @@ Consist mainly of 3 parts:
 
 2. Install libraries
 
-    $ bundle install
+        $ bundle install
 
 3. Run a test to ensure everything's 👌
 
-    $ ruby store_test.rb
+        $ ruby store_test.rb
 
 4. Load some data
 
-    $ ruby db_load.rb ../govauth/seed_templates.json
+        $ ruby db_load.rb ../govauth/seed_templates.json
 
 5. Run the api server
 
-    $ ruby api.rb
+        $ ruby api.rb
 
 Bob's your uncle.
