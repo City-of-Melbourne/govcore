@@ -11,7 +11,7 @@ records.each do |record|
   validate = 'templates' != record['bucket']
   doc, errors = Store.create(bucket, record, validate: validate)
 
-  if error
+  if errors
     puts "ERROR: errors: #{errors}"
     puts "  record: #{record}"
   else
