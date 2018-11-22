@@ -1,39 +1,49 @@
 # GovCore
 
-First step towards implementing GovCore concept  through test cases
+![Govcore](docs/assets/1-govcore-intro.png)
 
-## Index
+TODO: Introduce GovCore briefly then link to the [GovCore Concept](docs/govcore.md)
 
-1. Research   
-    - [Graphs](https://github.com/City-of-Melbourne/govAuth/blob/master/research/graphs.md)
+TODO: First attempt towards GovCore...GovAuth as a client to demonstrate GovCore
 
-2. Modeling GovAuth Problem
-    - [Model](https://github.com/City-of-Melbourne/govAuth/blob/master/research/model.md)
-    - [Model Representation](https://github.com/City-of-Melbourne/govAuth/blob/master/research/model-representation.md)
-    - [Template Representation](https://github.com/City-of-Melbourne/govAuth/blob/master/research/template-representation.md)
+TODO: Write about the specific of this chunk of the project (CoM <-> CodeForAustralia) (Fellowship)
 
-3. GovAuth 
-    - [ Prototype Code](https://github.com/City-of-Melbourne/govAuth/tree/master/code/govauth)
-    - [ Prototype -> Heroku](https://govauth.herokuapp.com)
-    - [ API Code](https://github.com/City-of-Melbourne/govAuth/tree/master/code/govauthapi)
-    - [ API Playground -> Heroku ](https://govauthapi.herokuapp.com/graphql)
+## TODO: Spec (Blueprint)
 
-4. Bridging Gaps
+Define the GovCore Way...
 
-     - [GraphQL](https://github.com/City-of-Melbourne/govAuth/tree/master/research/graphQL.md)
-     - [Protocol Buffers](https://github.com/City-of-Melbourne/govAuth/tree/master/research/protocolBuffers.md)
+The [GovCore Concept](docs/govcore.md) sets the Vision/Goals. We need to go down one level and specify the concept in more detail. We need to include enough information to able to implement GovCore in any platform/database/language.
 
-5. GovCore Web Manangment Tool( Data and model managment )
+## Implementation
 
-5. GovCore
-   - [REST API](https://github.com/City-of-Melbourne/govcore/tree/master/code/govcore)  
-        
+TODO: Review focus on GovCore/GovAuth
 
-## Road map
+- [GovAuth Graphql Templates](doc/govauth-graphql-templates.md)
+- [GovAuth Model](doc/govauth-model.md)
+- [GraphQL](doc/graphQL.md)
+- [Graphs](doc/graphs.md)
+- [Model Representation](doc/model-representation.md)
+- [Template Representation](doc/template-representation.md)
+- [Template Validation](doc/template-validation.md)
+- [Basic Operations](doc/basic-operations.md)
+
+## Code
+
+TODO: Diagram of current architecture GovAuth <-> GovCore
+
+TODO: What was built govcore, govauth, govbox
+
+TODO: How far we got (feature list checklist)
+
+TODO: What's next?
+
+## Roadmap
+
+TODO: review focus on GovCore
 
 - [x] Model of GovAuth
 - [x] Research and Implement model using a readable format (Json)
 - [x] Prototype for GovAuth(Just Wireframes)
-- [x] Bridging Gov Auth single application with GovCore API through graphQL  
+- [x] Bridging Gov Auth single application with GovCore API through graphQL
 - [x] Enabling Gov Auth API playground through graphQL
-- [ ] Increasing GovCore logic Layer (Template validation, enforcing rules, making template availables)  👈 doing 
+- [ ] Increasing GovCore logic Layer (Template validation, enforcing rules, making template availables)  👈 doing
