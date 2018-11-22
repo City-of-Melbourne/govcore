@@ -1,5 +1,3 @@
-# GovCore
-
 ![Govcore](docs/assets/1-govcore-intro.png)
 
 TODO: Introduce GovCore briefly then link to the [GovCore Concept](docs/govcore.md)
@@ -18,14 +16,14 @@ The [GovCore Concept](docs/govcore.md) sets the Vision/Goals. We need to go down
 
 TODO: Review focus on GovCore/GovAuth
 
-- [GovAuth Graphql Templates](doc/govauth-graphql-templates.md)
-- [GovAuth Model](doc/govauth-model.md)
-- [GraphQL](doc/graphQL.md)
-- [Graphs](doc/graphs.md)
-- [Model Representation](doc/model-representation.md)
-- [Template Representation](doc/template-representation.md)
-- [Template Validation](doc/template-validation.md)
-- [Basic Operations](doc/basic-operations.md)
+- [GovAuth Graphql Templates](docs/govauth-graphql-templates.md)
+- [GovAuth Model](docs/govauth-model.md)
+- [GraphQL](docs/graphQL.md)
+- [Graphs](docs/graphs.md)
+- [Model Representation](docs/model-representation.md)
+- [Template Representation](docs/template-representation.md)
+- [Template Validation](docs/template-validation.md)
+- [Basic Operations](docs/basic-operations.md)
 
 ## Code
 
