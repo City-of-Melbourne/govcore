@@ -1,35 +1,32 @@
 # GovCore
 
-First step towards implementing GovCore concept  through test cases
+TODO: Introduce GovCore briefly... [link to govcore](#todo)
 
-## Index
+## About the Project 
 
-1. Research   
-    - [Graphs](https://github.com/City-of-Melbourne/govAuth/blob/master/research/graphs.md)
+TODO: First attempt towards govcore...
 
-2. Modeling GovAuth Problem
-    - [Model](https://github.com/City-of-Melbourne/govAuth/blob/master/research/model.md)
-    - [Model Representation](https://github.com/City-of-Melbourne/govAuth/blob/master/research/model-representation.md)
-    - [Template Representation](https://github.com/City-of-Melbourne/govAuth/blob/master/research/template-representation.md)
+TODO: Write about the specific of this project (CoM <-> CodeForAustralia) (Fellowship)
 
-3. GovAuth 
-    - [ Prototype Code](https://github.com/City-of-Melbourne/govAuth/tree/master/code/govauth)
-    - [ Prototype -> Heroku](https://govauth.herokuapp.com)
-    - [ API Code](https://github.com/City-of-Melbourne/govAuth/tree/master/code/govauthapi)
-    - [ API Playground -> Heroku ](https://govauthapi.herokuapp.com/graphql)
+TODO: govauth as a client to demonstrate govcore
 
-4. Bridging Gaps
+## The Concept
 
-     - [GraphQL](https://github.com/City-of-Melbourne/govAuth/tree/master/research/graphQL.md)
-     - [Protocol Buffers](https://github.com/City-of-Melbourne/govAuth/tree/master/research/protocolBuffers.md)
+TODO: Overview of the concept
 
-5. GovCore Web Manangment Tool( Data and model managment )
+TODO: [link to docs](docs/)
 
-5. GovCore
-   - [REST API](https://github.com/City-of-Melbourne/govcore/tree/master/code/govcore)  
-        
+## The Implementation
+
+TODO: What was built govcore, govauth, govbox
+
+TODO: How far we got (feature list checklist)
+
+TODO: Next
 
 ## Road map
+
+TODO: review
 
 - [x] Model of GovAuth
 - [x] Research and Implement model using a readable format (Json)
