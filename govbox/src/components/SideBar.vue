@@ -1,30 +1,5 @@
 <template>
 
-  <aside class="menu">
-
-    <section v-if="profile === 'business'">
-      <p class="menu-label">
-        Dash-Business Owner
-      </p>
-      <ul class="menu-list">
-        <li><a href="/joinservice">Join Service</a></li>
-        <li><a href="/manageusers">Users</a></li>
-        <li><a href="/mybusiness">Business</a></li>
-        <li><a href="/myprofile">My Profile</a></li>
-      </ul>
-    </section>
-
-    <section v-if="profile === 'user'">
-
-      <p class="menu-label">
-        Dash-Business Staff
-      </p>
-      <ul class="menu-list">
-        <li><a href="/joinbusiness">Join Business</a></li>
-        <li><a href="/myprofile">My Profile</a></li>
-      </ul>
-    </section>
-  </aside>
 
 </template>
 

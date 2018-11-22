@@ -15,11 +15,8 @@ export default {
   <div>
     <nav-bar />
     <div class="container section">
-      <div class="columns is-mobile">
-        <div class="column is-3">
-          <side-bar />
-        </div>
-        <div class="column is-9">
+      <div class="columns is-mobile">       
+        <div class="column is-12">
           <slot />          
         </div>
       </div>

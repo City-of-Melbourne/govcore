@@ -24,11 +24,11 @@ export default new Router({
       meta: { layout: "no-sidebar" },
       component: require("@/pages/404.vue").default
     },
-    // Explore
+    // Explore    
     {
       path: "/explore",
       name: "explore",
-      component: () => import("@/pages/Explore.vue").default
-    }
+      component: () => import("@/pages/Explore.vue")
+    },
   ]
 });

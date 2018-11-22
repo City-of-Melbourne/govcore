@@ -1,4 +1,4 @@
-# GovAuth FrontEnd
+# GovBox FrontEnd
 
 To build this frontend the following technologies has been used:
 
