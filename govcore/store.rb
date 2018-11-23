@@ -13,7 +13,13 @@ class Store
     def create(bucket, doc, validate: true)
       doc = doc.clone
       doc[:id] = random_id
-      put(bucket, doc, validate)
+      new_doc, errors = put(bucket, doc, validate)
+
+      if new_doc
+        create_event(bucket, 'document_created', new_doc[:id])
+      end
+
+      return new_doc, errors
     end
 
     def update(bucket, doc, validate: true)
@@ -23,11 +29,18 @@ class Store
         return nil, ["Doc #{doc[:id]} not found."]
       end
 
-      put(bucket, doc, validate)
+      new_doc, errors = put(bucket, doc, validate)
+
+      if new_doc
+        create_event(bucket, 'document_updated', new_doc[:id])
+      end
+
+      return new_doc, errors
     end
 
     def delete(bucket, doc_id)
       bucket.delete(doc_id)
+      create_event(bucket, 'document_deleted', doc_id)
     end
 
     def find(bucket, props)
@@ -57,9 +70,23 @@ class Store
         end
       end
 
-      # TODO Validate
       value = bucket.put(doc[:id], Doc.dump(doc))
       return Doc.parse(value), nil
+    end
+
+    def create_event(bucket, name, doc_id)
+      t = Time.now
+
+      event = Doc.dump({
+        bucket: 'events',
+        type: 'system',
+        name: name,
+        doc_id: doc_id,
+        timestamp: t.to_i,
+        human_time: t.to_s
+      })
+
+      bucket.put(random_id, event)
     end
 
     def random_id

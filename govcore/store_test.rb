@@ -21,7 +21,7 @@ describe Store do
   end
 
   it "create" do
-    person = { bucket: 'entities', type: "person", name: "p1", email: "p1@test.io", age: 1000 }
+    person = { bucket: 'entities', type: "person", name: "p1", email: "p1@test.io" }
     subject, errors = Store.create(@bucket, person)
 
     assert_nil errors
@@ -60,6 +60,28 @@ describe Store do
     subject, _ = Store.get(@bucket, original[:id])
 
     assert_equal "Larry", subject[:name]
+  end
+
+  it "events" do
+    events_before = Store.find(@bucket, { bucket: 'events' })
+
+    doc, errors = Store.create(@bucket, { bucket: 'entities', type: "business", name: "Frank's Cafe" })
+
+    assert doc
+
+    # Create
+    assert_nil events_before.find { |event| doc[:id] == event[:doc_id] }
+    assert_equal 1, Store.find(@bucket, { name: 'document_created', doc_id: doc[:id] }).size
+
+    # Update
+    assert_equal 0, Store.find(@bucket, { name: 'document_updated', doc_id: doc[:id] }).size
+    Store.update(@bucket, doc.merge(name: "Caña de Melbourne"))
+    assert_equal 1, Store.find(@bucket, { name: 'document_updated', doc_id: doc[:id] }).size
+
+    # Delete
+    assert_equal 0, Store.find(@bucket, { name: 'document_deleted', doc_id: doc[:id] }).size
+    Store.delete(@bucket, doc[:id])
+    assert_equal 1, Store.find(@bucket, { name: 'document_deleted', doc_id: doc[:id] }).size
   end
 end
 
