@@ -2,7 +2,7 @@ $:.unshift(File.join(File.dirname(__FILE__), '../'))
 
 require 'minitest/spec'
 require 'minitest/autorun'
-require './fdb_playground'
+require './test/fdb_playground'
 require './fdb_bucket'
 
 include FDBPLayground

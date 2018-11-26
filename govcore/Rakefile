@@ -1,5 +1,5 @@
 require 'json'
-require './fdb_playground'
+require './test/fdb_playground'
 require './fdb_bucket'
 require './store'
 require './doc'
