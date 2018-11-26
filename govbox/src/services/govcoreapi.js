@@ -11,7 +11,20 @@ export default class govcoreapi {
     getTemplates() {
         return axios.get(this.apiURL + `find/${JSON.stringify({ bucket: 'templates' })}`);
     }
+    getDocument(param) {
+        return axios.get(this.apiURL + `doc/${param}`);
+    }
     getDocuments(template) {
         return axios.get(this.apiURL + `find/${JSON.stringify({ type: template })}`);
     }
+    updateTemplate(document){
+        return axios.put(this.apiURL + `doc`,document);
+    }
+    createTemplate(document){
+        return axios.post(this.apiURL + `doc`,document);
+    }
+    deleteTemplate(param){
+        return axios.delete(this.apiURL + `doc/${param}`);
+    }
+    
 }

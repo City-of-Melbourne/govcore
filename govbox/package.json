@@ -12,10 +12,11 @@
   "dependencies": {
     "axios": "^0.18.0",
     "buefy": "^0.7.0",
-    "vue": "^2.5.17",
-    "vue-router": "^3.0.1",
     "express": "^4.16.4",
-    "serve-static": "^1.13.2"
+    "serve-static": "^1.13.2",
+    "vue": "^2.5.17",
+    "vue-form-json-schema": "^1.17.3",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.5",
