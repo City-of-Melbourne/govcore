@@ -3,6 +3,7 @@ if ARGV.include?('--daemon')
   Process.daemon(true)
 end
 
+require 'rack/cors'
 require 'sinatra'
 require './fdb_bucket'
 require './doc'
@@ -11,15 +12,14 @@ require './store'
 set :server, 'webrick'
 set :bind, '0.0.0.0'
 
-configure do
-	enable:cross_origin
+use Rack::Cors do
+  allow do
+    origins '*'
+    resource '*', methods: [:get, :post, :delete, :put, :patch, :options, :head]
+  end
 end
 
-before do
-   content_type :json    
-   headers 'Access-Control-Allow-Origin' => '*', 
-            'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST','DELETE','PUT']  
-end
+before { content_type :json }
 
 def bucket
   FDBBucket.new(FDBBucket.db_open, 'docs')
