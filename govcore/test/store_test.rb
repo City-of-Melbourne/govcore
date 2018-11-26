@@ -5,12 +5,13 @@ require 'minitest/autorun'
 require './fdb_playground'
 require './fdb_bucket'
 require './store'
+require './doc'
 
 include FDBPLayground
 
 class Hash
   def normalize
-    JSON.parse(JSON.dump(self))
+    Doc.parse(Doc.dump(self))
   end
 end
 
@@ -88,7 +89,7 @@ describe Store do
 end
 
 def load_fixtures
-  records = JSON.parse(File.read('./test_templates.json'))
+  records = Doc.parse(File.read('test/test_templates.json'))
 
   bucket = FDBBucket.new(FDBBucket.db_open, 'test')
 

@@ -6,10 +6,9 @@ require './doc'
 
 include FDBPLayground
 
-desc "Dump the database in JSON format"
+desc "Dump the database"
 task :db_dump do
-  values = db_open.get_range('', '\xFF').map { |kv| JSON.parse(kv.value) }
-  puts JSON.pretty_generate(values)
+  puts db_open.get_range('', '\xFF').map { |kv| [kv.key, kv.value].join(": ") }
 end
 
 desc "Load the database from a JSON file"

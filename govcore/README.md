@@ -32,7 +32,7 @@ Consist mainly of 3 parts:
 
 4. Load some data
 
-        $ rake db_load[../govauth/seed_templates.json]
+        $ rake db_load[test/test_templates.json]
 
 5. Run the api server
 
