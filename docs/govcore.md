@@ -103,7 +103,7 @@ Our reality is three system options:
 Problems:
 
 - Foundations laid pre-2000
-- Most have not re-architected*
+- Most have not re-architected (excepting TechOne)
 - No APIs (or very limited)
 - No mobile customer interface
 - Not cloud native (or capable)
