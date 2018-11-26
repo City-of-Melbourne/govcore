@@ -8,4 +8,5 @@ gem "sinatra"
 gem "json-schema"
 gem "fdb"
 gem "rake"
+gem "rack-cors"
 
