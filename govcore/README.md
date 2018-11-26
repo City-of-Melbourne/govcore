@@ -10,7 +10,7 @@ Consist mainly of 3 parts:
 
 - [API](api.rb): Simple Rest API
 - [Store](store.rb): Library for basic CRUD operations on Documents
-- [FDBBucket](fdb_bucket.rb): Database adapter for FoundationDB database
+- [FDBBucket](fdb_bucket.rb): FoundationDB database adapter
 
 ## Dependencies
 
@@ -26,16 +26,20 @@ Consist mainly of 3 parts:
 
         $ bundle install
 
-3. Run a test to ensure everything's 👌
+3. Run the test suite to ensure everything's 👌
 
-        $ ruby store_test.rb
+        $ rake test
 
 4. Load some data
 
-        $ ruby db_load.rb ../govauth/seed_templates.json
+        $ rake db_load[../govauth/seed_templates.json]
 
 5. Run the api server
 
         $ ruby api.rb
+
+6. Make a request
+
+        curl localhost:4567
 
 Bob's your uncle.

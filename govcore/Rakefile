@@ -1,0 +1,53 @@
+require 'json'
+require './fdb_playground'
+require './fdb_bucket'
+require './store'
+require './doc'
+
+include FDBPLayground
+
+desc "Dump the database in JSON format"
+task :db_dump do
+  values = db_open.get_range('', '\xFF').map { |kv| JSON.parse(kv.value) }
+  puts JSON.pretty_generate(values)
+end
+
+desc "Load the database from a JSON file"
+task :db_load, :json_file do |t, args|
+  unless args[:json_file]
+    puts "ERROR: Please provide a JSON file to load. Example:"
+    puts "    rake db_load[test_templates.json]"
+    exit
+  end
+
+  records = Doc.parse(File.read(args[:json_file]))
+
+  bucket = FDBBucket.new(FDBBucket.db_open, 'docs')
+
+  records.each do |record|
+    validate = 'templates' != record[:bucket]
+
+    doc, errors = Store.create(bucket, record, validate: validate)
+
+    if errors
+      puts "ERROR: errors: #{errors}"
+      puts "  record: #{record}"
+    else
+      puts "Created: #{doc}"
+    end
+  end
+end
+
+desc "Delete everything in the database"
+task :db_wipe do
+  db_wipe(db_open)
+end
+
+desc "Run all tests"
+task :test do
+  FileList["test/*test.rb"].each do |test_file|
+    puts
+    puts "Running #{test_file}"
+    system("ruby #{test_file}")
+  end
+end

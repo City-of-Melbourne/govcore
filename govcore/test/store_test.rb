@@ -1,3 +1,5 @@
+$:.unshift(File.join(File.dirname(__FILE__), '../'))
+
 require 'minitest/spec'
 require 'minitest/autorun'
 require './fdb_playground'
