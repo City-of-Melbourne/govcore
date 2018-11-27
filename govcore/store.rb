@@ -60,7 +60,7 @@ class Store
       template = find(bucket, { bucket: "templates", type: doc[:type].to_s }).first
 
       # FIXME how should this be handled?
-      validate = false if doc[:bucket] == 'template'
+      validate = false if doc[:bucket] == 'templates'
 
       if validate
         if !template
