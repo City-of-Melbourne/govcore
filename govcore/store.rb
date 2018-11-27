@@ -13,6 +13,10 @@ class Store
     def create(bucket, doc, validate: true)
       doc = doc.clone
       doc[:id] = random_id
+
+      # FIXME how should this be handled?
+      validate = false if doc[:bucket] == 'template'
+
       new_doc, errors = put(bucket, doc, validate)
 
       if new_doc
