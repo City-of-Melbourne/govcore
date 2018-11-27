@@ -75,8 +75,7 @@ export default {
         component: 'input',
         model: 'secondName',
         fieldOptions: {          
-          on: ['input']
-          
+          on: ['input']          
         },
       }
       

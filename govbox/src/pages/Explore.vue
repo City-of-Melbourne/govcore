@@ -16,15 +16,30 @@
 
                 <div class="column is-2">
 
-                    <a class="button is-info" @click="addDocument()">
-                        <span class="icon is-small">
-                            <i class="fas fa-plus"></i>
-                        </span>
-                        <span>Document</span>
-                    </a>
+                    <div class="field is-grouped">
+                        <div class="control">
+                        <a class="button is-info" @click="addDocument()">
+                            <span class="icon is-small">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                            <span>Document</span>
+                        </a>
+                        </div>
+                        <div class="control">
+                        <a class="button is-success" @click="refreshDocuments()">
+                            <span class="icon is-small">
+                                <i class="fas fa-sync"></i>
+                            </span>
+                            
+                        </a>
+                        </div>
+                    </div>
+                    
                 </div>
-                <div class="column is-10">
+                
+                <div class="column is-10">                     
                     <h1 class="title">{{stemplate}}</h1>
+                    
                 </div>
 
 
@@ -36,10 +51,6 @@
                         <ul class="menu-list">
                             <h1 class="subtitle">Templates</h1>
 
-
-                            <li v-for="tem in templates" :value="tem.id" :key="tem.id">
-                                <a @click="getDocuments(tem.type,tem.id)">{{ tem.type}} </a>
-                            </li>
                             <li>
                                 <a class="button is-success" @click="addTemplate()">
                                     <span class="icon is-small">
@@ -56,6 +67,13 @@
                                     <span>Edit</span>
                                 </a>
                             </li>
+                            <li v-for="tem in templates" :value="tem.id" :key="tem.id">
+
+                                <a @click="getContent(tem.type,tem.id)">{{ tem.type}} </a>
+                            
+                            </li>
+                            
+                           
 
                         </ul>
 
@@ -186,22 +204,23 @@
             return {
                 templates: [],
                 documents: [],
+                edges: [],
                 stemplate: "",
                 idtemplate: "",
                 isLoading: false,
-                activeTab: 0,
-                isCardModalActive:false,
-                model: {},
-                state: {},
                 valid: false,
-                schema: {                   
-                },
+                isCardModalActive:false,
+                creating:false,
+                activeTab: 0,                
+                model: {},
+                state: {},               
+                schema: {},
                 uiSchema: [],
             }
         },
         created() {
             this.getTemplates();
-        
+                    
         },
         methods: {
 
@@ -217,6 +236,8 @@
             },
             async addDocument() {
                 this.isCardModalActive=true;
+                this.model={};
+                this.creating=true;
 
             },
             async addTemplate() {
@@ -225,26 +246,68 @@
             },
             async editTemplate() {
                 this.isCardModalActive=true;
+                this.creating=false;
 
+            },
+            async refreshDocuments(){
+                this.getDocuments(this.stemplate, this.idtemplate);
+                this.getTemplates();
             },
             async save(docum){
 
             this.isLoading = true;
-                await apicore.updateTemplate(docum).then(response => {
-                    this.getDocuments(this.stemplate, this.idtemplate);
-                    // eslint-disable-next-line 
-                    var something = response;
-                })// eslint-disable-next-line 
-                    .catch(e => {
-                        this.isLoading = false;
-                        this.$toast.open({
-                            duration: 4000,
-                            message: "Something's not good." + e,
-                            position: 'is-top',
-                            type: 'is-danger'
-                        });
-                    });
 
+                    if(this.creating){
+
+                        await apicore.createDocument(docum).then(response => {
+
+                                        
+                                        // eslint-disable-next-line 
+                                        var something = response;
+                                        this.$toast.open({
+                                            message: 'Document created succesfully!',
+                                            type: 'is-success'
+                                        });
+                                        this.refreshDocuments();
+                                        this.isLoading = false;
+                                    })// eslint-disable-next-line 
+                                        .catch(e => {
+                                            this.isLoading = false;
+                                            this.$toast.open({
+                                                duration: 4000,
+                                                message: "Something's not good." + e,
+                                                position: 'is-top',
+                                                type: 'is-danger'
+                                            });
+                                        });
+
+                    }
+                    else
+                    {
+
+                    await apicore.updateDocument(docum).then(response => {
+
+                                        
+                                        // eslint-disable-next-line 
+                                        var something = response;
+                                        this.$toast.open({
+                                            message: 'Document updated succesfully!',
+                                            type: 'is-success'
+                                        });
+                                        this.refreshDocuments();
+                                        this.isLoading = false;
+
+                                    })// eslint-disable-next-line 
+                                        .catch(e => {
+                                            this.isLoading = false;
+                                            this.$toast.open({
+                                                duration: 4000,
+                                                message: "Something's not good." + e,
+                                                position: 'is-top',
+                                                type: 'is-danger'
+                                            });
+                                        });
+                    }
             },
             async updateDocument(docum) {
           
@@ -280,43 +343,38 @@
                         });                         
                     }
                 })
-
-
-
-        
-
             },
 
+            async getContent(stemplate, idtemplate){
+                
+
+                if(stemplate==="graph_edge") 
+                    this.getGraphEdges(stemplate,idtemplate);
+                else
+                    this.getDocuments(stemplate,idtemplate)
+
+
+            },
             async getDocuments(stemplate, idtemplate) {
 
                 this.stemplate = stemplate;
                 this.idtemplate = idtemplate;
                 this.isLoading = true;
-                await apicore.getDocuments(this.stemplate).then(response => {
+
+                await apicore.getDocuments(this.stemplate,"entities").then(response => {
                     this.documents = response.data
 
 
                     //LOADING SCHEMA
-                    apicore.getDocument(this.idtemplate).then(response => {
+                    apicore.getDocument(this.idtemplate).then(response => {                       
+                     
+                        this.schema = response.data.schema;           
 
-                        
-                     
-                        this.schema = response.data.schema;
-                     
                         var fields =Object.keys(response.data.schema.properties);                        
                         this.uiSchema=[];
-                        fields.forEach( field => {
-                    
+                        fields.forEach( field => {                    
                             this.uiSchema.push({component:"input",model:field,  fieldOptions: { on: ['input']  }})
-                        });                                    
-                    
-                        console.log(this.uiSchema);
-                        console.log(this.schema);
-                    
-
-
-
-
+                        });    
 
                         this.isLoading = false;
 
@@ -347,6 +405,58 @@
                     
                   
             },
+            async getGraphEdges(stemplate,idtemplate){
+
+                this.isLoading = true;
+                this.stemplate = stemplate;
+                this.idtemplate = idtemplate;
+
+                await apicore.getGraphEdges().then(response => {
+                    
+                    this.isLoading = false;
+                    this.documents = response.data
+
+
+                    //LOADING SCHEMA
+                    apicore.getDocument(this.idtemplate).then(response => {                       
+                     
+                        this.schema = response.data.schema;           
+
+                        var fields =Object.keys(response.data.schema.properties);                        
+                        this.uiSchema=[];
+                        fields.forEach( field => {                    
+                            this.uiSchema.push({component:"input",model:field,  fieldOptions: { on: ['input']  }})
+                        });    
+
+                        this.isLoading = false;
+
+                    })// eslint-disable-next-line 
+                        .catch(e => {
+                            this.isLoading = false;
+                            this.$toast.open({
+                                duration: 3000,
+                                message: "Something's not good, try again",
+                                position: 'is-top',
+                                type: 'is-danger'
+                            });
+                        });
+
+                    
+                    
+
+                })// eslint-disable-next-line 
+                    .catch(e => {
+                        this.isLoading = false;
+                        this.$toast.open({
+                            duration: 3000,
+                            message: "Something's not good, try again",
+                            position: 'is-top',
+                            type: 'is-danger'
+                        });
+                    });
+            }
+            
+            ,
             async getTemplates() {
                 this.isLoading = true;
                 await apicore.getTemplates().then(response => {

@@ -11,16 +11,19 @@ export default class govcoreapi {
     getTemplates() {
         return axios.get(this.apiURL + `find/${JSON.stringify({ bucket: 'templates' })}`);
     }
+    getGraphEdges() {
+        return axios.get(this.apiURL + `find/${JSON.stringify({ bucket: 'graph_edges' })}`);
+    }
     getDocument(param) {
         return axios.get(this.apiURL + `doc/${param}`);
     }
-    getDocuments(template) {
-        return axios.get(this.apiURL + `find/${JSON.stringify({ type: template })}`);
+    getDocuments(template,bucket) {
+        return axios.get(this.apiURL + `find/${JSON.stringify({ type: template,bucket:bucket })}`);
     }
-    updateTemplate(document){
+    updateDocument(document){
         return axios.put(this.apiURL + `doc`,document);
     }
-    createTemplate(document){
+    createDocument(document){
         return axios.post(this.apiURL + `doc`,document);
     }
     deleteTemplate(param){
