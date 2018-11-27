@@ -74,6 +74,7 @@ TODO: Review focus on GovCore/GovAuth
 - [x] CRUD Documents: Entities, Graph
 - [x] Data validation with Template Documents
 - [x] Store Events on data changes
+- [ ] Data validation with remote schema/api
 - [ ] Versioning
 - [ ] Access Control
 - [ ] Workflow Engine
@@ -95,9 +96,8 @@ TODO: Review focus on GovCore/GovAuth
 - [ ] Improve from experience
 - [ ] Get more funding 💰
 - [ ] Build a few more clients (Scale)
-- [ ] Build a few more database adapters (SQL, Salesforce)
 - [ ] Improve from experience
 - [ ] Get more funding 💰
 - [ ] Marketplace: Build services for other gov agencies
 - [ ] Offer training
-- [ ] Stat GovCore foundation 😊
+- [ ] Start GovCore foundation 😊
