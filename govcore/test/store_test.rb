@@ -94,7 +94,7 @@ def load_fixtures
   bucket = FDBBucket.new(FDBBucket.db_open, 'test')
 
   records.each do |record|
-    doc, errors = Store.create(bucket, record, validate: false)
+    doc, errors = Store.create(bucket, record)
     if errors
       raise "Couldn't create record #{record}: #{error}" if errors
       exit
