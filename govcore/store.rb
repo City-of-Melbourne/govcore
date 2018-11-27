@@ -14,9 +14,6 @@ class Store
       doc = doc.clone
       doc[:id] = random_id
 
-      # FIXME how should this be handled?
-      validate = false if doc[:bucket] == 'template'
-
       new_doc, errors = put(bucket, doc, validate)
 
       if new_doc
@@ -61,6 +58,9 @@ class Store
 
     def put(bucket, doc, validate)
       template = find(bucket, { bucket: "templates", type: doc[:type].to_s }).first
+
+      # FIXME how should this be handled?
+      validate = false if doc[:bucket] == 'template'
 
       if validate
         if !template
