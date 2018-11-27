@@ -246,7 +246,7 @@
     },
     {
         "bucket": "templates",
-        "type": "business_person",
+        "type": "business_person_request",
         "schema": {
             "properties": {
                 "id": {
@@ -258,7 +258,7 @@
                 },
                 "type": {
                     "type": "string",
-                    "pattern": "business_person"
+                    "pattern": "business_person_request"
                 },
                 "business": {
                     "type": "string"
