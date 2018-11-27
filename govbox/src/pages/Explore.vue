@@ -163,8 +163,8 @@
                         <vue-form-json-schema :model="model" :schema="schema" :ui-schema="uiSchema" v-on:change="onChange"
                             v-on:state-change="onChangeState" v-on:validated="onValidated">
                         </vue-form-json-schema>
-
-                        <h4>Document</h4>
+                        <br>
+                        <b>Document</b>
                         <pretty-print :value="model"></pretty-print>
                       
 
@@ -174,7 +174,7 @@
                                     <span class="icon is-small ">
                                         <i class="fas fa-edit"></i>
                                     </span>
-                                    <label>Save</label>
+                                    <span>Save</span>
                                 </a>
                             </div>
                             
@@ -373,7 +373,14 @@
                         var fields =Object.keys(response.data.schema.properties);                        
                         this.uiSchema=[];
                         fields.forEach( field => {                    
-                            this.uiSchema.push({component:"input",model:field,  fieldOptions: { on: ['input']  }})
+                            this.uiSchema.push({
+                                component:"b-input",
+                                model:field,  
+                                fieldOptions: { 
+                                    on: ['input'] ,
+                                    attrs: {
+                                        placeholder: "Please enter->"+field}, 
+                                    }})
                         });    
 
                         this.isLoading = false;

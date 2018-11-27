@@ -29,6 +29,11 @@ export default new Router({
       path: "/explore",
       name: "explore",
       component: () => import("@/pages/Explore.vue")
+    },
+    {
+      path: "/test",
+      name: "test",
+      component: () => import("@/pages/Test.vue")
     }
   ]
 });

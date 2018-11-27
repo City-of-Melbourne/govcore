@@ -60,23 +60,22 @@ export default {
         properties: {
           firstName: {
             type: 'string',
-          },
+          }
+          ,
           secondName: {
             type: 'string',
-          },
+          }
         },
       },
       uiSchema: [{
-        component: 'input',
+        component: 'b-input',
         model: 'firstName',
-        
+        fieldOptions: { on: ['input']  }
       },
       {
-        component: 'input',
+        component: 'b-input',
         model: 'secondName',
-        fieldOptions: {          
-          on: ['input']          
-        },
+        fieldOptions: { on: ['input']  }
       }
       
       

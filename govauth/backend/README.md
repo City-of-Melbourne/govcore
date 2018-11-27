@@ -10,14 +10,17 @@ To build this API the following technologies has been used:
 - Nodemon
 
 
-
 ## Project setup
+
+- Install Npm  (depends on system so google it )
 
 - Install project dependencies
 __npm install__
 
-- Execute 
+- Execute Locally
 __npm start__
+
+
 
 ## Project Deployment to Heroku
 

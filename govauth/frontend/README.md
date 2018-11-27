@@ -2,6 +2,7 @@
 
 To build this frontend the following technologies has been used:
 
+- Npm
 - Vue
 - Sass
 - Bulma
@@ -9,6 +10,8 @@ To build this frontend the following technologies has been used:
 - Vue/Cli(Quick Prototyping)
 
 ## Project setup
+
+- Install Npm  (depends on system so google it )
 
 - Install Vue/Cli
 __npm install -g @vue/cli-service-global__
@@ -19,8 +22,12 @@ __npm install -D sass-loader node-sass__
 - Install project dependencies
 __npm install__
 
-- Execute 
+- Execute Locally
 __npm run serve__
+
+- To build the webpack(to be publushed on any web server)
+
+__npm build__
 
 
 ## Project Deployment to Heroku
