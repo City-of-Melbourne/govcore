@@ -252,15 +252,13 @@ export default class coreApiGraphql {
             });    
 
           return data.BusinessPersonRequests;
-    }
-    
+    }   
 
-    createPersonToBusinessRequest(obj) {        
-
+    createPersonToBusinessRequest(obj) {
 
         var query = `mutation{
-            createPersonToBusinessRequest(input: { type: "person_business_request", business: "${obj.businessId}", person: "${obj.personId}", role: "${obj.roleId}", date: "${(new Date()).toISOString()}" }){
-                 id   date
+            createPersonBusinessRequest(input: { type: "person_business_request", business: "${obj.businessId}", person: "${obj.personId}", role: "${obj.roleId}", date: "${(new Date()).toISOString()}" }){
+                 id 
             }
         }`;
 

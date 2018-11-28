@@ -47,7 +47,7 @@ const typeDefs = gql`
 
     createBusinessService(input:BusinessServiceEdgeInput): BusinessService    
     createBusinessPerson(input:BusinessPersonEdgeInput): BusinessPerson   
-    createPersonToBusinessRequest(input:BusinessPersonEdgeInput): BusinessPerson   
+    createPersonBusinessRequest(input:PersonBusinessRequestEdgeInput): BusinessPersonRequest   
 
 
     
@@ -159,6 +159,18 @@ input BusinessPersonEdgeInput {
     role: String 
     date:String               
 }
+
+input PersonBusinessRequestEdgeInput { 
+    id: ID
+    type:String
+    business: String
+    person: String 
+    role: String 
+    date:String          
+}
+
+
+
 
 `;
 module.exports = typeDefs;

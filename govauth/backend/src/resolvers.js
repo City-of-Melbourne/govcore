@@ -48,7 +48,7 @@ module.exports = {
     },
     BusinessPersonRequests: (_, { type, business, person }, { dataSources }) => {
 
-      return dataSources.GovCoreApi.findDocument({ bucket: "graph_edges", type: type, a: business, b: person }).then(edges => {
+      return dataSources.GovCoreApi.findDocument({ bucket: "graph_edges", type: type, business: business, person: person }).then(edges => {
         return edges.map(function (edge) { return Object.assign(edge, { business: dataSources.GovCoreApi.getDocument({ id: edge.business }), person: dataSources.GovCoreApi.getDocument({ id: edge.person }), role: dataSources.GovCoreApi.getDocument({ id: edge.role }) }); });
       });
 
@@ -76,7 +76,8 @@ module.exports = {
     deleteGraphEdge: (_, { id }, { dataSources }) => dataSources.GovCoreApi.deleteDocument({ id }),
     
     createBusinessService: (_, { input }, { dataSources }) => dataSources.GovCoreApi.createDocument({  input, bucket: 'graph_edges'}),
-    createBusinessPerson: (_, { input }, { dataSources }) => dataSources.GovCoreApi.createDocument({  input, bucket: 'graph_edges'})
+    createBusinessPerson: (_, { input }, { dataSources }) => dataSources.GovCoreApi.createDocument({  input, bucket: 'graph_edges'}),
+    createPersonBusinessRequest: (_, { input }, { dataSources }) => dataSources.GovCoreApi.createDocument({  input, bucket: 'graph_edges'})
 
     
 
