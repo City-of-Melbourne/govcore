@@ -5,7 +5,7 @@ export default class coreApiGraphql {
       }
       async postData(query) {
         return axios({
-             // url: 'https://govauthapi.herokuapp.com/graphql',
+             //url: 'https://govauthapi.herokuapp.com/graphql',
              // TODO: Grab from env
              url: 'http://localhost:8002',
              method: 'post',
@@ -19,25 +19,13 @@ export default class coreApiGraphql {
     }
     createBusiness(model) {      
         var query=` mutation{
-            createBusiness(input:{id:"${model.id}",abn:"${model.abn}",name:"${model.name}",date:"${(new Date()).toISOString()}"}){
+            createBusiness(input:{abn:"${model.abn}",name:"${model.name}",date:"${(new Date()).toISOString()}",type:"business"}){
                 id                                            
                 abn
                 name
             }
         }`;   
-        return this.postData(query).then((business) => {
-            this.createPerson(model).then((person)=>{                     
-                    this.createGraphEdge({  type:"business_person",
-                                            a:business.createBusiness.id,
-                                            b:person.createPerson.id,
-                                            date: (new Date()).toISOString()
-                                            })
-                    this.createGraphEdge({  type:"person_idp",
-                                            a:person.createPerson.id,
-                                            b:1,
-                                            date: (new Date()).toISOString()})
-            })
-        }); 
+        return this.postData(query); 
     }
     updateBusiness(model) {
         
@@ -57,15 +45,7 @@ export default class coreApiGraphql {
                   }
               }`;  
         //TODO: We need  to use real Idp values , for now using a predefined '1'
-         return this.postData(query).then((person)=>{
-
-                this.createGraphEdge({  type:"person_idp",
-                a:person.createPerson.id,
-                b:1,
-                date: (new Date()).toISOString()})
-                return person;
-
-         });
+         return this.postData(query);
            
     }
 

@@ -60,17 +60,16 @@ module.exports = {
   },
   Mutation: {
 
-    createPerson: (_, { input }, { dataSources }) => dataSources.GovCoreApi.createDocument({ Input: input, bucket: 'entities', type: 'person' }),
-    updatePerson: (_, { input }, { dataSources }) => dataSources.GovCoreApi.updateDocument({ Input: input, bucket: 'entities', type: 'person' }),
+    createPerson: (_, { input }, { dataSources }) => dataSources.GovCoreApi.createDocument({ input, bucket: 'entities'}),
+    updatePerson: (_, { input }, { dataSources }) => dataSources.GovCoreApi.updateDocument({ input, bucket: 'entities' }),
 
-    createService: (_, { input }, { dataSources }) => dataSources.GovCoreApi.createDocument({ Input: input, bucket: 'entities', type: 'service' }),
-    updateService: (_, { input }, { dataSources }) => dataSources.GovCoreApi.updateDocument({ Input: input, bucket: 'entities', type: 'service' }),
+    createService: (_, { input }, { dataSources }) => dataSources.GovCoreApi.createDocument({ input, bucket: 'entities'}),
+    updateService: (_, { input }, { dataSources }) => dataSources.GovCoreApi.updateDocument({  input, bucket: 'entities'}),
+    createBusiness: (_, { input }, { dataSources }) => dataSources.GovCoreApi.createDocument({  input, bucket: 'entities' }),
+    updateBusiness: (_, { input }, { dataSources }) => dataSources.GovCoreApi.updateDocument({  input, bucket: 'entities'}),
 
-    createBusiness: (_, { input }, { dataSources }) => dataSources.GovCoreApi.createDocument({ Input: input, bucket: 'entities', type: 'business' }),
-    updateBusiness: (_, { input }, { dataSources }) => dataSources.GovCoreApi.updateDocument({ Input: input, bucket: 'entities', type: 'business' }),
-
-    createIdp: (_, { input }, { dataSources }) => dataSources.GovCoreApi.createDocument({ Input: input, bucket: 'entities', type: 'idp' }),
-    updateIdp: (_, { input }, { dataSources }) => dataSources.GovCoreApi.updateDocument({ Input: input, bucket: 'entities', type: 'idp' }),
+    createIdp: (_, { input }, { dataSources }) => dataSources.GovCoreApi.createDocument({  input, bucket: 'entities' }),
+    updateIdp: (_, { input }, { dataSources }) => dataSources.GovCoreApi.updateDocument({  input, bucket: 'entities' }),
 
     createGraphEdge: (_, { input }, { dataSources }) => dataSources.GovCoreApi.createDocument({  input, bucket: 'graph_edges'}), 
     deleteGraphEdge: (_, { id }, { dataSources }) => dataSources.GovCoreApi.deleteDocument({ id }),

@@ -131,6 +131,7 @@ input BusinessInput {
         name: String   
         abn: String  
         date: String
+        type: String
     }
 input IdpInput { 
         id: ID     

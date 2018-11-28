@@ -196,7 +196,7 @@
                 setTimeout(() => {
                     this.isLoading = false;
                     //router.push({ name: "dash" });
-                    opener.location.href = "/dash";
+                    opener.location.href = "/login";
                     window.close();
 
                 }, 1 * 1000)
