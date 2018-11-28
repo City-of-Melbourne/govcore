@@ -5,8 +5,8 @@ export default class coreApiGraphql {
       }
       async postData(query) {
         return axios({
-            // url: 'https://govauthapi.herokuapp.com/graphql',
-             url: 'http://localhost:5000/',
+             url: 'https://govauthapi.herokuapp.com/graphql',
+             //url: 'http://localhost:5000/',
              method: 'post',
              data: { query }
          }
