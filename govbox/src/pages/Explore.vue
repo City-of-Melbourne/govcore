@@ -156,15 +156,21 @@
         <div v-if="activeTab === 1"></div>
 
         <b-loading :is-full-page="true" :active.sync="isLoading" :can-cancel="true"></b-loading>
-        <b-modal :active.sync="isCardModalActive" :width="640" scroll="keep">
+        <b-modal :active.sync="isCardModalActive" :width="640" scroll="keep" >
             <div class="card">
                
                 <div class="card-content">
+
+                        <h1 class="title" v-if="creating"> Creating </h1>
+                        <h1 class="title" v-if="!creating"> Editing </h1>
+                        <h2 class="subtitle">{{this.stemplate}} </h2>
+
                         <vue-form-json-schema :model="model" :schema="schema" :ui-schema="uiSchema" v-on:change="onChange"
                             v-on:state-change="onChangeState" v-on:validated="onValidated">
                         </vue-form-json-schema>
                         <br>
-                        <b>Document</b>
+                        
+                        <h2 class="subtitle">Document</h2>
                         <pretty-print :value="model"></pretty-print>
                       
 
@@ -220,6 +226,10 @@
         },
         created() {
             this.getTemplates();
+            //LOADING THE FIRST TEMPLATE AS DEFAULT DURING THE INITIAL PHASE
+            this.stemplate = this.templates[0].type;
+            this.idtemplate = this.templates[0].id;
+            this.getDocuments(this.stemplate, this.idtemplate);
                     
         },
         methods: {
@@ -250,8 +260,9 @@
 
             },
             async refreshDocuments(){
-                this.getDocuments(this.stemplate, this.idtemplate);
-                this.getTemplates();
+              
+               await this.getDocuments(this.stemplate, this.idtemplate);
+               await this.getTemplates();
             },
             async save(docum){
 
@@ -263,12 +274,13 @@
 
                                         
                                         // eslint-disable-next-line 
-                                        var something = response;
+                                        this.model=response.data;
                                         this.$toast.open({
                                             message: 'Document created succesfully!',
                                             type: 'is-success'
                                         });
                                         this.refreshDocuments();
+
                                         this.isLoading = false;
                                     })// eslint-disable-next-line 
                                         .catch(e => {
@@ -284,18 +296,19 @@
                     }
                     else
                     {
-
                     await apicore.updateDocument(docum).then(response => {
 
                                         
                                         // eslint-disable-next-line 
-                                        var something = response;
+                                        this.model=response.data;
                                         this.$toast.open({
                                             message: 'Document updated succesfully!',
                                             type: 'is-success'
                                         });
-                                        this.refreshDocuments();
                                         this.isLoading = false;
+
+                                        this.refreshDocuments();
+                                        
 
                                     })// eslint-disable-next-line 
                                         .catch(e => {
@@ -327,10 +340,10 @@
                     onConfirm: () => {
                         this.isLoading = true;
                          apicore.deleteTemplate(docum).then(response => {
-                            this.getDocuments(this.stemplate, this.idtemplate);
                             // eslint-disable-next-line 
                             var something = response;
                             this.isLoading = false;
+                            this.getDocuments(this.stemplate, this.idtemplate);     
                         })// eslint-disable-next-line 
                         .catch(e => {
                         this.isLoading = false;
@@ -340,17 +353,13 @@
                                 position: 'is-top',
                                 type: 'is-danger'
                             });
-                        });                         
+                        });   
+                                     
                     }
                 })
             },
-
-            async getContent(stemplate, idtemplate){
+            async getContent(stemplate, idtemplate){  
                 
-
-                if(stemplate==="graph_edge") 
-                    this.getGraphEdges(stemplate,idtemplate);
-                else
                     this.getDocuments(stemplate,idtemplate)
 
 
@@ -360,16 +369,15 @@
                 this.stemplate = stemplate;
                 this.idtemplate = idtemplate;
                 this.isLoading = true;
-
-                await apicore.getDocuments(this.stemplate,"entities").then(response => {
-                    this.documents = response.data
-
+                
+                await apicore.getDocuments(this.stemplate).then(response => {
+                    this.documents = response.data;
 
                     //LOADING SCHEMA
                     apicore.getDocument(this.idtemplate).then(response => {                       
                      
-                        this.schema = response.data.schema;           
-
+                        this.schema = response.data.schema;          
+                        
                         var fields =Object.keys(response.data.schema.properties);                        
                         this.uiSchema=[];
                         fields.forEach( field => {                    
@@ -379,10 +387,10 @@
                                 fieldOptions: { 
                                     on: ['input'] ,
                                     attrs: {
-                                        placeholder: "Please enter->"+field}, 
+                                        placeholder: "Please enter -> "+field}, 
                                     }})
                         });    
-
+                        
                         this.isLoading = false;
 
                     })// eslint-disable-next-line 
@@ -395,10 +403,6 @@
                                 type: 'is-danger'
                             });
                         });
-
-
-
-
                 })// eslint-disable-next-line 
                     .catch(e => {
                         this.isLoading = false;
@@ -469,10 +473,7 @@
                 await apicore.getTemplates().then(response => {
                     this.templates = response.data;
                     this.isLoading = false;
-                    this.stemplate = this.templates[0].type;
-
-                    this.idtemplate = this.templates[0].id;
-                    this.getDocuments(this.stemplate, this.idtemplate);
+                    
                 })// eslint-disable-next-line 
                     .catch(e => {
                         this.isLoading = false;

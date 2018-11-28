@@ -146,7 +146,7 @@
             </b-tab-item>
 
         </b-tabs>
-
+        <b-loading :is-full-page="true" :active.sync="isLoading" :can-cancel="true"></b-loading>
     </div>
 </template>
 
@@ -159,11 +159,13 @@
 
     export default {
         async created() {
+            this.isLoading = true;
             this.BUSINESS =JSON.parse(localStorage.getItem('objsession')).business,
             this.usersData = await apicore.getBusinessPersons({ business: this.BUSINESS });
             this.usersReqData = await apicore.getBusinessPersonRequests({ business: this.BUSINESS });            
             this.roles = await apicore.getRoles();
             this.persons = await apicore.getPersons();
+            this.isLoading = false;
         },
         data() {
             return {
@@ -210,7 +212,8 @@
                     businessId: this.BUSINESS.id,
                     roleId: this.model.role,
                     personId: this.selected.id
-                }                 
+                }        
+                this.isLoading = true;         
                  // eslint-disable-next-line 
                 apicore.linkPersonToBusiness(relationship).then((result) => {
                     this.$toast.open({
@@ -235,6 +238,7 @@
                             type: 'is-danger'
                         });
                     });
+                    this.isLoading = false;
             },
             deleteUser(graphEdgeId) {
                 // eslint-disable-next-line 

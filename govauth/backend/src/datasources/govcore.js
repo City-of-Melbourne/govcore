@@ -38,7 +38,8 @@ class GovCoreApi extends RESTDataSource {
   } 
    findDocument( input ) {         
     
-    return this.get(`find/${JSON.stringify(input)}`).catch(err => { return null; });    
+    //return this.get(`find/${JSON.stringify(input)}`).catch(err => { return null; });    
+    return this.get(`find/${JSON.stringify(input)}`);    
 
   } 
 

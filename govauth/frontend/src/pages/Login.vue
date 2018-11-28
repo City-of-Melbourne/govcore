@@ -11,12 +11,49 @@
                 </div>
                 <div class="columns  is-desktop" v-if="use === 'govauth'">
                     <div class="column">
-                        <b-field label="Select a Profile">
-                            <b-select placeholder="Select a Profile" v-model="profile" icon="account">
-                                <option value="business">Business</option>
-                                <option value="user">User</option>
+                      
+
+
+                        <div class="field is-grouped">
+
+                        <div class="control">
+                        <b-field label="Profile">
+                                <b-select placeholder="Select a Profile" v-model="profile" icon="account">
+                                    <option value="business">Business</option>
+                                    <option value="user">User</option>
+                                </b-select>
+                            </b-field>
+                        </div>
+
+
+                        <div class="control" v-if="profile=='business'">
+                            <b-field label="Business">
+                            <b-select v-model="model.business" >
+                                <option
+                                v-for="option in businesses"
+                                :value="option.id"
+                                :key="option.id">
+                                {{ option.name }}
+                                </option>
                             </b-select>
-                        </b-field>
+                            </b-field>
+                        </div>
+                        <div class="control"  v-if="profile=='user'">
+                            <b-field label="User">
+                           <b-select v-model="model.person" >
+                                <option
+                                v-for="option in persons"
+                                :value="option.id"
+                                :key="option.id">
+                                {{ option.name }}
+                                </option>
+                            </b-select>
+                            </b-field>
+                        </div>
+                    </div>  
+
+
+
                     </div>
                 </div>
                 <div class="columns  is-desktop">
@@ -78,24 +115,33 @@
 </template>
 
 <script>
+    import coreApiGraphql from '../services/coreApiGraphql';
+    const apicore = new coreApiGraphql();
 
     export default {
-        created() {
+       async created() {
 
             if (opener != null) {
                 this.use = "authenticator";
             }
             else {
-                this.use = "govauth";
+                  this.isLoading = true;
+                  this.use = "govauth";
+                  this.businesses = await apicore.getBusinesses();
+                  this.persons = await apicore.getPersons();                 
+                  this.model.business=this.businesses[0].id;
+                  this.model.person=this.persons[0].id;
+                  this.isLoading = false;
             }
-
         },
         data() {
             return {
                 isLoading: false,
                 use: "",
-                profile: "business"
-
+                profile: "business",
+                persons:[],
+                businesses:[],
+                model:{person:"",business:""}
             }
         },
         methods: {
@@ -109,16 +155,18 @@
                         opener.location.href = "/handsbills/success";
                     } else {
 
+
+
                         let objsession = {
                             person: {
-                                id: "4950e03f1632529af32baa7f727325bd",
+                                id: this.model.person,
                                 name: "User A",
                                 email: "usera@email.com",
                                 mobile: "665465",
                                 type: "person"                                
                             },
                             business: {                                
-                               id: "c014b39d6bd7269a707e4bcad19508ec",
+                                id: this.model.business,
                                 name: "Company A",
                                 abn: "54654987",
                                 bucket: "entities",

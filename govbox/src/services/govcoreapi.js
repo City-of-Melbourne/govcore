@@ -17,8 +17,8 @@ export default class govcoreapi {
     getDocument(param) {
         return axios.get(this.apiURL + `doc/${param}`);
     }
-    getDocuments(template,bucket) {
-        return axios.get(this.apiURL + `find/${JSON.stringify({ type: template,bucket:bucket })}`);
+    getDocuments(template) {
+        return axios.get(this.apiURL + `find/${JSON.stringify({ type: template})}`);
     }
     updateDocument(document){
         return axios.put(this.apiURL + `doc`,document);

@@ -71,6 +71,7 @@
                 </article>
             </template>
         </b-table>
+        <b-loading :is-full-page="true" :active.sync="isLoading" :can-cancel="true"></b-loading>
     </div>
 </template>
 <script>
@@ -81,9 +82,11 @@
     export default {
 
         async created() {
+            this.isLoading = true;
             this.BUSINESS=JSON.parse(localStorage.getItem('objsession')).business;
             this.serviceData = await apicore.getBusinessServices({ business: this.BUSINESS });
             this.services = await apicore.getServices();
+            this.isLoading = false;
         },
         data() {
             return {
@@ -91,6 +94,7 @@
                 services: [],
                 serviceData,
                 defaultOpenedDetails: [0],
+                isLoading: false,
                 name: '',
                 selected: null
             }
@@ -122,12 +126,13 @@
                     });
                     return
                 }
-
+                
                 // create a relationship between business and service
                 let relationship = {
                     businessId: this.BUSINESS.id,
                     serviceId: this.selected.id
                 }
+                this.isLoading = true;
                 // eslint-disable-next-line 
                 apicore.linkBusinessAndService(relationship).then((result) => {
                     this.$toast.open({
@@ -150,6 +155,7 @@
                             type: 'is-danger'
                         });
                     });
+                    this.isLoading = false;
             },
             leaveService(graphEdgeId) {
                 // eslint-disable-next-line 

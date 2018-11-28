@@ -5,7 +5,8 @@ export default class coreApiGraphql {
       }
       async postData(query) {
         return axios({
-             url: 'https://govauthapi.herokuapp.com/graphql',
+            // url: 'https://govauthapi.herokuapp.com/graphql',
+             url: 'http://localhost:5000/',
              method: 'post',
              data: { query }
          }
@@ -156,21 +157,23 @@ export default class coreApiGraphql {
           return data.BusinessServices;
     }
 
-    linkBusinessAndService(obj) {
-        return this.createGraphEdge({
-            type: "business_service",
-            a: obj.businessId,
-            b: obj.serviceId,
-            date: (new Date()).toISOString()
-        });
+    linkBusinessAndService(obj) {        
+
+        var query = `mutation{
+            createBusinessService(input: { type: "business_service", business: "${obj.businessId}", service: "${obj.serviceId}", date: "${(new Date()).toISOString()}" }){
+                 id 
+            }
+        }`;
+
+        return this.postData(query);
     }
   
 
     linkPersonToBusiness(obj) {  
 
         var query = `mutation{
-            createGraphEdge(input: { type: "business_person", a: "${obj.businessId}", b: "${obj.personId}", role: "${obj.roleId}", date: "${(new Date()).toISOString()}" }){
-                type id a b date
+            createBusinessPerson(input: { type: "business_person", business: "${obj.businessId}", person: "${obj.personId}", role: "${obj.roleId}", date: "${(new Date()).toISOString()}" }){
+                 id date
             }
         }`;
         return this.postData(query);
@@ -256,8 +259,8 @@ export default class coreApiGraphql {
 
 
         var query = `mutation{
-            createGraphEdge(input: { type: "person_business_request", a: "${obj.businessId}", b: "${obj.personId}", role: "${obj.roleId}", date: "${(new Date()).toISOString()}" }){
-                type id a b date
+            createPersonToBusinessRequest(input: { type: "person_business_request", business: "${obj.businessId}", person: "${obj.personId}", role: "${obj.roleId}", date: "${(new Date()).toISOString()}" }){
+                 id   date
             }
         }`;
 

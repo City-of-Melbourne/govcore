@@ -42,8 +42,16 @@ const typeDefs = gql`
     createIdp(input:IdpInput): Idp
     updateIdp(input:IdpInput): Idp
 
-    createGraphEdge(input:GraphEdgeInput): GraphEdge
+    createGraphEdge(input:GraphEdgeInput): GraphEdge    
     deleteGraphEdge(id: ID!): GraphEdge
+
+    createBusinessService(input:BusinessServiceEdgeInput): BusinessService    
+    createBusinessPerson(input:BusinessPersonEdgeInput): BusinessPerson   
+    createPersonToBusinessRequest(input:BusinessPersonEdgeInput): BusinessPerson   
+
+
+    
+
   } 
   
   type BusinessService {
@@ -134,9 +142,23 @@ input GraphEdgeInput {
         a: String
         b: String 
         role: String 
-        date:String 
-              
+        date:String               
     }
+input BusinessServiceEdgeInput { 
+    id: ID
+    type: String
+    business: String
+    service: String         
+    date:String             
+}
+input BusinessPersonEdgeInput { 
+    id: ID  
+    type: String
+    business: String
+    person: String 
+    role: String 
+    date:String               
+}
 
 `;
 module.exports = typeDefs;
