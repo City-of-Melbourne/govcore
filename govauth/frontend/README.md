@@ -13,12 +13,6 @@ To build this frontend the following technologies has been used:
 
 - Install Npm  (depends on system so google it )
 
-- Install Vue/Cli
-__npm install -g @vue/cli-service-global__
-
-- Install Sass preprocessor
-__npm install -D sass-loader node-sass__
-
 - Install project dependencies
 __npm install__
 
@@ -27,7 +21,7 @@ __npm run serve__
 
 - To build the webpack(to be publushed on any web server)
 
-__npm build__
+__npm run build__
 
 
 ## Project Deployment to Heroku
