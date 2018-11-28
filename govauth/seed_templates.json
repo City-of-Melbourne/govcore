@@ -177,25 +177,100 @@
     },
     {
         "bucket": "templates",
-        "type": "graph_edge",
+        "type": "business_service",
         "schema": {
             "properties": {
                 "id": {
                     "type": "string"
                 },
+                "bucket": {
+                    "type": "string",
+                    "pattern": "graph_edges"
+                },
                 "type": {
                     "type": "string",
-                    "pattern": "graph_edge"
+                    "pattern": "business_service"
+                },
+                "business": {
+                    "type": "string"
+                },
+                "service": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "date"
+                }
+            },
+            "required": [
+                "id",
+                "bucket",
+                "type"
+            ]
+        }
+    },
+    {
+        "bucket": "templates",
+        "type": "business_person",
+        "schema": {
+            "properties": {
+                "id": {
+                    "type": "string"
                 },
                 "bucket": {
                     "type": "string",
                     "pattern": "graph_edges"
                 },
-                "a": {
+                "type": {
+                    "type": "string",
+                    "pattern": "business_person"
+                },
+                "business": {
                     "type": "string"
                 },
-                "b": {
+                "person": {
                     "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "date"
+                }
+            },
+            "required": [
+                "id",
+                "bucket",
+                "type"
+            ]
+        }
+    },
+    {
+        "bucket": "templates",
+        "type": "business_person_request",
+        "schema": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "bucket": {
+                    "type": "string",
+                    "pattern": "graph_edges"
+                },
+                "type": {
+                    "type": "string",
+                    "pattern": "business_person_request"
+                },
+                "business": {
+                    "type": "string"
+                },
+                "person": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "date"
                 }
             },
             "required": [
