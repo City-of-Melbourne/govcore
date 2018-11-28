@@ -29,7 +29,7 @@ RUN cd /govcore/govauth/frontend \
     && npm install
     
 # Install GovAuth Frontend dependencies
-RUN cd /govcore/govbox
+RUN cd /govcore/govbox \
     && npm install
 
 #GovCore API
