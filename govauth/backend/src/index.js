@@ -17,7 +17,7 @@ const server = new ApolloServer({
   playground: true,
 });
 
-const p = process.env.PORT || 5000
+const p = process.env.GOVAUTH_BACKEND_PORT || 8002
 // Start our server if we're not in a test env.
   server
     .listen({ port: p })
