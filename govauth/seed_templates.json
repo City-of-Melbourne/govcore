@@ -189,7 +189,7 @@
                 },
                 "type": {
                     "type": "string",
-                    "pattern": "business_person"
+                    "pattern": "business_service"
                 },
                 "business": {
                     "type": "string"
