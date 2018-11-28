@@ -1,8 +1,8 @@
 ![Govcore](docs/assets/1-govcore-intro.png)
 
-GovCore is information management system to run councils.
+GovCore is an ambitious project which aims to develop an information management system which can be used to run council: by council, for council
 
-It tries to address these problems:
+The drive behind the platform is to address the problems in existing solutions currently available to government:
 
 - Satisfying audit
 - Supporting flexibility and continuous improvement
@@ -14,64 +14,39 @@ It tries to address these problems:
 - Adopting international and industry standards
 - Satisfying records management obligations
 
+Most, if not all, solutions offered to council are not tailored for the government sector; they are off the shelf offerings with a few tweaks to “meet” government requirements. Or they are bespoke builds with bespoke prices – out of reach for most local councils. GovCore is an open source platform, utilising the contributions of a network of developers, with the aim of being accessible to all.
+
 Read the [GovCore Concept](docs/govcore.md) for a more detailed description.
 
 ## About the Project
 
-This project is the first attempt to realise Simons's vision of GovCore.
+This project is the first attempt to realise Simons' broader vision of GovCore.
 
-It was a six-week experiment ran at the City Of Melbourne by [CodeForAustralia](https://codeforaustralia.org/) fellows Jonathan Castillo Bello and Victor Nava under the guidance and support of Simon Weller, Daniella Mazzone and Colin Fairweather.
+It was a six-week experiment run at the City Of Melbourne by [CodeForAustralia](https://codeforaustralia.org/) fellows: Jonathan Castillo Bello and Victor Nava under the guidance and support of Simon Weller, Daniella Mazzone and Colin Fairweather.
 
-The main goal of the project was to demonstrate that:
+The main goals of the project were to demonstrate that:
 
-1. A system following GovCore principles could be built
-2. Such system is a good option for building of apps for council
+1. A system following the GovCore principles can be built
+2. Such a system is a viable option for building apps for councils
 
 To achieve that, we built these prototypes:
 
 - [GovCore](govcore/): JSON Document/Template store accesible via HTTP API
-- [GovAuth](govauth/): An authorization system for CoM clients to login into CoM services.
+- [GovAuth](govauth/): An authorization system for CoM clients to login into CoM services
 - [GovBox](govbox/): Web client to manage/explore GovCore
 
-[TODO: diagram of what we built and how it's connected]
+A six week sprint is not long enough (obviously!) to be able to fully develop the GovCore vision, however in that time we have managed to demonstrate on a small scale, that it is achievable. The prototypes are a starting point for the GovCore platform to be continued to be developed. By starting out on this small scale, we have proven that the GovCore platform can be scaled up in line with the wider vision.
 
-TODO: that was the result?
+Some notes about the process and rationale of the implementations can be found in the [docs directory](docs/).
 
-## TODO: Spec (Blueprint)
+[TODO insert system diagram]
 
-TODO: put on a separate document?
-
-Define distill the GovCore Way...
-
-The [GovCore Concept](docs/govcore.md) sets the Vision/Goals. We need to go down one level and specify the concept in more detail. We need to include enough information to able to implement GovCore in any platform/database/language.
-
-GovCore stores its data in key/value pair documents in human readable format.
-
-GovCore is composed of layers:
-
-- Rest API
-- Access Control
-- Workflow Management/Runner
-- Data Store Logic
-- Data Store Adapters (Document, Graph and Log)
-
-## Implementation Notes
-
-TODO: Review focus on GovCore/GovAuth
-
-- [GovAuth Graphql Templates](docs/govauth-graphql-templates.md)
-- [GovAuth Model](docs/govauth-model.md)
-- [GraphQL](docs/graphQL.md)
-- [Graphs](docs/graphs.md)
-- [Model Representation](docs/model-representation.md)
-- [Template Representation](docs/template-representation.md)
-- [Template Validation](docs/template-validation.md)
-- [Basic Operations](docs/basic-operations.md)
+[TODO insert govauth and govbox screenshots]
 
 ## Features List
 
 - [x] Basic Rest API
-- [x] CRUD Documents: Entities, Graph
+- [x] CRUD Documents: Entities, Graph, Events
 - [x] Data validation with Template Documents
 - [x] Store Events on data changes
 - [ ] Data validation with remote schema/api
@@ -99,5 +74,3 @@ TODO: Review focus on GovCore/GovAuth
 - [ ] Improve from experience
 - [ ] Get more funding 💰
 - [ ] Marketplace: Build services for other gov agencies
-- [ ] Offer training
-- [ ] Start GovCore foundation 😊
