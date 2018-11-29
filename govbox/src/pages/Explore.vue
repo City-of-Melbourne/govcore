@@ -5,8 +5,8 @@
             <h1 class="title">My Workspace</h1>
 
             <b-tabs type="is-toggle" expanded v-model="activeTab">
-                <b-tab-item label="Documents" icon="google-photos" @click="selectTab('documents')"></b-tab-item>
-                <b-tab-item label="Graph" icon="library-music" @click="selectTab('graph')"></b-tab-item>
+                <b-tab-item label="Documents"  @click="selectTab('documents')"></b-tab-item>
+                <b-tab-item label="Graph"  @click="selectTab('graph')"></b-tab-item>
 
             </b-tabs>
         </section>
@@ -21,8 +21,7 @@
                         <a class="button is-info" @click="addDocument()">
                             <span class="icon is-small">
                                 <i class="fas fa-plus"></i>
-                            </span>
-                            <span>Document</span>
+                            </span>                            
                         </a>
                         </div>
                         <div class="control">
@@ -39,7 +38,6 @@
                 
                 <div class="column is-10">                     
                     <h1 class="title">{{stemplate}}</h1>
-                    
                 </div>
 
 
@@ -49,24 +47,14 @@
 
                     <aside class="menu">
                         <ul class="menu-list">
-                            <h1 class="subtitle">Templates</h1>
+                  
 
-                            <li>
-                                <a class="button is-success" @click="addTemplate()">
-                                    <span class="icon is-small">
-                                        <i class="fas fa-plus"></i>
-                                    </span>
-                                    <span>Add</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="button is-primary" @click="editTemplate()">
-                                    <span class="icon is-small">
-                                        <i class="fas fa-edit"></i>
-                                    </span>
-                                    <span>Edit</span>
-                                </a>
-                            </li>
+                            <b-select placeholder="Bucket"  v-model="bucket">
+                                <option value="entities">Entities</option>   
+                                <option value="templates">Templates</option>
+                            </b-select>
+                 
+                       
                             <li v-for="tem in templates" :value="tem.id" :key="tem.id">
 
                                 <a @click="getContent(tem.type,tem.id)">{{ tem.type}} </a>
@@ -89,7 +77,7 @@
 
                                     <div class="content">
 
-                                        <b-table :data="documents" detailed detail-key="id">
+                                        <b-table :data="documents" detailed detail-key="id"  @details-open="(row, index) => getEvents(row.id)">
 
                                             <template slot-scope="props">
 
@@ -109,34 +97,49 @@
 
                                             <template slot="detail" slot-scope="props">
 
-                                                <article class="media">
+                                               
+                                                <div class="columns is-mobile">
+                                                    <div class="column is-6">
+                                                        <div class="media-content">
+                                                            <div class="content">
+                                                                <div class="field is-grouped">
+                                                                    <div class="control">
+                                                                        <a class="button is-primary" @click="updateDocument(props.row)">
+                                                                            <span class="icon is-small ">
+                                                                                <i class="fas fa-edit"></i>
+                                                                            </span>
+                                                                            <span>Edit</span>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="control">
+                                                                        <a class="button is-danger" @click="deleteDocument(props.row.id)">
+                                                                            <span class="icon is-small">
+                                                                                <i class="fas fa-minus"></i>
+                                                                            </span>
+                                                                            <span>Delete</span>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
 
-                                                    <div class="media-content">
-                                                        <div class="content">
-                                                            <div class="field is-grouped">
-                                                                <div class="control">
-                                                                    <a class="button is-primary" @click="updateDocument(props.row)">
-                                                                        <span class="icon is-small ">
-                                                                            <i class="fas fa-edit"></i>
-                                                                        </span>
-                                                                        <span>Edit</span>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="control">
-                                                                    <a class="button is-danger" @click="deleteDocument(props.row.id)">
-                                                                        <span class="icon is-small">
-                                                                            <i class="fas fa-minus"></i>
-                                                                        </span>
-                                                                        <span>Delete</span>
-                                                                    </a>
-                                                                </div>
+                                                                <pretty-print :value="props.row"></pretty-print>
+
                                                             </div>
-
-                                                            <pretty-print :value="props.row"></pretty-print>
-
                                                         </div>
                                                     </div>
-                                                </article>
+                                                    <div class="column is-6">   
+                                                        <h2 class="subtitle">Events</h2>                                                 
+                                                        <b-table :data="events"  detail-key="human_time"  >
+                                                            <template slot-scope="evs">
+                                                                <b-table-column field="name" label="Event" sortable>
+                                                                    {{ evs.row.name }}
+                                                                </b-table-column>                                                               
+                                                                <b-table-column field="human_time" label="Time" sortable>
+                                                                    {{ evs.row.human_time }}
+                                                                </b-table-column>
+                                                            </template>
+                                                        </b-table>
+                                                    </div>
+                                                </div>       
                                             </template>
                                         </b-table>
 
@@ -209,8 +212,8 @@
         data() {
             return {
                 templates: [],
-                documents: [],
-                edges: [],
+                documents: [],                
+                events: [],
                 stemplate: "",
                 idtemplate: "",
                 isLoading: false,
@@ -222,15 +225,22 @@
                 state: {},               
                 schema: {},
                 uiSchema: [],
+                bucket:"entities"
             }
         },
-        created() {
-            this.getTemplates();
-            //LOADING THE FIRST TEMPLATE AS DEFAULT DURING THE INITIAL PHASE
-            this.stemplate = this.templates[0].type;
-            this.idtemplate = this.templates[0].id;
-            this.getDocuments(this.stemplate, this.idtemplate);
-                    
+       async created() {
+            this.isLoading=true;
+                await this.getTemplates();
+                //LOADING THE FIRST TEMPLATE AS DEFAULT DURING THE INITIAL PHASE
+                this.stemplate = this.templates[0].type;
+                this.idtemplate = this.templates[0].id;
+                this.getDocuments(this.stemplate, this.idtemplate);  
+            this.isLoading=false;                  
+        },
+        watch:{
+              bucket: function () {
+                    this.refreshDocuments();
+                }
         },
         methods: {
 
@@ -360,8 +370,8 @@
             },
             async getContent(stemplate, idtemplate){  
                 
-                    this.getDocuments(stemplate,idtemplate)
 
+                    this.getDocuments(stemplate,idtemplate)
 
             },
             async getDocuments(stemplate, idtemplate) {
@@ -370,7 +380,7 @@
                 this.idtemplate = idtemplate;
                 this.isLoading = true;
                 
-                await apicore.getDocuments(this.stemplate).then(response => {
+                await apicore.getDocuments(this.stemplate,this.bucket).then(response => {
                     this.documents = response.data;
 
                     //LOADING SCHEMA
@@ -465,9 +475,7 @@
                             type: 'is-danger'
                         });
                     });
-            }
-            
-            ,
+            },
             async getTemplates() {
                 this.isLoading = true;
                 await apicore.getTemplates().then(response => {
@@ -485,6 +493,24 @@
                         });
                     });
 
+            },
+            async getEvents(documentId){
+
+                this.isLoading = true;
+                await apicore.getEvents(documentId).then(response => {
+                    this.events = response.data;
+                    this.isLoading = false;
+                    
+                })// eslint-disable-next-line 
+                    .catch(e => {
+                        this.isLoading = false;
+                        this.$toast.open({
+                            duration: 3000,
+                            message: "Something's not good, try again",
+                            position: 'is-top',
+                            type: 'is-danger'
+                        });
+                    });
             }
         }
 

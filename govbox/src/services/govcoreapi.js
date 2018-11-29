@@ -17,8 +17,8 @@ export default class govcoreapi {
     getDocument(param) {
         return axios.get(this.apiURL + `doc/${param}`);
     }
-    getDocuments(template) {
-        return axios.get(this.apiURL + `find/${JSON.stringify({ type: template})}`);
+    getDocuments(template,bucket) {
+        return axios.get(this.apiURL + `find/${JSON.stringify({ type: template,bucket: bucket})}`);
     }
     updateDocument(document){
         return axios.put(this.apiURL + `doc`,document);
@@ -28,6 +28,9 @@ export default class govcoreapi {
     }
     deleteTemplate(param){
         return axios.delete(this.apiURL + `doc/${param}`);
+    }
+    getEvents(documentId) {
+        return axios.get(this.apiURL + `find/${JSON.stringify({ doc_id: documentId,bucket: "events"})}`);
     }
     
 }
