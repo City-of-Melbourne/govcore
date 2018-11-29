@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+GOVCORE_PORT=8001
+GOVAUTH_BACKEND_PORT=8002
+GOVAUTH_FRONTEND_PORT=8003
+GOVBOX_PORT=8004
+
+# Start GovCore API
+cd /govcore/govcore && ruby api.rb -p $GOVCORE_PORT >> /govcore/all.log &
+
+# Start GovAuth Backend
+cd /govcore/govauth/backend && npm start >> /govcore/all.log &
+
+# Start GovAuth Frontend
+cd /govcore/govauth/frontend && node server.js >> /govcore/all.log &
+
+# Start GovBox Frontend
+cd /govcore/govbox && node server.js >> /govcore/all.log &
