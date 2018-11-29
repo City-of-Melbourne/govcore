@@ -38,7 +38,7 @@ And consist of 3 main parts:
 
 4. Load some data
 
-        $ rake db_load[test/test_templates.json]
+        $ rake db_load[../govauth/test_templates.json]
 
 5. Run the api server
 

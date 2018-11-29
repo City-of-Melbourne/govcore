@@ -1,0 +1,29 @@
+# General
+
+**/.git
+**/_v
+**/.DS_Store
+**/.DS_Store?
+**/.Spotlight-V100
+**/.Trashes
+**/.env
+**/.gitattributes
+**/.project.yml
+**/.sublime-workspace
+**/.tm_properties
+**/.rbenv-version
+**/.ruby-version
+**/.powenv
+**/.sass-cache
+**/.vscode
+
+# Project Specific
+
+**/node_modules
+**/package-lock.json
+Gemfile.lock
+.dockerignore
+.gitignore
+Dockerfile
+README.md
+docs

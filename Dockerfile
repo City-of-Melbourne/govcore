@@ -1,4 +1,3 @@
-# govcore:2
 FROM ruby:2.5-stretch
 
 # Install FoundationDB
@@ -13,9 +12,9 @@ RUN apt-get update \
     && curl -sL https://deb.nodesource.com/setup_11.x | bash - \
     && apt-get install -y nodejs
 
-# Pull GovCore code
-RUN git clone https://github.com/City-of-Melbourne/govcore
-
+# Copy current directory into container at /govcore
+COPY . /govcore
+#
 # Install GovCore dependencies
 RUN cd /govcore/govcore \
     && bundle install
@@ -27,19 +26,22 @@ RUN cd /govcore/govauth/backend \
 # Install GovAuth Frontend dependencies
 RUN cd /govcore/govauth/frontend \
     && npm install
-    
+
 # Install GovAuth Frontend dependencies
 RUN cd /govcore/govbox \
     && npm install
 
-#GovCore API
+# GovCore API port
 EXPOSE 8001
 
-# GovAuth Backend
+# GovAuth Backend port
 EXPOSE 8002
 
-# GovAuth Frontend
+# GovAuth Frontend port
 EXPOSE 8003
 
-# GovBox
+# GovBox port
 EXPOSE 8004
+
+# Start FoundationDB
+CMD /govcore/start

@@ -5,6 +5,14 @@ GOVAUTH_BACKEND_PORT=8002
 GOVAUTH_FRONTEND_PORT=8003
 GOVBOX_PORT=8004
 
+# Start foundationDB
+/usr/lib/foundationdb/fdbmonitor &
+
+# Seed database
+cd /govcore/govcore \
+    && rake db_load[/govcore/govauth/seed_templates.json] \
+    && rake db_load[/govcore/govauth/seed_documents.json] &
+
 # Start GovCore API
 cd /govcore/govcore && ruby api.rb -p $GOVCORE_PORT >> /govcore/all.log &
 
@@ -15,4 +23,4 @@ cd /govcore/govauth/backend && npm start >> /govcore/all.log &
 cd /govcore/govauth/frontend && node server.js >> /govcore/all.log &
 
 # Start GovBox Frontend
-cd /govcore/govbox && node server.js >> /govcore/all.log &
+cd /govcore/govbox && node server.js >> /govcore/all.log
