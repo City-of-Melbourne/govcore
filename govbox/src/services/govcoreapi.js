@@ -6,7 +6,7 @@ export default class govcoreapi {
         
     }
     get apiURL() {
-        return "http://ec2-3-16-136-94.us-east-2.compute.amazonaws.com:3000/";
+        return "http://localhost:8001/";
     }
     getTemplates() {
         return axios.get(this.apiURL + `find/${JSON.stringify({ bucket: 'templates' })}`);
