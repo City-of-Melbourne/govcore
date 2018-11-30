@@ -13,8 +13,10 @@ RUN apt-get update \
     && apt-get install -y nodejs
 
 # Copy current directory into container at /govcore
-COPY . /govcore
-#
+
+# COPY . /govcore
+RUN git clone https://github.com/City-of-Melbourne/govcore
+
 # Install GovCore dependencies
 RUN cd /govcore/govcore \
     && bundle install
