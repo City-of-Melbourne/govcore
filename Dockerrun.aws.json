@@ -1,0 +1,21 @@
+{
+  "AWSEBDockerrunVersion": "1",
+   "Ports": [
+    {
+      "ContainerPort": "8001",
+      "HostPort": "8001"
+    },
+    {
+      "ContainerPort": "8002",
+      "HostPort": "8002"
+    },
+    {
+      "ContainerPort": "8003",
+      "HostPort": "8003"
+    },
+    {
+      "ContainerPort": "8004",
+      "HostPort": "8004"
+    }
+  ]
+}
